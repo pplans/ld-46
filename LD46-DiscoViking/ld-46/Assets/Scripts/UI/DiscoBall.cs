@@ -30,7 +30,6 @@ public class DiscoBall : MonoBehaviour
 
     public void SetMaxDisco(int val)
     {
-        print("SetMaxDisco(" + val + ")");
         maxDisco = val;
     }
 
@@ -38,13 +37,11 @@ public class DiscoBall : MonoBehaviour
     {
         currDisco = val;
         float r = (float)currDisco / maxDisco;
-        print("SetDisco(" + currDisco + ") | max Disco: " + maxDisco);
         SetDiscoBallIntensity(r);
     }
 
     private void SetDiscoBallIntensity(float intensity)
     {
-        print("SetDiscoBallIntensity(" + intensity + ")");
         material.SetFloat(IntensityOccStr, intensity);
     }
 }
