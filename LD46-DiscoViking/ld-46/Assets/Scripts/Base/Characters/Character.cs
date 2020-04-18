@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Character : MonoBehaviour
+public abstract class Character : WorldObject
 {
 	#region Members
 
@@ -57,7 +57,7 @@ public abstract class Character : MonoBehaviour
 
 	public void DoMove(Vector2 direction)
 	{
-		ITileInfo tileInfo = m_World.GetTileFromPositionAndDirection(m_Position, direction);
+		ITileInfo tileInfo = m_World.GetTileInfo(m_Position, direction);
 		if (tileInfo.IsAvailable())
 		{
 			m_Position += direction;

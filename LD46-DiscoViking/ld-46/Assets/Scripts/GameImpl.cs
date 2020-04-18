@@ -82,10 +82,21 @@ public class GameImpl : Game
 	public List<Character> m_characters;
     bool levelComplete = false;
 
-    public Player m_player;
-	public PlayerController m_playerController;
+    public Player m_player = null;
+	public PlayerController m_playerController = null;
+	public World m_world = null;
+	[SerializeField]
+	public WorldObject m_testLamp = null;
 
 	const float m_playerMovingSpeed = 5f; // per second
+
+	public void Awake()
+	{
+		m_world.Init();
+
+		WorldObject wo = Instantiate<WorldObject>(m_testLamp);
+		m_world.PlaceObject(wo);
+	}
 
 	public override void UpdateGame()
 	{
