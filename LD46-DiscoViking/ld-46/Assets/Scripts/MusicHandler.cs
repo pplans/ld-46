@@ -4,10 +4,13 @@ using UnityEngine.UI;
 
 public class MusicHandler : MonoBehaviour
 {
-	public AudioSource music;
-	public InputAction action;
-	public CanvasGroup group;
-	public AnimationCurve curve;
+	public InputAction	action;
+	public AudioSource	music;
+	public CanvasGroup	metronome;
+	public CanvasGroup	player;
+	public Text			text;
+
+	public AnimationCurve	curve;
 
 	public float bpm;
 	public float bpmOffset;
@@ -26,14 +29,17 @@ public class MusicHandler : MonoBehaviour
 	{
 		if (!started)
 			StartMusic();
-		Debug.Log(ValidateBeat());
+
+		player.alpha = ValidateBeat() ? 1f : 0f;
+		text.text = GetBeatOffset().ToString();
 	}
 
 	private void Update()
 	{
 		if (!started)
 			return;
-		group.alpha = ValidateBeat() ? 1f : 0f;
+
+		metronome.alpha = ValidateBeat() ? 1f : 0f;
 	}
 
 	private void StartMusic()
