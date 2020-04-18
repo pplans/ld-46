@@ -38,7 +38,13 @@ public class World : MonoBehaviour
 		private WorldObject worldObject;
 
 		public GameObject Tile { get => tileObject; set { tileObject = value; } }
-		public WorldObject Object { get => worldObject; set { worldObject = value; } }
+		public WorldObject Object { get => worldObject;
+			set
+			{
+				worldObject = value;
+				worldObject.transform.parent = tileObject.transform;
+			}
+		}
 	}
 	#endregion
 
@@ -69,7 +75,7 @@ public class World : MonoBehaviour
 
 	private World() => m_bIsWorldInit = false;
 
-	public void Awake()
+	public void Init()
 	{
 		if (m_bIsWorldInit) return;
 
