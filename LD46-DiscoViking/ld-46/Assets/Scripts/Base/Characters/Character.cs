@@ -8,6 +8,12 @@ public abstract class Character : MonoBehaviour
 
 	protected bool m_isAlive;
 
+	// World Position
+	[SerializeField]
+	private Vector2 m_Position;
+	[SerializeField]
+	private World m_World;
+
 	#endregion
 
 	#region UnityEvents
@@ -47,6 +53,15 @@ public abstract class Character : MonoBehaviour
     {
         Debug.Log("Character is dead");
         m_isAlive = false;
+	}
+
+	public void DoMove(Vector2 direction)
+	{
+		ITileInfo tileInfo = m_World.GetTileFromPositionAndDirection(m_Position, direction);
+		if (tileInfo.IsAvailable())
+		{
+			m_Position += direction;
+		}
 	}
     #endregion
 }
