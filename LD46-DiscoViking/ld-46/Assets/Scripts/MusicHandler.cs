@@ -33,7 +33,7 @@ public class MusicHandler : MonoBehaviour
 	{
 		if (!started)
 			return;
-		group.alpha = curve.Evaluate( 1f - ( Mathf.Abs( GetBeatOffset() ) * 4f ) );
+		group.alpha = ValidateBeat() ? 1f : 0f;
 	}
 
 	private void StartMusic()
