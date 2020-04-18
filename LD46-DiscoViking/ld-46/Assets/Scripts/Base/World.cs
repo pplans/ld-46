@@ -50,10 +50,13 @@ public class World : MonoBehaviour
 		{
 			for(int j = 0; j < gridSize.y; ++j)
 			{
+				Color rdrCol = new Color(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), Random.Range(0.5f, 1f));
 				m_2dGrid[i, j] = Instantiate(tilePrefab);
 				Vector2 it = new Vector2(i, j);
-				Vector2 pos = TileStartPos + it * (TileSize/2);
+				Vector2 pos = TileStartPos + it * TileSize;
 				m_2dGrid[i, j].transform.position = new Vector3(pos.x, 0, pos.y);
+				Material mat = m_2dGrid[i, j].GetComponent<MeshRenderer>().material;
+				mat.SetColor("Color_D10C4CBD", rdrCol);
 			}
 		}
 		m_bIsWorldInit = true;
