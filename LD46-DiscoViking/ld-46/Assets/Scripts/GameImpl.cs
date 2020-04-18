@@ -108,17 +108,24 @@ public class GameImpl : Game
 	
 		m_world.Init(TileStartPos, TileEndPos, TileSize);
 
-		WorldObject wo = Instantiate<WorldObject>(m_testLamp);
-		m_world.PlaceObject(wo);
+		m_world.PlaceObject(m_testLamp);
 		m_player.Init(PlayerInitPos);
 		m_world.SetWorldAnchor(PlayerInitPos);
-		m_world.PlaceObject(m_player, PlayerInitPos, new Vector2(0, 0));
+		m_world.SetObject(m_player, PlayerInitPos);
 	}
 
 	private void InputPlayer(InputAction.CallbackContext callbackContext)
 	{
 		Vector2 newDirection = callbackContext.action.ReadValue<Vector2>();
-		m_player.DoMove(newDirection);
+		TileState tileState = m_player.GetTileState(newDirection);
+		if(tileState==TileState.BorderRight)
+		{
+			m_world.Reinit();
+			// Load next grid
+			m_player.ResetPosition(tileState);
+		}
+		else
+			m_player.DoMove(newDirection, tileState);
 	}
 
 	public override void UpdateGame()

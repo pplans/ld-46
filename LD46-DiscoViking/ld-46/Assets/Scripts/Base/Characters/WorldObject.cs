@@ -4,4 +4,5 @@ using UnityEngine;
 
 public class WorldObject : MonoBehaviour
 {
+	public virtual bool IsPlayer() { return false; }
 }

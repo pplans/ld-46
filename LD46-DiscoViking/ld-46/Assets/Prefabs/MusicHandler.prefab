@@ -45,10 +45,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   music: {fileID: 7104218156940426774}
-  bpm: 103.626945
+  bpm: 103.75
   bpmOffset: 0.645
   inputValidity: 0.2
   started: 0
+  OnResetBeat:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBeat:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBeatInvalid:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!82 &7104218156940426774
 AudioSource:
   m_ObjectHideFlags: 0

@@ -49,6 +49,8 @@ public abstract class Character : WorldObject
 	   }
     }
 
+	public Vector2 Position { get { return m_Position; } set { m_Position = value; } }
+
     public bool IsAlive()
     {
         return m_isAlive;
@@ -60,12 +62,26 @@ public abstract class Character : WorldObject
         m_isAlive = false;
 	}
 
-	public void DoMove(Vector2 direction)
+	public TileState GetTileState(Vector2 direction)
 	{
-		ITileInfo tileInfo = m_World.GetTileInfo(m_Position, direction);
-		if (tileInfo.IsAvailable())
+		return m_World.GetTileInfo(m_Position, direction).GetState();
+	}
+
+	public void ResetPosition(TileState state)
+	{
+		if (state == TileState.BorderRight)
 		{
-			m_World.PlaceObject(this, m_Position, direction);
+			m_Position.x = 0f;
+			m_World.SetWorldAnchor(m_Position);
+			m_World.SetObject(this, m_Position);
+		}
+	}
+
+	public void DoMove(Vector2 direction, TileState state)
+	{
+		if (state == TileState.Empty)
+		{
+			m_World.MoveObject(m_Position, direction);
 			m_Position += direction;
 		}
 	}
