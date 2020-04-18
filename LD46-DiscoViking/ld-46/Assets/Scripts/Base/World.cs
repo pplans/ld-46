@@ -115,10 +115,11 @@ public class World : MonoBehaviour
 		TileStartPos = _gridStartPos; TileEndPos = _gridEndPos; TileSize = _gridSize;
 
 		Vector2 gridSize = GetNumberOfTiles();
-		m_2dGrid = new WorldTile[Mathf.RoundToInt(gridSize.x), Mathf.RoundToInt(gridSize.y)];
-		for(int i = 0; i < gridSize.x; ++i)
+		Vector2Int iGridSize = new Vector2Int(Mathf.RoundToInt(gridSize.x), Mathf.RoundToInt(gridSize.y));
+		m_2dGrid = new WorldTile[iGridSize.x, iGridSize.y];
+		for(int i = 0; i < iGridSize.x; ++i)
 		{
-			for(int j = 0; j < gridSize.y; ++j)
+			for(int j = 0; j < iGridSize.y; ++j)
 			{
 				m_2dGrid[i, j] = new WorldTile();
 				Color rdrCol = new Color(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), Random.Range(0.5f, 1f));
@@ -238,9 +239,10 @@ public class World : MonoBehaviour
 		return new TileInfo(state, wo);
 	}
 
-	public Vector2 GetNumberOfTiles()
+	public Vector2Int GetNumberOfTiles()
 	{
-		return (TileEndPos - TileStartPos) / TileSize;
+		Vector2 fGridSize = (TileEndPos - TileStartPos) / TileSize;
+		return new Vector2Int(Mathf.RoundToInt(fGridSize.x), Mathf.RoundToInt(fGridSize.y));
 	}
 
 	public class Backup { public WorldObject wo; public Vector2 pos; };
