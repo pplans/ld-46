@@ -95,6 +95,9 @@ public class World : MonoBehaviour
 	[SerializeField]
 	private List<string> filePaths = null;
 
+	[SerializeField]
+	private UnityEngine.VFX.VisualEffect smokePuffPuff = null;
+
 	private bool m_bIsWorldInit;
 
 	private Vector2 m_worldAnchor;
@@ -146,6 +149,10 @@ public class World : MonoBehaviour
 			ReadFile(filePath);
 		}
 		UseCache(0);
+
+		smokePuffPuff.transform.localPosition = new Vector3(iGridSize.x * 0.5f, 0f, iGridSize.y * 0.5f);
+		smokePuffPuff.SetFloat("SpawnRadius", 1f);
+		smokePuffPuff.SendEvent("Start");
 	}
 
 	public void ReadFile(string filePath)
