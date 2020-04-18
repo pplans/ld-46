@@ -79,13 +79,10 @@ public abstract class Character : WorldObject
 		}
 	}
 
-	public void DoMove(Vector2 direction, TileState state)
+	public void DoMove(Vector2 direction)
 	{
-		if (state == TileState.Empty)
-		{
-			m_World.MoveObject(m_Position, direction);
-			m_Position += direction;
-		}
+		TileState tileState = m_World.MoveObject(m_Position, direction);
+		m_Position += direction;
 	}
     #endregion
 }
