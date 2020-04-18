@@ -120,7 +120,7 @@ public class GameImpl : Game
 		TileState tileState = m_player.GetTileState(newDirection);
 		if(tileState==TileState.BorderRight)
 		{
-			m_world.Reinit();
+			m_world.UseCache(Random.Range(0, m_world.GetCacheSize()));
 			// Load next grid
 			m_player.ResetPosition(tileState);
 		}
