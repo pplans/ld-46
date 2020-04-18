@@ -100,10 +100,11 @@ MonoBehaviour:
   m_player: {fileID: 8495809602471273612}
   m_playerController: {fileID: 8495809603711268624}
   m_world: {fileID: 8059701049154549776}
-  m_testLamp: {fileID: 3449095308438064096, guid: 2a6d522d64ac89c4e993d447c1833f86, type: 3}
+  m_testLamp: {fileID: 6999492763199560926, guid: f7c3a31c5e0703040828b300080485a2, type: 3}
   TileStartPos: {x: 0, y: 0}
   TileEndPos: {x: 10, y: 4}
   TileSize: {x: 1, y: 1}
+  PlayerInitPos: {x: 3, y: 1}
 --- !u!1 &6176461746269875432
 GameObject:
   m_ObjectHideFlags: 0

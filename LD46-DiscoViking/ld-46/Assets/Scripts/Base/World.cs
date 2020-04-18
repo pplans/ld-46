@@ -2,10 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TileState
+{
+	Empty,
+	Occupied,
+	Player,
+	BorderRight,
+	Border
+}
+
 public interface ITileInfo
 {
-	bool IsAvailable();
 	void SetBorderColor(Color _c);
+	TileState GetState();
 }
 
 public class World : MonoBehaviour
@@ -13,21 +22,20 @@ public class World : MonoBehaviour
 	#region TileInfo
 	private class TileInfo : ITileInfo
 	{
-		private bool m_bIsAvailable;
 		private WorldTile m_tile;
+		TileState m_state;
 
-		public TileInfo(bool _bAvailable, WorldTile _tile)
+		public TileInfo(TileState _state, WorldTile _tile)
 		{
-			m_bIsAvailable = _bAvailable;
 			m_tile = _tile;
+			m_state = _state;
 		}
-		public bool IsAvailable() { return m_bIsAvailable; }
 		public void SetBorderColor(Color _c)
 		{
-			if (!IsAvailable() || m_tile == null) return;
 			Material mat = m_tile.Tile.GetComponent<MeshRenderer>().material;
 			mat.SetColor("Color_D10C4CBD", _c);
 		}
+		public TileState GetState() { return m_state; }
 	}
 	#endregion
 
@@ -41,6 +49,11 @@ public class World : MonoBehaviour
 		public WorldObject Object { get => worldObject;
 			set
 			{
+				if (value == null && worldObject!=null)
+				{
+					worldObject.transform.parent = null;
+					worldObject.transform.localPosition = Vector3.zero;
+				}
 				worldObject = value;
 				if (worldObject != null)
 				{
@@ -105,29 +118,55 @@ public class World : MonoBehaviour
 		m_bIsWorldInit = true;
 	}
 
-	public bool ProjectToGrid(ref Vector2 pos)
+	public void Reinit()
+	{
+		Vector2 gridSize = GetNumberOfTiles();
+		for (int i = 0; i < gridSize.x; ++i)
+		{
+			for (int j = 0; j < gridSize.y; ++j)
+			{
+				if(m_2dGrid[i, j].Object!=null)
+				{
+					if(!m_2dGrid[i, j].Object.IsPlayer())
+						Destroy(m_2dGrid[i, j].Object);
+					m_2dGrid[i, j].Object = null;
+				}
+				Color rdrCol = new Color(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), Random.Range(0.5f, 1f));
+				Material mat = m_2dGrid[i, j].Tile.GetComponent<MeshRenderer>().material;
+				mat.SetColor("Color_D10C4CBD", rdrCol);
+			}
+		}
+		m_bIsWorldInit = true;
+	}
+
+	public TileState ProjectToGrid(ref Vector2 pos)
 	{
 		Vector2 numberOfTiles = GetNumberOfTiles();
-		bool bTileIsAvailable = pos.y < numberOfTiles.y && pos.y >= 0 && pos.x>=0 && pos.x < numberOfTiles.x;
-		if (bTileIsAvailable)
-		{
-			pos = new Vector2(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
-		}
-		return bTileIsAvailable;
+		if (pos.x >= TileEndPos.x)
+			return TileState.BorderRight;
+		if (pos.x < 0 || pos.y < 0 || pos.y >= TileEndPos.y)
+			return TileState.Border;
+
+		pos = new Vector2(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
+
+		return TileState.Empty;
 	}
 
 	public ITileInfo GetTileInfo(Vector2 pos, Vector2 dir)
 	{
 		Vector2 numberOfTiles = GetNumberOfTiles();
-		Vector2 posInTile = ((pos + dir) / TileSize);
-		bool bTileIsAvailable = ProjectToGrid(ref posInTile);
+		Vector2 posInTile = pos + dir;
+		TileState state = ProjectToGrid(ref posInTile);
 		WorldTile wo = null;
-		if (bTileIsAvailable)
+		if (state!=TileState.Border && state != TileState.BorderRight)
 		{
 			wo = m_2dGrid[Mathf.RoundToInt(posInTile.x), Mathf.RoundToInt(posInTile.y)];
-			bTileIsAvailable = bTileIsAvailable && wo.Object == null;
+			if (wo.Object == null)
+				state = TileState.Empty;
+			else
+				state = TileState.Occupied;
 		}
-		return new TileInfo(bTileIsAvailable, wo);
+		return new TileInfo(state, wo);
 	}
 
 	public Vector2 GetNumberOfTiles()
@@ -171,6 +210,7 @@ public class World : MonoBehaviour
 
 	public void PlaceObject(WorldObject _wo)
 	{
+		WorldObject wo = Instantiate<WorldObject>(_wo);
 		Vector2 gridSize = GetNumberOfTiles();
 		float threshold = 0.98f, step = 1f / (gridSize.x * gridSize.y);
 		bool bPlaced = false;
@@ -180,7 +220,7 @@ public class World : MonoBehaviour
 			{
 				if (m_2dGrid[i, j].Object == null && Random.value > threshold)
 				{
-					m_2dGrid[i, j].Object = _wo;
+					m_2dGrid[i, j].Object = wo;
 					bPlaced = true;
 				}
 				else
@@ -191,12 +231,29 @@ public class World : MonoBehaviour
 
 	public void PlaceObject(WorldObject _wo, Vector2 _pos, Vector2 _d)
 	{
-		Vector2 gridSize = GetNumberOfTiles();
+		WorldObject wo = Instantiate<WorldObject>(_wo);
 		Vector2 newPos = _pos + _d;
-		if (!ProjectToGrid(ref newPos))
+		if (ProjectToGrid(ref newPos)==TileState.Occupied)
 			return;
 		m_2dGrid[Mathf.RoundToInt(_pos.x), Mathf.RoundToInt(_pos.y)].Object = null;
-		m_2dGrid[Mathf.RoundToInt(newPos.x), Mathf.RoundToInt(newPos.y)].Object = _wo;
+		m_2dGrid[Mathf.RoundToInt(newPos.x), Mathf.RoundToInt(newPos.y)].Object = wo;
+	}
+
+	public void MoveObject(Vector2 _pos, Vector2 _d)
+	{
+		Vector2 newPos = _pos + _d;
+		if (ProjectToGrid(ref newPos) == TileState.Occupied)
+			return;
+		WorldObject owo = m_2dGrid[Mathf.RoundToInt(_pos.x), Mathf.RoundToInt(_pos.y)].Object;
+		m_2dGrid[Mathf.RoundToInt(_pos.x), Mathf.RoundToInt(_pos.y)].Object = null;
+		m_2dGrid[Mathf.RoundToInt(newPos.x), Mathf.RoundToInt(newPos.y)].Object = owo;
+	}
+
+	public void SetObject(WorldObject _wo, Vector2 _pos)
+	{
+		if (ProjectToGrid(ref _pos) == TileState.Occupied)
+			return;
+		m_2dGrid[Mathf.RoundToInt(_pos.x), Mathf.RoundToInt(_pos.y)].Object = _wo;
 	}
 
 	public void OnDrawGizmos()
