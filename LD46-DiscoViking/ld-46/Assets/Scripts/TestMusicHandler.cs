@@ -24,20 +24,20 @@ public class TestMusicHandler : MonoBehaviour
 		if (!musicHandler.started)
 			musicHandler.StartMusic();
 
-		player.alpha = 1f;
-		playerImage.color = musicHandler.ValidateBeat() ? Color.green : Color.red;
-		text.text = musicHandler.GetBeatOffset().ToString();
+	//	player.alpha = 1f;
+	//	playerImage.color = musicHandler.ValidateBeat() ? Color.green : Color.red;
+	//	text.text = musicHandler.GetBeatOffset().ToString();
 	}
 
 	private void Update()
 	{
-		if (!musicHandler.started)
-			return;
+	//	if (!musicHandler.started)
+	//		return;
 
-		float beatValue = musicHandler.GetBeatOffset() + 0.5f;
-		metronome.alpha = curve.Evaluate(beatValue);
-		beatValue = 2f - 2f * beatValue;
-		if (player.alpha > beatValue)
-			player.alpha = beatValue;
+	//	float beatValue = musicHandler.GetBeatOffset() + 0.5f;
+	//	metronome.alpha = curve.Evaluate(beatValue);
+	//	beatValue = 2f - 2f * beatValue;
+	//	if (player.alpha > beatValue)
+	//		player.alpha = beatValue;
 	}
 }

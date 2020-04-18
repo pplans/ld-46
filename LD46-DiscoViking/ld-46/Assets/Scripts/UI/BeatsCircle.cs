@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class BeatsCircle : MonoBehaviour
 {
+    public MusicHandler musicHandler;
+    public AnimationCurve curve;
+
     private Material material;
     private static string CircleRadiusStr = "_BeatsCircleRadius";
 
@@ -15,7 +18,8 @@ public class BeatsCircle : MonoBehaviour
 
     void Update()
     {
-        
+        if (musicHandler.started)
+            SetBeatsCircleRadius(curve.Evaluate(musicHandler.GetBeatOffset() + 0.5f));
     }
 
     public void SetBeatsCircleRadius(float radius01)
