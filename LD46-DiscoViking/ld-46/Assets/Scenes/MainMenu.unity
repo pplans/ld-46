@@ -284,6 +284,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 411aa5fc553878944803a3c58db20547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Position: {x: 0, y: 0}
+  m_World: {fileID: 0}
   cam: {fileID: 0}
 --- !u!4 &80695968
 Transform:
@@ -616,7 +618,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - MainMenu
-  - SampleScene
+  - Level0
 --- !u!4 &330150414
 Transform:
   m_ObjectHideFlags: 0
