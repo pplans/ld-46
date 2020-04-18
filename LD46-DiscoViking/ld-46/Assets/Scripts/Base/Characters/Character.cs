@@ -64,7 +64,7 @@ public abstract class Character : WorldObject
 
 	public TileState GetTileState(Vector2 direction)
 	{
-		return m_World.GetTileInfo(m_Position, direction).GetState();
+		return m_World.GetTileInfo(m_Position+direction).GetState();
 	}
 
 	public void ResetPosition(TileState state)
