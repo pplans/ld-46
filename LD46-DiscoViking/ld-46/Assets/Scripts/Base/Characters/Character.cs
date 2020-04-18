@@ -37,9 +37,11 @@ public abstract class Character : WorldObject
 		m_isAlive = false;
 	}
 
-	public void Init(Vector2 position)
+	public void Init(Vector2 position, World world)
 	{
 		m_Position = position;
+		world.SetWorldAnchor(m_Position);
+		world.SetObject(this, m_Position);
 	}
 
 	public virtual void UpdateCharacter()
@@ -64,7 +66,7 @@ public abstract class Character : WorldObject
 
 	public TileState GetTileState(Vector2 direction)
 	{
-		return m_World.GetTileInfo(m_Position, direction).GetState();
+		return m_World.GetTileInfo(m_Position+direction).GetState();
 	}
 
 	public void ResetPosition(TileState state)

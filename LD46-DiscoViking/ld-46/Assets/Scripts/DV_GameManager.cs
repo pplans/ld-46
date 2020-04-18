@@ -29,6 +29,7 @@ public class DV_GameManager : MonoBehaviour
         Debug.Log("Game Is Started motherfucker");
 
         world.Init(new Vector2 (startGridPos.position.x,startGridPos.position.z), new Vector2(endGridPos.position.x, endGridPos.position.z), new Vector2(1, 1));
+        player.Init(new Vector2(0, 0), world);
 
     }
 }

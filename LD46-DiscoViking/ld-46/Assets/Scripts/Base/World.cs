@@ -15,6 +15,7 @@ public enum TileState
 public interface ITileInfo
 {
 	void SetBorderColor(Color _c);
+	void SetEmissiveScale(float _v);
 	TileState GetState();
 }
 
@@ -39,6 +40,11 @@ public class World : MonoBehaviour
 		{
 			Material mat = m_tile.Tile.GetComponent<MeshRenderer>().material;
 			mat.SetColor("Color_D10C4CBD", _c);
+		}
+		public void SetEmissiveScale(float _v)
+		{
+			Material mat = m_tile.Tile.GetComponent<MeshRenderer>().material;
+			mat.SetFloat("Vector1_237226DD", _v);
 		}
 		public TileState GetState() { return m_state; }
 	}
@@ -130,6 +136,7 @@ public class World : MonoBehaviour
 				m_2dGrid[i, j].Tile.transform.parent = WorldObject.transform;
 				Material mat = m_2dGrid[i, j].Tile.GetComponent<MeshRenderer>().material;
 				mat.SetColor("Color_D10C4CBD", rdrCol);
+				mat.SetFloat("Vector1_237226DD", 1f);
 			}
 		}
 		m_bIsWorldInit = true;
@@ -184,6 +191,7 @@ public class World : MonoBehaviour
 				Color rdrCol = new Color(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), Random.Range(0.5f, 1f));
 				Material mat = m_2dGrid[i, j].Tile.GetComponent<MeshRenderer>().material;
 				mat.SetColor("Color_D10C4CBD", rdrCol);
+				mat.SetFloat("Vector1_237226DD", 1f);
 			}
 		}
 	}
@@ -204,6 +212,7 @@ public class World : MonoBehaviour
 				Color rdrCol = new Color(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), Random.Range(0.5f, 1f));
 				Material mat = m_2dGrid[i, j].Tile.GetComponent<MeshRenderer>().material;
 				mat.SetColor("Color_D10C4CBD", rdrCol);
+				mat.SetFloat("Vector1_237226DD", 1f);
 			}
 		}
 		m_bIsWorldInit = true;
@@ -211,7 +220,6 @@ public class World : MonoBehaviour
 
 	public TileState ProjectToGrid(ref Vector2 pos)
 	{
-		Vector2 numberOfTiles = GetNumberOfTiles();
 		if (pos.x >= TileEndPos.x)
 			return TileState.BorderRight;
 		if (pos.x < 0 || pos.y < 0 || pos.y >= TileEndPos.y)
@@ -222,15 +230,13 @@ public class World : MonoBehaviour
 		return TileState.Empty;
 	}
 
-	public ITileInfo GetTileInfo(Vector2 pos, Vector2 dir)
+	public ITileInfo GetTileInfo(Vector2 pos)
 	{
-		Vector2 numberOfTiles = GetNumberOfTiles();
-		Vector2 posInTile = pos + dir;
-		TileState state = ProjectToGrid(ref posInTile);
+		TileState state = ProjectToGrid(ref pos);
 		WorldTile wo = null;
 		if (state!=TileState.Border && state != TileState.BorderRight)
 		{
-			wo = m_2dGrid[Mathf.RoundToInt(posInTile.x), Mathf.RoundToInt(posInTile.y)];
+			wo = m_2dGrid[Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y)];
 			if (wo.Object == null)
 				state = TileState.Empty;
 			else
@@ -304,7 +310,8 @@ public class World : MonoBehaviour
 	{
 		WorldObject wo = Instantiate<WorldObject>(_wo);
 		Vector2 newPos = _pos + _d;
-		if (ProjectToGrid(ref newPos)==TileState.Occupied)
+		ITileInfo tileInfo = GetTileInfo(newPos);
+		if (tileInfo.GetState() == TileState.Occupied)
 			return;
 		m_2dGrid[Mathf.RoundToInt(_pos.x), Mathf.RoundToInt(_pos.y)].Object = null;
 		m_2dGrid[Mathf.RoundToInt(newPos.x), Mathf.RoundToInt(newPos.y)].Object = wo;
@@ -313,8 +320,13 @@ public class World : MonoBehaviour
 	public void MoveObject(Vector2 _pos, Vector2 _d)
 	{
 		Vector2 newPos = _pos + _d;
-		if (ProjectToGrid(ref newPos) == TileState.Occupied)
+		ITileInfo tileInfo = GetTileInfo(newPos);
+		if (tileInfo.GetState() == TileState.Occupied)
 			return;
+
+		ITileInfo oldTileInfo = GetTileInfo(_pos);
+		oldTileInfo.SetEmissiveScale(4f);
+
 		WorldObject owo = m_2dGrid[Mathf.RoundToInt(_pos.x), Mathf.RoundToInt(_pos.y)].Object;
 		m_2dGrid[Mathf.RoundToInt(_pos.x), Mathf.RoundToInt(_pos.y)].Object = null;
 		m_2dGrid[Mathf.RoundToInt(newPos.x), Mathf.RoundToInt(newPos.y)].Object = owo;
@@ -322,30 +334,10 @@ public class World : MonoBehaviour
 
 	public void SetObject(WorldObject _wo, Vector2 _pos)
 	{
-		if (ProjectToGrid(ref _pos) == TileState.Occupied)
+		ITileInfo tileInfo = GetTileInfo(_pos);
+		if (tileInfo.GetState() == TileState.Occupied)
 			return;
 		m_2dGrid[Mathf.RoundToInt(_pos.x), Mathf.RoundToInt(_pos.y)].Object = _wo;
-	}
-
-	public void OnDrawGizmos()
-	{
-		Vector2 NumberOfTiles = GetNumberOfTiles();
-		for(int j = 0; j< NumberOfTiles.y +1; ++j)
-		{
-			Vector2 itHor = new Vector2(0, j);
-			{
-				Vector2 start = TileStartPos + itHor * TileSize;
-				Vector2 end = new Vector2(TileEndPos.x, start.y);
-				Debug.DrawLine(start, end);
-			}
-			for (int i = 0; i < NumberOfTiles.x + 1; ++i)
-			{
-				Vector2 itVer = new Vector2(i, 0);
-				Vector2 start = TileStartPos + itVer * TileSize;
-				Vector2 end = new Vector2(start.x, TileEndPos.y);
-				Debug.DrawLine(start, end);
-			}
-		}
 	}
 #endregion
 }
