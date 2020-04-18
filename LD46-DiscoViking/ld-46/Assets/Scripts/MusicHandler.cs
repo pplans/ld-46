@@ -8,6 +8,7 @@ public class MusicHandler : MonoBehaviour
 	public AudioSource	music;
 	public CanvasGroup	metronome;
 	public CanvasGroup	player;
+	public Image		playerImage;
 	public Text			text;
 
 	public AnimationCurve	curve;
@@ -30,7 +31,8 @@ public class MusicHandler : MonoBehaviour
 		if (!started)
 			StartMusic();
 
-		player.alpha = ValidateBeat() ? 1f : 0f;
+		player.alpha = 1f;
+		playerImage.color = ValidateBeat() ? Color.green : Color.red;
 		text.text = GetBeatOffset().ToString();
 	}
 
@@ -39,7 +41,11 @@ public class MusicHandler : MonoBehaviour
 		if (!started)
 			return;
 
-		metronome.alpha = ValidateBeat() ? 1f : 0f;
+		float beatValue = GetBeatOffset() + 0.5f;
+		metronome.alpha = curve.Evaluate(beatValue);
+		beatValue = 2f - 2f * beatValue;
+		if (player.alpha > beatValue)
+			player.alpha = beatValue;
 	}
 
 	private void StartMusic()
