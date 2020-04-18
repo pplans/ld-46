@@ -166,7 +166,7 @@ public class World : MonoBehaviour
 	public void PlaceObject(WorldObject _wo)
 	{
 		Vector2 gridSize = GetNumberOfTiles();
-		float threshold = 0.9f;
+		float threshold = 0.98f, step = 1f / (gridSize.x * gridSize.y);
 		bool bPlaced = false;
 		for (int i = 0; i < gridSize.x && !bPlaced; ++i)
 		{
@@ -178,7 +178,7 @@ public class World : MonoBehaviour
 					bPlaced = true;
 				}
 				else
-					threshold = threshold - 0.05f;
+					threshold = threshold - step;
 			}
 		}
 	}
