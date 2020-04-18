@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Input
 {
@@ -77,15 +78,48 @@ namespace Input
 
 public class GameImpl : Game
 {
+	public InputAction action;
+
 	public LoadLevel loadLevel;
 
 	public List<Character> m_characters;
     bool levelComplete = false;
 
-    public Player m_player;
-	public PlayerController m_playerController;
+    public Player m_player = null;
+	public PlayerController m_playerController = null;
+	public World m_world = null;
+	[SerializeField]
+	public WorldObject m_testLamp = null;
+	[SerializeField]
+	private Vector2 TileStartPos = new Vector2(0, 0);
+	[SerializeField]
+	private Vector2 TileEndPos = new Vector2(10, 4);
+	[SerializeField]
+	private Vector2 TileSize = new Vector2(1, 1);
+	[SerializeField]
+	private Vector2 PlayerInitPos = new Vector2(3, 1);
 
 	const float m_playerMovingSpeed = 5f; // per second
+
+	public void Start()
+	{
+		action.performed += InputPlayer;
+		action.Enable();
+	
+		m_world.Init(TileStartPos, TileEndPos, TileSize);
+
+		WorldObject wo = Instantiate<WorldObject>(m_testLamp);
+		m_world.PlaceObject(wo);
+		m_player.Init(PlayerInitPos);
+		m_world.SetWorldAnchor(PlayerInitPos);
+		m_world.PlaceObject(m_player, PlayerInitPos, new Vector2(0, 0));
+	}
+
+	private void InputPlayer(InputAction.CallbackContext callbackContext)
+	{
+		Vector2 newDirection = callbackContext.action.ReadValue<Vector2>();
+		m_player.DoMove(newDirection);
+	}
 
 	public override void UpdateGame()
 	{
@@ -105,29 +139,6 @@ public class GameImpl : Game
 		foreach (Character p in m_characters)
 		{
 			p.UpdateCharacter();
-		}
-	}
-
-	public override void CaptureKeyboard()
-	{
-		for (int index = 0; index < Input.Mapper.Actions.Length; index++)
-		{
-			Input.ActionEntry input = Input.Mapper.Actions[index];
-			input.Type = Input.Type.None;
-            
-            if (UnityEngine.Input.GetKeyDown(input.Code))
-			{
-				input.Type |= Input.Type.Down;
-			}
-            else if (UnityEngine.Input.GetKey(input.Code))
-            {
-                input.Type |= Input.Type.Hold;
-            }
-            else if (UnityEngine.Input.GetKeyUp(input.Code))
-			{
-				input.Type |= Input.Type.Up;
-			}
-			Input.Mapper.Actions[index] = input;
 		}
 	}
 }

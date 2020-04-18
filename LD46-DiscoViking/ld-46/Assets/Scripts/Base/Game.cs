@@ -21,11 +21,8 @@ public abstract class Game : MonoBehaviour
 
 	void Update()
 	{
-		CaptureKeyboard();
 		UpdateGame();
 	}
 
 	public abstract void UpdateGame();
-
-	public abstract void CaptureKeyboard();
 }
