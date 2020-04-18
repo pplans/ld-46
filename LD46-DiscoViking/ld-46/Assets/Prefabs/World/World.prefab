@@ -48,3 +48,6 @@ MonoBehaviour:
   TileSize: {x: 1, y: 1}
   WorldObject: {fileID: 1132295859119932116}
   tilePrefab: {fileID: 6688268635194366996, guid: 751f9d0ad02798d419705ef368e3f158, type: 3}
+  DefaultPrefab: {fileID: 6999492763199560926, guid: f7c3a31c5e0703040828b300080485a2, type: 3}
+  filePaths:
+  - Assets/GridsData/grid0.txt

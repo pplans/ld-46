@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public enum TileState
 {
@@ -19,6 +20,10 @@ public interface ITileInfo
 
 public class World : MonoBehaviour
 {
+	public class WorldCache
+	{
+		public List<List<string>> cache = new List<List<string>>();
+	}
 	#region TileInfo
 	private class TileInfo : ITileInfo
 	{
@@ -49,7 +54,7 @@ public class World : MonoBehaviour
 		public WorldObject Object { get => worldObject;
 			set
 			{
-				if (value == null && worldObject!=null)
+				if (value == null && worldObject != null)
 				{
 					worldObject.transform.parent = null;
 					worldObject.transform.localPosition = Vector3.zero;
@@ -79,6 +84,10 @@ public class World : MonoBehaviour
 
 	[SerializeField]
 	private GameObject tilePrefab = null;
+	[SerializeField]
+	private WorldObject DefaultPrefab = null;
+	[SerializeField]
+	private List<string> filePaths = null;
 
 	private bool m_bIsWorldInit;
 
@@ -88,9 +97,16 @@ public class World : MonoBehaviour
 
 	private static World s_Instance = null;
 
+	private WorldCache cache = new WorldCache();
+
 	public World Instance { get { if (s_Instance) s_Instance = new World(); return s_Instance; } }
 
 	private World() => m_bIsWorldInit = false;
+
+	public int GetCacheSize()
+	{
+		return cache.cache.Count;
+	}
 
 	public void Init(Vector2 _gridStartPos, Vector2 _gridEndPos, Vector2 _gridSize)
 	{
@@ -98,15 +114,12 @@ public class World : MonoBehaviour
 
 		TileStartPos = _gridStartPos; TileEndPos = _gridEndPos; TileSize = _gridSize;
 
-		Debug.Log(TileStartPos);
-		Debug.Log(TileEndPos);
-		Debug.Log(TileSize);
-
 		Vector2 gridSize = GetNumberOfTiles();
-		m_2dGrid = new WorldTile[Mathf.RoundToInt(gridSize.x), Mathf.RoundToInt(gridSize.y)];
-		for(int i = 0; i < gridSize.x; ++i)
+		Vector2Int iGridSize = new Vector2Int(Mathf.RoundToInt(gridSize.x), Mathf.RoundToInt(gridSize.y));
+		m_2dGrid = new WorldTile[iGridSize.x, iGridSize.y];
+		for(int i = 0; i < iGridSize.x; ++i)
 		{
-			for(int j = 0; j < gridSize.y; ++j)
+			for(int j = 0; j < iGridSize.y; ++j)
 			{
 				m_2dGrid[i, j] = new WorldTile();
 				Color rdrCol = new Color(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), Random.Range(0.5f, 1f));
@@ -120,6 +133,59 @@ public class World : MonoBehaviour
 			}
 		}
 		m_bIsWorldInit = true;
+
+		foreach(string filePath in filePaths)
+		{
+			ReadFile(filePath);
+		}
+		UseCache(0);
+	}
+
+	public void ReadFile(string filePath)
+	{
+		StreamReader reader = File.OpenText(filePath);
+		string line;
+		List<string> StringRows = new List<string>();
+		while ((line = reader.ReadLine()) != null)
+		{
+			string[] rows = line.Split('\n');
+			foreach (string row in rows)
+			{
+				StringRows.Add(row);
+			}
+		}
+		StringRows.Reverse();
+		cache.cache.Add(StringRows);
+	}
+
+	public void UseCache(int cacheIndex)
+	{
+		if (cacheIndex > cache.cache.Count) throw new System.Exception("World Cache unknown.");
+		List<string> buffers = cache.cache[cacheIndex];
+		Vector2 GridSize = new Vector2(buffers[0].Length, buffers.Count);
+		Vector2 actualGridSize = GetNumberOfTiles();
+		if (GridSize != actualGridSize) throw new System.Exception("World Cache grid sizes inconsistent.");
+		Reinit();
+		for (int i = 0; i < GridSize.x; ++i)
+		{
+			for (int j = 0; j < GridSize.y; ++j)
+			{
+				char c = buffers[j][i];
+				// here we pick the things to spawn
+				switch(c)
+				{
+					case '.':
+						
+					break;
+					default:
+						m_2dGrid[i, j].Object = Instantiate(DefaultPrefab);
+					break;
+				}
+				Color rdrCol = new Color(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), Random.Range(0.5f, 1f));
+				Material mat = m_2dGrid[i, j].Tile.GetComponent<MeshRenderer>().material;
+				mat.SetColor("Color_D10C4CBD", rdrCol);
+			}
+		}
 	}
 
 	public void Reinit()
@@ -173,9 +239,10 @@ public class World : MonoBehaviour
 		return new TileInfo(state, wo);
 	}
 
-	public Vector2 GetNumberOfTiles()
+	public Vector2Int GetNumberOfTiles()
 	{
-		return (TileEndPos - TileStartPos) / TileSize;
+		Vector2 fGridSize = (TileEndPos - TileStartPos) / TileSize;
+		return new Vector2Int(Mathf.RoundToInt(fGridSize.x), Mathf.RoundToInt(fGridSize.y));
 	}
 
 	public class Backup { public WorldObject wo; public Vector2 pos; };

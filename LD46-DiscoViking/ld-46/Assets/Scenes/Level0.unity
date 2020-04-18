@@ -547,7 +547,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 575766786}
-  - component: {fileID: 575766785}
   - component: {fileID: 575766787}
   m_Layer: 0
   m_Name: GameManager
@@ -556,36 +555,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &575766785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 575766784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 089629f21527d0e43a81068d4ecf80fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  action:
-    m_Name: Action
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 1d26a7d5-bfb7-434f-96c7-ab8bfd4f7a77
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-  loadLevel: {fileID: 671821951}
-  m_characters: []
-  m_player: {fileID: 1438055911}
-  m_playerController: {fileID: 653210537}
-  m_world: {fileID: 0}
-  m_testLamp: {fileID: 0}
-  TileStartPos: {x: 0, y: 0}
-  TileEndPos: {x: 10, y: 4}
-  TileSize: {x: 1, y: 1}
-  PlayerInitPos: {x: 3, y: 1}
 --- !u!4 &575766786
 Transform:
   m_ObjectHideFlags: 0
@@ -969,7 +938,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1426507036}
-  - component: {fileID: 1426507035}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -977,23 +945,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1426507035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1426507034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e321792723eee34479af65eb01c9c75d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TileStartPos: {x: 0, y: 0}
-  TileEndPos: {x: 10, y: 4}
-  TileSize: {x: 1, y: 1}
-  WorldObject: {fileID: 0}
-  tilePrefab: {fileID: 0}
 --- !u!4 &1426507036
 Transform:
   m_ObjectHideFlags: 0
@@ -1059,7 +1010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0}
-  m_World: {fileID: 1426507035}
+  m_World: {fileID: 0}
   cam: {fileID: 840431611}
 --- !u!4 &1438055912
 Transform:
