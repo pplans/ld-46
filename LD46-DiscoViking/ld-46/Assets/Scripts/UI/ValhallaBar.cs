@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DiscoBar : MonoBehaviour
+public class ValhallaBar : MonoBehaviour
 {
     public Slider slider;
     public Gradient gradient;
     public Image fill;
 
-    public void SetMaxValhalla(int maxVahalla)
+    public void SetMaxValhalla(int val)
     {
-        slider.maxValue = maxVahalla;
+        slider.maxValue = val;
     }
 
-    public void SetValhalla(int vahalla)
+    public void SetValhalla(int val)
     {
-        slider.value = vahalla;
+        slider.value = val;
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 }
