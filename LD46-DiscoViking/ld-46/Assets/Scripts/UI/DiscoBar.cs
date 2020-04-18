@@ -6,16 +6,17 @@ using UnityEngine.UI;
 public class DiscoBar : MonoBehaviour
 {
     public Slider slider;
+    public Gradient gradient;
+    public Image fill;
 
-    // Start is called before the first frame update
-    void Start()
+    public void SetMaxValhalla(int maxVahalla)
     {
-        
+        slider.maxValue = maxVahalla;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetValhalla(int vahalla)
     {
-        
+        slider.value = vahalla;
+        fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 }
