@@ -5,7 +5,11 @@ using UnityEngine.InputSystem;
 
 public class DV_InputManager : MonoBehaviour
 {
-    public InputAction action;
+    public InputAction up;
+    public InputAction down;
+    public InputAction left;
+    public InputAction right;
+
     public DV_GameManager gameManager;
     private bool bInputDetectionActive;
     private float timeBetweenStuff;
@@ -14,8 +18,17 @@ public class DV_InputManager : MonoBehaviour
 
     private void Start()
     {
-        action.performed += InputLink;
-        action.Enable();
+        up.performed += UpPressed;
+        up.Enable();
+
+        down.performed += DownPressed;
+        down.Enable();
+
+        left.performed += LeftPressed;
+        left.Enable();
+
+        right.performed += RightPressed;
+        right.Enable();
 
         bInputDetectionActive = false;
 
@@ -28,7 +41,7 @@ public class DV_InputManager : MonoBehaviour
 
     }
 
-    private void InputLink(InputAction.CallbackContext callbackContext)
+    private void UpPressed(InputAction.CallbackContext callbackContext)
     {
           
         if (bInputDetectionActive)
@@ -38,10 +51,65 @@ public class DV_InputManager : MonoBehaviour
 
             if (valid)
             {
-                Debug.Log(gameManager.musicHandler.GetBeatOffset());
+                Debug.Log("Up");
+                m_player.DoMove(new Vector2(0, 1));
             }
             
         }        
+
+    }
+
+    private void DownPressed(InputAction.CallbackContext callbackContext)
+    {
+
+        if (bInputDetectionActive)
+        {
+
+            bool valid = gameManager.musicHandler.ValidateBeat();
+
+            if (valid)
+            {
+                Debug.Log("Down");
+                m_player.DoMove(new Vector2(0, -1));
+            }
+
+        }
+
+    }
+
+    private void LeftPressed(InputAction.CallbackContext callbackContext)
+    {
+
+        if (bInputDetectionActive)
+        {
+
+            bool valid = gameManager.musicHandler.ValidateBeat();
+
+            if (valid)
+            {
+                Debug.Log("Left");
+                m_player.DoMove(new Vector2(-1, 0));
+            }
+
+        }
+
+    }
+
+    private void RightPressed(InputAction.CallbackContext callbackContext)
+    {
+
+        if (bInputDetectionActive)
+        {
+
+            bool valid = gameManager.musicHandler.ValidateBeat();
+
+            if (valid)
+            {
+                Debug.Log("Right");
+                m_player.DoMove(new Vector2(1,0));
+            }
+
+        }
 
     }
 
@@ -64,6 +132,6 @@ public class DV_InputManager : MonoBehaviour
             m_player.ResetPosition(tileState);
         }
         else
-            m_player.DoMove(newDirection, tileState);
+            m_player.DoMove(newDirection);
     }
 }

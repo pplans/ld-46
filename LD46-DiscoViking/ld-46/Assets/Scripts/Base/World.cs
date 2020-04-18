@@ -317,12 +317,12 @@ public class World : MonoBehaviour
 		m_2dGrid[Mathf.RoundToInt(newPos.x), Mathf.RoundToInt(newPos.y)].Object = wo;
 	}
 
-	public void MoveObject(Vector2 _pos, Vector2 _d)
+	public TileState MoveObject(Vector2 _pos, Vector2 _d)
 	{
 		Vector2 newPos = _pos + _d;
 		ITileInfo tileInfo = GetTileInfo(newPos);
 		if (tileInfo.GetState() == TileState.Occupied)
-			return;
+			return tileInfo.GetState();
 
 		ITileInfo oldTileInfo = GetTileInfo(_pos);
 		oldTileInfo.SetEmissiveScale(4f);
@@ -330,6 +330,7 @@ public class World : MonoBehaviour
 		WorldObject owo = m_2dGrid[Mathf.RoundToInt(_pos.x), Mathf.RoundToInt(_pos.y)].Object;
 		m_2dGrid[Mathf.RoundToInt(_pos.x), Mathf.RoundToInt(_pos.y)].Object = null;
 		m_2dGrid[Mathf.RoundToInt(newPos.x), Mathf.RoundToInt(newPos.y)].Object = owo;
+		return tileInfo.GetState();
 	}
 
 	public void SetObject(WorldObject _wo, Vector2 _pos)
