@@ -18,8 +18,8 @@ public class MusicHandler : MonoBehaviour
 	{
 		action.performed += InputLink;
 		action.Enable();
-		music.Play();
 		bpmOffset += Time.time;
+		music.Play();
 	}
 	private void InputLink(InputAction.CallbackContext callbackContext)
 	{
