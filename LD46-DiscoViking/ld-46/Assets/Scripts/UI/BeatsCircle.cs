@@ -18,7 +18,7 @@ public class BeatsCircle : MonoBehaviour
 
     void Update()
     {
-        if (musicHandler.started)
+        if (musicHandler && musicHandler.started)
             SetBeatsCircleRadius(curve.Evaluate(musicHandler.GetBeatOffset() + 0.5f));
     }
 

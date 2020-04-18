@@ -8,15 +8,15 @@ public class DiscoBall : MonoBehaviour
     public MeshRenderer mesh;
 
     private Material material;
-    private static string IntensityOccStr = "Vector1_6580437B";
+    private static string IntensityOccStr = "_IntensityOcc";
 
     private int maxDisco;
     private int currDisco;
 
-    void Start()
+    void Awake()
     {
         maxDisco = 100;
-        material = mesh.GetComponent<Material>();
+        material = mesh.GetComponent<MeshRenderer>().materials[0];
     }
 
     void Update()
