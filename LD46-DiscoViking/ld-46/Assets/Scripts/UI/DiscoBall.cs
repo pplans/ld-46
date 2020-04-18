@@ -5,6 +5,7 @@ using UnityEngine;
 public class DiscoBall : MonoBehaviour
 {
     public float rotationSpeed = 15.0f;
+    public MeshRenderer mesh;
 
     private Material material;
     private static string IntensityOccStr = "Vector1_6580437B";
@@ -15,7 +16,7 @@ public class DiscoBall : MonoBehaviour
     void Start()
     {
         maxDisco = 100;
-        material = GetComponent<MeshRenderer>().material;
+        material = mesh.GetComponent<Material>();
     }
 
     void Update()
