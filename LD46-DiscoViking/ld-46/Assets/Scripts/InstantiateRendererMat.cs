@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class InstantiateRendererMat : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         GetComponent<Image>().material = Instantiate<Material>(GetComponent<Image>().material);
     }
