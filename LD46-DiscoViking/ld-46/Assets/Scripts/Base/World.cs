@@ -98,6 +98,10 @@ public class World : MonoBehaviour
 
 		TileStartPos = _gridStartPos; TileEndPos = _gridEndPos; TileSize = _gridSize;
 
+		Debug.Log(TileStartPos);
+		Debug.Log(TileEndPos);
+		Debug.Log(TileSize);
+
 		Vector2 gridSize = GetNumberOfTiles();
 		m_2dGrid = new WorldTile[Mathf.RoundToInt(gridSize.x), Mathf.RoundToInt(gridSize.y)];
 		for(int i = 0; i < gridSize.x; ++i)

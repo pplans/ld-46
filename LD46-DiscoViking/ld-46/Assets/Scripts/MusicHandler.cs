@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class MusicHandler : MonoBehaviour
 {
@@ -11,6 +11,36 @@ public class MusicHandler : MonoBehaviour
 	public float inputValidity;
 
 	public bool started = false;
+
+	public UnityEvent OnResetBeat;
+	public UnityEvent OnBeat;
+	public UnityEvent OnBeatInvalid;
+
+	private float previousBeat = 1f;
+
+	private void Update()
+	{
+		if (!started)
+			return;
+
+		if (Time.time < bpmOffset)
+			return;
+
+		// check OnBeat
+		float newBeat = GetBeatOffset();
+		float newSign = Mathf.Sign(newBeat);
+		if (newSign != Mathf.Sign(previousBeat))
+		{
+			if (newSign == 1f)
+				OnBeat.Invoke();
+			else
+				OnResetBeat.Invoke();
+		}
+		if (previousBeat < inputValidity && newBeat > inputValidity)
+			OnBeatInvalid.Invoke();
+
+		previousBeat = newBeat;
+	}
 
 	public void StartMusic()
 	{

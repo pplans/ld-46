@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DiscoTest : MonoBehaviour
 {
@@ -11,7 +12,12 @@ public class DiscoTest : MonoBehaviour
     public int currValhalla;
 
     public DiscoBall discoBall;
+    public BeatsCircle beatsCircle;
     public ValhallaBar valhallaBar;
+
+    [Range(0.0f, 1.0f)]
+    public float beatsCircleRadius = 1.0f;
+
 
     void Start()
     {
@@ -42,6 +48,8 @@ public class DiscoTest : MonoBehaviour
         {
             AddValhalla(+5);
         }
+
+        beatsCircle.SetBeatsCircleRadius(beatsCircleRadius);
     }
 
     void AddDisco(int amount)
