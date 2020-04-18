@@ -43,6 +43,7 @@ public class World : MonoBehaviour
 			{
 				worldObject = value;
 				worldObject.transform.parent = tileObject.transform;
+				worldObject.transform.localPosition = Vector3.zero;
 			}
 		}
 	}
@@ -75,9 +76,11 @@ public class World : MonoBehaviour
 
 	private World() => m_bIsWorldInit = false;
 
-	public void Init()
+	public void Init(Vector2 _gridStartPos, Vector2 _gridEndPos, Vector2 _gridSize)
 	{
 		if (m_bIsWorldInit) return;
+
+		TileStartPos = _gridStartPos; TileEndPos = _gridEndPos; TileSize = _gridSize;
 
 		Vector2 gridSize = GetNumberOfTiles();
 		m_2dGrid = new WorldTile[Mathf.RoundToInt(gridSize.x), Mathf.RoundToInt(gridSize.y)];

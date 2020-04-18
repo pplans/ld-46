@@ -87,15 +87,23 @@ public class GameImpl : Game
 	public World m_world = null;
 	[SerializeField]
 	public WorldObject m_testLamp = null;
+	[SerializeField]
+	private Vector2 TileStartPos = new Vector2(0, 0);
+	[SerializeField]
+	private Vector2 TileEndPos = new Vector2(10, 4);
+	[SerializeField]
+	private Vector2 TileSize = new Vector2(1, 1);
 
 	const float m_playerMovingSpeed = 5f; // per second
 
 	public void Awake()
 	{
-		m_world.Init();
+		m_world.Init(TileStartPos, TileEndPos, TileSize);
 
 		WorldObject wo = Instantiate<WorldObject>(m_testLamp);
 		m_world.PlaceObject(wo);
+		m_world.SetWorldAnchor(new Vector2(3, 1));
+		m_world.PlaceObject(m_player, new Vector2(3, 1));
 	}
 
 	public override void UpdateGame()
