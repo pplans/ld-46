@@ -14,21 +14,33 @@ public class MusicHandler : MonoBehaviour
 
 	public float inputValidity;
 
+	private bool started = false;
+
 	private void Start()
 	{
 		action.performed += InputLink;
 		action.Enable();
-		music.Play();
-		bpmOffset += Time.time;
 	}
+
 	private void InputLink(InputAction.CallbackContext callbackContext)
 	{
+		if (!started)
+			StartMusic();
 		Debug.Log(ValidateBeat());
 	}
 
 	private void Update()
 	{
-		group.alpha = curve.Evaluate( 1f - ( Mathf.Abs( GetBeatOffset() ) * 4f ) );
+		if (!started)
+			return;
+		group.alpha = ValidateBeat() ? 1f : 0f;
+	}
+
+	private void StartMusic()
+	{
+		bpmOffset += Time.time;
+		music.Play();
+		started = true;
 	}
 
 	private float GetBeatOffset()
