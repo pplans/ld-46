@@ -42,8 +42,11 @@ public class World : MonoBehaviour
 			set
 			{
 				worldObject = value;
-				worldObject.transform.parent = tileObject.transform;
-				worldObject.transform.localPosition = Vector3.zero;
+				if (worldObject != null)
+				{
+					worldObject.transform.parent = tileObject.transform;
+					worldObject.transform.localPosition = Vector3.zero;
+				}
 			}
 		}
 	}
@@ -136,7 +139,7 @@ public class World : MonoBehaviour
 	public void SetWorldAnchor(Vector2 _anchor)
 	{
 		// if different from old world anchor, move stuff around
-		{
+		/*{
 			Vector2 direction = _anchor - m_worldAnchor;
 			direction.y = 0;
 			Vector2 gridSize = GetNumberOfTiles();
@@ -162,7 +165,7 @@ public class World : MonoBehaviour
 			{
 				m_2dGrid[Mathf.RoundToInt(bkp.pos.x), Mathf.RoundToInt(bkp.pos.y)].Object = bkp.wo;
 			}
-		}
+		}*/
 		m_worldAnchor = _anchor;
 	}
 
@@ -186,12 +189,14 @@ public class World : MonoBehaviour
 		}
 	}
 
-	public void PlaceObject(WorldObject _wo, Vector2 _pos)
+	public void PlaceObject(WorldObject _wo, Vector2 _pos, Vector2 _d)
 	{
 		Vector2 gridSize = GetNumberOfTiles();
-		if (!ProjectToGrid(ref _pos))
+		Vector2 newPos = _pos + _d;
+		if (!ProjectToGrid(ref newPos))
 			return;
-		m_2dGrid[Mathf.RoundToInt(_pos.x), Mathf.RoundToInt(_pos.y)].Object = _wo;
+		m_2dGrid[Mathf.RoundToInt(_pos.x), Mathf.RoundToInt(_pos.y)].Object = null;
+		m_2dGrid[Mathf.RoundToInt(newPos.x), Mathf.RoundToInt(newPos.y)].Object = _wo;
 	}
 
 	public void OnDrawGizmos()

@@ -12,7 +12,7 @@ public abstract class Character : WorldObject
 	[SerializeField]
 	private Vector2 m_Position;
 	[SerializeField]
-	private World m_World;
+	private World m_World = null;
 
 	#endregion
 
@@ -37,8 +37,13 @@ public abstract class Character : WorldObject
 		m_isAlive = false;
 	}
 
-    public virtual void UpdateCharacter()
-    {
+	public void Init(Vector2 position)
+	{
+		m_Position = position;
+	}
+
+	public virtual void UpdateCharacter()
+	{
        if(!m_isAlive)
 	   {
 	   }
@@ -60,6 +65,7 @@ public abstract class Character : WorldObject
 		ITileInfo tileInfo = m_World.GetTileInfo(m_Position, direction);
 		if (tileInfo.IsAvailable())
 		{
+			m_World.PlaceObject(this, m_Position, direction);
 			m_Position += direction;
 		}
 	}

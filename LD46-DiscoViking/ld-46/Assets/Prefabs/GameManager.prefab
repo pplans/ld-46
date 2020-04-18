@@ -47,6 +47,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089629f21527d0e43a81068d4ecf80fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  action:
+    m_Name: Action
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 96a9c839-4940-44a1-9d5a-1651be40789c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 2D Vector
+      m_Id: 2b7b2064-6f79-4280-8e57-1263b3a5873a
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Action
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 7d06865d-23be-4855-8f4d-eb91b7c638a9
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Action
+      m_Flags: 8
+    - m_Name: down
+      m_Id: ddb690d7-259c-44f1-920e-f2a8abc79b6a
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Action
+      m_Flags: 8
+    - m_Name: left
+      m_Id: e152a8a2-7d09-4014-bd26-4b1c6271b4a0
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Action
+      m_Flags: 8
+    - m_Name: right
+      m_Id: f378e8e0-3845-45fa-8d64-169615faa4cc
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Action
+      m_Flags: 8
   loadLevel: {fileID: 6176461746269875435}
   m_characters: []
   m_player: {fileID: 8495809602471273612}
