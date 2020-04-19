@@ -148,7 +148,7 @@ public class World : MonoBehaviour
 		{
 			ReadFile(filePath);
 		}
-		UseCache(0);
+		UseCache(Random.Range(0, cache.cache.Count));
 
 		smokePuffPuff.transform.localPosition = new Vector3(iGridSize.x * 0.5f, 0f, iGridSize.y * 0.5f);
 		smokePuffPuff.SetFloat("SpawnRadius", Mathf.Max(gridSize.x, gridSize.y));
