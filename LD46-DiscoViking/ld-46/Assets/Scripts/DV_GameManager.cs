@@ -14,7 +14,7 @@ public class DV_GameManager : MonoBehaviour
     public Transform endGridPos;
     public bool bBeatValidated;
     public DanceSequence danceSequence;
-    public WorldObject currentDanceTarget;
+    public ITileInfo currentDanceTargetTile;
     private List<DV_EnemyAnimation> wokeEnemies;
 
 
@@ -71,10 +71,10 @@ public class DV_GameManager : MonoBehaviour
         bBeatValidated = false;
     }
 
-    public void BeginDanceSequence(WorldObject danceTarget)
+    public void BeginDanceSequence(ITileInfo tileInfo)
     {
         danceSequence.InitializeDanceSequence();
-        currentDanceTarget = danceTarget;
+        currentDanceTargetTile = tileInfo;
         currentGamePhase = "dance";
     }
 
@@ -84,15 +84,16 @@ public class DV_GameManager : MonoBehaviour
         {
             anim.Dance();
         }
-        //Debug.Log(wokeEnemies.Count);
+        
     }
 
     public void SucceedDanceSequence()
     {
         danceSequence.HideSequence();
         currentGamePhase = "move";
-        currentDanceTarget.GetComponent<DV_EnemyAnimation>().WakeUp();
-        wokeEnemies.Add(currentDanceTarget.GetComponent<DV_EnemyAnimation>());
+        currentDanceTargetTile.SetVisited();
+        currentDanceTargetTile.GetWorldObject().GetComponent<DV_EnemyAnimation>().WakeUp();
+        wokeEnemies.Add(currentDanceTargetTile.GetWorldObject().GetComponent<DV_EnemyAnimation>());
         discoController.AddDisco(3);
         discoController.AddBoogie(3);
     }

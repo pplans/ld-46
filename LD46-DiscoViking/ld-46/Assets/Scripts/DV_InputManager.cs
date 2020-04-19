@@ -76,7 +76,7 @@ public class DV_InputManager : MonoBehaviour
                         {
                             if (!tileInfo.GetWorldObject().GetComponent<DV_EnemyAnimation>().bWokenUp)
                             {
-                                gameManager.BeginDanceSequence(tileInfo.GetWorldObject());
+                                gameManager.BeginDanceSequence(tileInfo);
                             }
                             
                         }
@@ -151,7 +151,7 @@ public class DV_InputManager : MonoBehaviour
                         {
                             if (!tileInfo.GetWorldObject().GetComponent<DV_EnemyAnimation>().bWokenUp)
                             {
-                                gameManager.BeginDanceSequence(tileInfo.GetWorldObject());
+                                gameManager.BeginDanceSequence(tileInfo);
                             }
                         }
                     }
@@ -223,7 +223,7 @@ public class DV_InputManager : MonoBehaviour
                         {
                             if (!tileInfo.GetWorldObject().GetComponent<DV_EnemyAnimation>().bWokenUp)
                             {
-                                gameManager.BeginDanceSequence(tileInfo.GetWorldObject());
+                                gameManager.BeginDanceSequence(tileInfo);
                             }
                         }
                     }
@@ -296,7 +296,7 @@ public class DV_InputManager : MonoBehaviour
                         {
                             if (!tileInfo.GetWorldObject().GetComponent<DV_EnemyAnimation>().bWokenUp)
                             {
-                                gameManager.BeginDanceSequence(tileInfo.GetWorldObject());
+                                gameManager.BeginDanceSequence(tileInfo);
                             }
                         }
                     }
