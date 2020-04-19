@@ -16,6 +16,7 @@ public class DV_InputManager : MonoBehaviour
     public Player m_player;
     public World m_world;
     public int danceStepIndex;
+    public CharacterAnim anim;
 
     private void Start()
     {
@@ -39,7 +40,6 @@ public class DV_InputManager : MonoBehaviour
     void Update()
     {
         bInputDetectionActive = gameManager.bGameStarted;
-
     }
 
     private void UpPressed(InputAction.CallbackContext callbackContext)
@@ -50,9 +50,11 @@ public class DV_InputManager : MonoBehaviour
 
             bool valid = gameManager.musicHandler.ValidateBeat();
             bool obstruction = false;
+            bool successfulInput = false;
 
             if (gameManager.currentGamePhase == "move")
             {
+                
                 if (valid)
                 {
                     TileState state = m_player.DoMove(new Vector2(0, 1));
@@ -65,24 +67,29 @@ public class DV_InputManager : MonoBehaviour
                     if (!obstruction)
                     {
                         gameManager.ValidateBeat();
+                        successfulInput = true;
                     }
                     else
                     {
                         gameManager.BeginDanceSequence();
+                        successfulInput = true;
                     }
                 }
             } else
             {
                 if (gameManager.danceSequence.CheckStepValidityAgainstInput("Up", danceStepIndex))
                 {
+                    gameManager.ValidateBeat();
                     gameManager.danceSequence.ValidateStep(danceStepIndex);
                     if (danceStepIndex < 3)
                     {
                         danceStepIndex++;
+                        successfulInput = true;
                     }
                     else
                     {
                         gameManager.SucceedDanceSequence();
+                        successfulInput = true;
                     }
                 }
                 else
@@ -90,6 +97,11 @@ public class DV_InputManager : MonoBehaviour
                     gameManager.danceSequence.ResetDanceSequence();
                     danceStepIndex = 0;
                 }
+            }
+
+            if (successfulInput)
+            {
+                anim.AnimationStep();
             }
             
             
@@ -105,6 +117,7 @@ public class DV_InputManager : MonoBehaviour
 
             bool valid = gameManager.musicHandler.ValidateBeat();
             bool obstruction = false;
+            bool successfulInput = false;
 
             if (gameManager.currentGamePhase == "move")
             {
@@ -120,24 +133,29 @@ public class DV_InputManager : MonoBehaviour
                     if (!obstruction)
                     {
                         gameManager.ValidateBeat();
+                        successfulInput = true;
                     }
                     else
                     {
                         gameManager.BeginDanceSequence();
+                        successfulInput = true;
                     }
                 }
             } else
             {
                 if (gameManager.danceSequence.CheckStepValidityAgainstInput("Down", danceStepIndex))
                 {
+                    gameManager.ValidateBeat();
                     gameManager.danceSequence.ValidateStep(danceStepIndex);
                     if (danceStepIndex < 3)
                     {
                         danceStepIndex++;
+                        successfulInput = true;
                     }
                     else
                     {
                         gameManager.SucceedDanceSequence();
+                        successfulInput = true;
                     }
                 }
                 else
@@ -145,6 +163,11 @@ public class DV_InputManager : MonoBehaviour
                     gameManager.danceSequence.ResetDanceSequence();
                     danceStepIndex = 0;
                 }
+            }
+
+            if (successfulInput)
+            {
+                anim.AnimationStep();
             }
 
         }
@@ -159,6 +182,7 @@ public class DV_InputManager : MonoBehaviour
 
             bool valid = gameManager.musicHandler.ValidateBeat();
             bool obstruction = false;
+            bool successfulInput = false;
 
             if (gameManager.currentGamePhase == "move")
             {
@@ -174,24 +198,29 @@ public class DV_InputManager : MonoBehaviour
                     if (!obstruction)
                     {
                         gameManager.ValidateBeat();
+                        successfulInput = true;
                     }
                     else
                     {
                         gameManager.BeginDanceSequence();
+                        successfulInput = true;
                     }
                 }
             } else
             {
                 if (gameManager.danceSequence.CheckStepValidityAgainstInput("Left", danceStepIndex))
                 {
+                    gameManager.ValidateBeat();
                     gameManager.danceSequence.ValidateStep(danceStepIndex);
                     if (danceStepIndex < 3)
                     {
                         danceStepIndex++;
+                        successfulInput = true;
                     }
                     else
                     {
                         gameManager.SucceedDanceSequence();
+                        successfulInput = true;
                     }
                 }
                 else
@@ -201,6 +230,10 @@ public class DV_InputManager : MonoBehaviour
                 }
             }
 
+            if (successfulInput)
+            {
+                anim.AnimationStep();
+            }
 
 
         }
@@ -215,6 +248,7 @@ public class DV_InputManager : MonoBehaviour
 
             bool valid = gameManager.musicHandler.ValidateBeat();
             bool obstruction = false;
+            bool successfulInput = false;
 
             if (gameManager.currentGamePhase == "move")
             {
@@ -231,10 +265,12 @@ public class DV_InputManager : MonoBehaviour
                     if (!obstruction)
                     {
                         gameManager.ValidateBeat();
+                        successfulInput = true;
                     }
                     else
                     {
                         gameManager.BeginDanceSequence();
+                        successfulInput = true;
                     }
 
                 }
@@ -242,13 +278,16 @@ public class DV_InputManager : MonoBehaviour
             {
                 if (gameManager.danceSequence.CheckStepValidityAgainstInput("Right", danceStepIndex))
                 {
+                    gameManager.ValidateBeat();
                     gameManager.danceSequence.ValidateStep(danceStepIndex);
                     if (danceStepIndex < 3)
                     {
                         danceStepIndex++;
+                        successfulInput = true;
                     } else
                     {
                         gameManager.SucceedDanceSequence();
+                        successfulInput = true;
                     }
                     
                 }
@@ -259,7 +298,10 @@ public class DV_InputManager : MonoBehaviour
                 }
             }
 
-
+            if (successfulInput)
+            {
+                anim.AnimationStep();
+            }
 
         }
 
