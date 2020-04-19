@@ -23,12 +23,12 @@ MonoBehaviour:
     min: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.25
+    m_Value: 0.45
     min: 0
     max: 1
   scatter:
     m_OverrideState: 1
-    m_Value: 0.6
+    m_Value: 0.203
     min: 0
     max: 1
   tint:
@@ -78,7 +78,7 @@ MonoBehaviour:
     m_Value: 1
   fixedExposure:
     m_OverrideState: 1
-    m_Value: 15.26
+    m_Value: -5
   compensation:
     m_OverrideState: 0
     m_Value: 0
@@ -196,10 +196,10 @@ MonoBehaviour:
     m_Value: {x: 0.9411581, y: 0.9999998, z: 1, w: -0.36454606}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 0.9294132, y: 0.9437474, z: 1, w: 0.014295924}
+    m_Value: {x: 0.9294132, y: 0.9437474, z: 1, w: -0.17003588}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 0.94375724, y: 0.9666886, z: 1, w: -0.21443884}
+    m_Value: {x: 0.94375724, y: 0.9666886, z: 1, w: -0.07618998}
   shadowsStart:
     m_OverrideState: 0
     m_Value: 0
@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: MenuPostprocessingVolumeProfile
+  m_Name: MainGame
   m_EditorClassIdentifier: 
   components:
   - {fileID: 849704581553946013}
@@ -292,7 +292,7 @@ MonoBehaviour:
     m_Value: 0
   exposure:
     m_OverrideState: 1
-    m_Value: 9.92
+    m_Value: 0
   multiplier:
     m_OverrideState: 0
     m_Value: 1
@@ -538,7 +538,7 @@ MonoBehaviour:
     m_Value: 0
   maximumHeight:
     m_OverrideState: 1
-    m_Value: 10.05
+    m_Value: 10.22
   albedo:
     m_OverrideState: 1
     m_Value: {r: 0.24684052, g: 0.29785076, b: 0.4056604, a: 1}
@@ -547,7 +547,7 @@ MonoBehaviour:
     showEyeDropper: 1
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 1.91
+    m_Value: 1.71
     min: 1
   enableVolumetricFog:
     m_OverrideState: 1
