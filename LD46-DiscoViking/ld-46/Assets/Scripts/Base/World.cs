@@ -126,7 +126,7 @@ public class World : MonoBehaviour
 	[SerializeField]
 	private List<Ennemy> EnnemyList = null;
 	[SerializeField]
-	private List<string> filePaths = null;
+	private List<TextAsset> textAssets = null;
 	[SerializeField]
 	private MusicHandler musicHandler = null;
 
@@ -198,25 +198,22 @@ public class World : MonoBehaviour
 		}
 		m_bIsWorldInit = true;
 
-		foreach(string filePath in filePaths)
+		foreach(TextAsset textFile in textAssets)
 		{
-			ReadFile(filePath);
+			ReadFile(textFile);
 		}
 		UseCache(Random.Range(0, cache.cache.Count));
 	}
 
-	public void ReadFile(string filePath)
+	public void ReadFile(TextAsset textAsset)
 	{
-		StreamReader reader = File.OpenText(filePath);
+		string text = textAsset.text;
 		string line;
 		List<string> StringRows = new List<string>();
-		while ((line = reader.ReadLine()) != null)
+		string[] rows = text.Split('\n');
+		foreach (string row in rows)
 		{
-			string[] rows = line.Split('\n');
-			foreach (string row in rows)
-			{
-				StringRows.Add(row);
-			}
+			StringRows.Add(row);
 		}
 		StringRows.Reverse();
 		cache.cache.Add(StringRows);

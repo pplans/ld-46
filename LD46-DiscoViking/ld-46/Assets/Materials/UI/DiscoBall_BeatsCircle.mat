@@ -68,14 +68,14 @@ Material:
     - Boolean_47B606DB: 0
     - Vector1_13B9990A: 0.225
     - Vector1_300E72F8: 0.022
-    - Vector1_70037E37: 0.3
+    - Vector1_70037E37: 0.35
     - Vector1_799D8D7A: 0.85
     - _Alpha: 0.85
     - _AlphaClip: 0
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 10
     - _AlphaSrcBlend: 1
-    - _BeatsCircleRadius: 0.007828919
+    - _BeatsCircleRadius: 0
     - _BeatsCircleSize: 1
     - _Blend: 0
     - _BlendMode: 0
@@ -127,7 +127,7 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _Color: {r: 2, g: 2, b: 2, a: 1}
+    - _Color: {r: 0.5019608, g: 48.188236, b: 95.87451, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
