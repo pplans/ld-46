@@ -67,6 +67,9 @@ public class DV_InputManager : MonoBehaviour
                         case TileState.Ennemy:
                             enemy = true;
                             break;
+                        case TileState.BorderRight:
+                            gameManager.IncrementProgress();
+                            break;
                     }
                     if (!obstruction)
                     {
@@ -142,6 +145,9 @@ public class DV_InputManager : MonoBehaviour
                         case TileState.Ennemy:
                             enemy = true;
                             break;
+                        case TileState.BorderRight:
+                            gameManager.IncrementProgress();
+                            break;
                     }
                     if (!obstruction)
                     {
@@ -213,6 +219,9 @@ public class DV_InputManager : MonoBehaviour
                             break;
                         case TileState.Ennemy:
                             enemy = true;
+                            break;
+                        case TileState.BorderRight:
+                            gameManager.IncrementProgress();
                             break;
                     }
                     if (!obstruction)
@@ -286,6 +295,9 @@ public class DV_InputManager : MonoBehaviour
                             break;
                         case TileState.Ennemy:
                             enemy = true;
+                            break;
+                        case TileState.BorderRight:
+                            gameManager.IncrementProgress();
                             break;
                     }
                     if (!obstruction)

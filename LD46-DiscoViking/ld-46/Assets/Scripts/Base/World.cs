@@ -20,6 +20,7 @@ public interface ITileInfo
 	void SetVisited();
 	TileState GetState();
 	WorldObject GetWorldObject();
+	Vector2 GetPosition();
 }
 
 public class World : MonoBehaviour
@@ -33,11 +34,13 @@ public class World : MonoBehaviour
 	{
 		private WorldTile m_tile;
 		TileState m_state;
+		Vector2 m_pos;
 
-		public TileInfo(TileState _state, WorldTile _tile)
+		public TileInfo(TileState _state, WorldTile _tile, Vector2 pos)
 		{
 			m_tile = _tile;
 			m_state = _state;
+			m_pos = pos;
 		}
 		public void SetBorderColor(Color _c)
 		{
@@ -52,6 +55,10 @@ public class World : MonoBehaviour
 		public WorldObject GetWorldObject()
 		{
 			return m_tile.Object;
+		}
+		public Vector2 GetPosition()
+		{
+			return m_pos;
 		}
 		public void SetVisited() { m_tile.Visited = true; }
 		public TileState GetState() { return m_state; }
@@ -121,8 +128,7 @@ public class World : MonoBehaviour
 	[SerializeField]
 	private MusicHandler musicHandler = null;
 
-	[SerializeField]
-	private UnityEngine.VFX.VisualEffect smokePuffPuff = null;
+	private int CurrentCacheEnnemyCount = -1;
 
 	private bool m_bIsWorldInit;
 
@@ -153,6 +159,8 @@ public class World : MonoBehaviour
 			}
 		}
 	}
+
+	public int GetEnnemyCount() { return CurrentCacheEnnemyCount; }
 
 	public int GetCacheSize()
 	{
@@ -193,10 +201,6 @@ public class World : MonoBehaviour
 			ReadFile(filePath);
 		}
 		UseCache(Random.Range(0, cache.cache.Count));
-
-		smokePuffPuff.transform.localPosition = new Vector3(iGridSize.x * 0.5f, 0f, iGridSize.y * 0.5f);
-		smokePuffPuff.SetFloat("SpawnRadius", Mathf.Max(gridSize.x, gridSize.y));
-		//smokePuffPuff.SendEvent("Start");
 	}
 
 	public void ReadFile(string filePath)
@@ -233,6 +237,7 @@ public class World : MonoBehaviour
 				if (c == 'e')
 				{
 					m_2dGrid[i, j].Object = Instantiate(EnnemyList[0]);
+					CurrentCacheEnnemyCount++;
 				}
 				else if (c>='0' && c<='9')
 				{
@@ -264,6 +269,7 @@ public class World : MonoBehaviour
 			}
 		}
 		m_bIsWorldInit = true;
+		CurrentCacheEnnemyCount = 0;
 	}
 
 	public TileState ProjectToGrid(ref Vector2 pos)
@@ -292,7 +298,7 @@ public class World : MonoBehaviour
 			else if (wo.Object.IsIA())
 				state = TileState.Ennemy;
 		}
-		return new TileInfo(state, wo);
+		return new TileInfo(state, wo, new Vector2(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y)));
 	}
 
 	public Vector2Int GetNumberOfTiles()
@@ -368,10 +374,11 @@ public class World : MonoBehaviour
 		m_2dGrid[Mathf.RoundToInt(newPos.x), Mathf.RoundToInt(newPos.y)].Object = wo;
 	}
 
-	List<ITileInfo> GetNeighbors(Vector2 pos, int dist)
+	List<ITileInfo> GetNeighbors(ITileInfo tile, int dist)
 	{
 		List<ITileInfo> ret = new List<ITileInfo>();
 		Vector2 gridSize = GetNumberOfTiles();
+		Vector2 pos = tile.GetPosition();
 		Vector2Int iGridSize = new Vector2Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
 		for (int i = Mathf.Max(0, iGridSize.x-dist); i < Mathf.Min(iGridSize.x+dist, gridSize.x); ++i)
 		{

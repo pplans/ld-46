@@ -92,6 +92,10 @@ public abstract class Character : WorldObject
         {
 			return tileInfo;
         }
+		else if(tileInfo.GetState() == TileState.Border)
+		{
+			return tileInfo;
+		}
 		TileState tileState = m_World.MoveObject(m_Position, direction);
 		m_Position += direction;
 		return tileInfo;
