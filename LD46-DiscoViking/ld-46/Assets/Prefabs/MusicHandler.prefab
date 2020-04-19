@@ -75,7 +75,7 @@ MonoBehaviour:
   music: {fileID: 7104218156940426774}
   beep: {fileID: 8851312379944073318}
   musicHandler: {fileID: 7104218156940426856}
-  ratio: 0.25
+  ratio: 1
 --- !u!82 &7104218156940426774
 AudioSource:
   m_ObjectHideFlags: 0
