@@ -33,10 +33,6 @@ public class Player : Character
 
 	public override bool IsPlayer() { return true; }
 
-    void LossBloodOverTime()
-	{
-    }
-
 	public override void UpdateCharacter()
     {
 	}
