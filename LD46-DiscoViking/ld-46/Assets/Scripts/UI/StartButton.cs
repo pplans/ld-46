@@ -12,7 +12,8 @@ public class StartButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager.StartGame();
+        Invoke("StartGame", 1.5f);
     }
 
     // Update is called once per frame
@@ -24,6 +25,5 @@ public class StartButton : MonoBehaviour
     public void StartGame()
     {
         musicHandler.StartMusic();
-        gameManager.StartGame();
     }
 }
