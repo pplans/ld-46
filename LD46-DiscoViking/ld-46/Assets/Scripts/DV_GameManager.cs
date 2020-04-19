@@ -93,6 +93,7 @@ public class DV_GameManager : MonoBehaviour
         currentGamePhase = "move";
         currentDanceTargetTile.SetVisited();
         currentDanceTargetTile.GetWorldObject().GetComponent<DV_EnemyAnimation>().WakeUp();
+		currentDanceTargetTile.GetWorldObject().GetComponent<Ennemy>().StartDancingImpactVFX();
         wokeEnemies.Add(currentDanceTargetTile.GetWorldObject().GetComponent<DV_EnemyAnimation>());
         discoController.AddDisco(3);
         discoController.AddBoogie(3);
