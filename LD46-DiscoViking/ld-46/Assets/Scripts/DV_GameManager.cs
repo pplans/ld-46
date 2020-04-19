@@ -8,15 +8,21 @@ public class DV_GameManager : MonoBehaviour
     public MusicHandler musicHandler;
     public World world;
     public Player player;
+    public DV_InputManager inputManager;
     public Transform startGridPos;
     public Transform endGridPos;
     public bool bBeatValidated;
+    public DanceSequence danceSequence;
+
+
+    public string currentGamePhase;
 
     // Start is called before the first frame update
     void Start()
     {
         bGameStarted = false;
         bBeatValidated = false;
+        currentGamePhase = "move";
     }
 
     // Update is called once per frame
@@ -40,13 +46,30 @@ public class DV_GameManager : MonoBehaviour
         bBeatValidated = true;
     }
 
+    public void StartDanceSequence()
+    {
+
+    }
+
     public void EndOfBeatManager()
     {
         if (!bBeatValidated)
         {
-            Debug.Log("BAD BEAT");
+            //Debug.Log("BAD BEAT");
         }
 
         bBeatValidated = false;
+    }
+
+    public void BeginDanceSequence()
+    {
+        danceSequence.InitializeDanceSequence();
+        currentGamePhase = "dance";
+    }
+
+    public void SucceedDanceSequence()
+    {
+        danceSequence.HideSequence();
+        currentGamePhase = "move";
     }
 }
