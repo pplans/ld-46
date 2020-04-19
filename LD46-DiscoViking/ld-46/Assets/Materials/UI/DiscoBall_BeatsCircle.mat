@@ -51,10 +51,10 @@ Material:
     - Boolean_47B606DB: 0
     - Vector1_13B9990A: 0.225
     - Vector1_300E72F8: 0.02
-    - Vector1_70037E37: 0.5
-    - Vector1_799D8D7A: 1
+    - Vector1_70037E37: 0.23
+    - Vector1_799D8D7A: 0.7
     - _AlphaClip: 0
-    - _BeatsCircleRadius: 0.007828919
+    - _BeatsCircleRadius: 0.826572
     - _BeatsCircleSize: 1
     - _Blend: 0
     - _BumpScale: 1
