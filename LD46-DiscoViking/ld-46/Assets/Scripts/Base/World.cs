@@ -128,6 +128,8 @@ public class World : MonoBehaviour
 	[SerializeField]
 	private MusicHandler musicHandler = null;
 
+	private int CurrentCacheEnnemyCount = -1;
+
 	private bool m_bIsWorldInit;
 
 	private Vector2 m_worldAnchor;
@@ -157,6 +159,8 @@ public class World : MonoBehaviour
 			}
 		}
 	}
+
+	public int GetEnnemyCount() { return CurrentCacheEnnemyCount; }
 
 	public int GetCacheSize()
 	{
@@ -233,6 +237,7 @@ public class World : MonoBehaviour
 				if (c == 'e')
 				{
 					m_2dGrid[i, j].Object = Instantiate(EnnemyList[0]);
+					CurrentCacheEnnemyCount++;
 				}
 				else if (c>='0' && c<='9')
 				{
@@ -264,6 +269,7 @@ public class World : MonoBehaviour
 			}
 		}
 		m_bIsWorldInit = true;
+		CurrentCacheEnnemyCount = 0;
 	}
 
 	public TileState ProjectToGrid(ref Vector2 pos)
