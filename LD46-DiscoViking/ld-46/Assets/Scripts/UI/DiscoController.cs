@@ -47,7 +47,7 @@ public class DiscoController : MonoBehaviour
         if (amount < 0)
             discoBall.FailAnimation();
 
-        musicEffect.ratio = (float)currDisco / (float)maxDisco;
+        musicEffect.ratio = GetDiscoRatio();
 
         if (currDisco == 0)
             OnGameOver.Invoke();
@@ -62,7 +62,14 @@ public class DiscoController : MonoBehaviour
 
     public void ChangeColor()
     {
-        beatsCircle.ChangeColor();
+        Color color = beatsCircle.ChangeColor();
+        discoBall.SetDissolveColor(color);
+        discoBall.SetDissolveRatio(1.0f-GetDiscoRatio());
+    }
+
+    private float GetDiscoRatio()
+    {
+        return (float)currDisco / (float)maxDisco;
     }
 
     //void AddValhalla(int amount)
