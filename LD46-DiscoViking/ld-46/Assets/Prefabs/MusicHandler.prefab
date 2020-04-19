@@ -46,11 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef5d6e1dfc633a43a1287b58fe89d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: a4d8d63d386fcb04483f4a4800ea5a99, type: 2}
-  volume: 1
   music: {fileID: 7104218156940426774}
-  bpm: 103.75
-  bpmOffset: 0.645
+  bpm: 100
+  bpmOffset: 0
   inputValidity: 0.2
   started: 0
   OnResetBeat:
@@ -88,11 +86,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: a4d8d63d386fcb04483f4a4800ea5a99, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 694b5d3548add7e4fa42d5e644e27547, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e836f8c0a8ba6544888eb360c460b9d4, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.066
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
