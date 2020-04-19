@@ -49,7 +49,7 @@ ModelImporter:
       name: idle01
       takeName: rig|rigAction
       internalID: 0
-      firstFrame: 100
+      firstFrame: 0
       lastFrame: 100
       wrapMode: 0
       orientationOffsetY: 0
@@ -78,8 +78,8 @@ ModelImporter:
       name: Idle02
       takeName: rig|rigAction
       internalID: 0
-      firstFrame: 80
-      lastFrame: 90
+      firstFrame: 99
+      lastFrame: 100
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

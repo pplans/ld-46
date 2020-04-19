@@ -2005,6 +2005,10 @@ PrefabInstance:
       propertyPath: musicEffect
       value: 
       objectReference: {fileID: 516891732584433510, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+    - target: {fileID: 1366115763054470441, guid: 04e16e7828e969b45a828f3239446179, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 4206619dca92edc49b4bb9a6ac86386a, type: 2}
     - target: {fileID: 4055351747145985888, guid: 04e16e7828e969b45a828f3239446179, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2093,6 +2097,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6299311555588713947, guid: 04e16e7828e969b45a828f3239446179, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 2586bcade78406f4a88ace897bd3aa61, type: 2}
     - target: {fileID: 6997152379339416715, guid: 04e16e7828e969b45a828f3239446179, type: 3}
       propertyPath: m_Layer
       value: 8
