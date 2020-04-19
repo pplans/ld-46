@@ -154,7 +154,7 @@ MonoBehaviour:
   m_DefaultLookDevProfile: {fileID: 11400000, guid: 254c4fe87beb7be4fa72e1681edbed02, type: 2}
   m_RenderingPathDefaultCameraFrameSettings:
     bitDatas:
-      data1: 70297877217101
+      data1: 70297877217103
       data2: 4539628425463136256
     lodBias: 1
     lodBiasMode: 0
@@ -337,7 +337,7 @@ MonoBehaviour:
       SSRMaxRaySteps: 100000002000000040000000
   allowShaderVariantStripping: 1
   enableSRPBatcher: 1
-  shaderVariantLogLevel: 0
+  shaderVariantLogLevel: 2
   availableMaterialQualityLevels: -1
   m_DefaultMaterialQualityLevel: 4
   diffusionProfileSettings: {fileID: 0}
