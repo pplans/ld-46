@@ -49,7 +49,7 @@ MonoBehaviour:
   music: {fileID: 7104218156940426774}
   bpm: 100
   bpmOffset: 0
-  inputValidity: 0.2
+  inputValidity: 0.28
   started: 0
   OnResetBeat:
     m_PersistentCalls:

@@ -897,20 +897,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 575766786}
     m_Modifications:
     - target: {fileID: 7104218156940426774, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 4888557a4163d744b9e0671bed54c62d, type: 3}
-    - target: {fileID: 7104218156940426774, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
       propertyPath: m_Volume
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
       propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.size
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
-      propertyPath: inputValidity
-      value: 0.28
       objectReference: {fileID: 0}
     - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
       propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1143,6 +1135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bGameStarted: 0
   musicHandler: {fileID: 560581624}
+  discoController: {fileID: 1478883438}
   world: {fileID: 284306275}
   player: {fileID: 50272070}
   startGridPos: {fileID: 1523045031}
@@ -1795,6 +1788,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1478883438 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 734140185939141832, guid: 04e16e7828e969b45a828f3239446179, type: 3}
+  m_PrefabInstance: {fileID: 1189267195}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c142f9bc76110d54c9468c4c7753ea28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1523045030
 GameObject:
   m_ObjectHideFlags: 0
