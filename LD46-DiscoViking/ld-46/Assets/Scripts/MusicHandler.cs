@@ -49,8 +49,17 @@ public class MusicHandler : MonoBehaviour
 		started = true;
 	}
 
+	public void StopMusic()
+	{
+		music.Stop();
+		started = false;
+	}
+
 	public float GetBeatOffset()
 	{
+		if (!started)
+			return -0.5f;
+
 		float timeValue = Time.unscaledTime - bpmOffset;
 
 		timeValue *= bpm / 60;
