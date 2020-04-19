@@ -50,6 +50,7 @@ public class DV_InputManager : MonoBehaviour
 
             bool valid = gameManager.musicHandler.ValidateBeat();
             bool obstruction = false;
+            bool enemy = false;
             bool successfulInput = false;
 
             if (gameManager.currentGamePhase == "move")
@@ -63,17 +64,20 @@ public class DV_InputManager : MonoBehaviour
                         case TileState.Occupied:
                             obstruction = true;
                             break;
+                        case TileState.Ennemy:
+                            enemy = true;
+                            break;
                     }
                     if (!obstruction)
                     {
                         gameManager.ValidateBeat();
                         successfulInput = true;
+                        if (enemy)
+                        {
+                            gameManager.BeginDanceSequence();
+                        }
                     }
-                    else
-                    {
-                        gameManager.BeginDanceSequence();
-                        successfulInput = true;
-                    }
+                    
                 }
             } else
             {
@@ -117,6 +121,7 @@ public class DV_InputManager : MonoBehaviour
 
             bool valid = gameManager.musicHandler.ValidateBeat();
             bool obstruction = false;
+            bool enemy = false;
             bool successfulInput = false;
 
             if (gameManager.currentGamePhase == "move")
@@ -129,16 +134,18 @@ public class DV_InputManager : MonoBehaviour
                         case TileState.Occupied:
                             obstruction = true;
                             break;
+                        case TileState.Ennemy:
+                            enemy = true;
+                            break;
                     }
                     if (!obstruction)
                     {
                         gameManager.ValidateBeat();
                         successfulInput = true;
-                    }
-                    else
-                    {
-                        gameManager.BeginDanceSequence();
-                        successfulInput = true;
+                        if (enemy)
+                        {
+                            gameManager.BeginDanceSequence();
+                        }
                     }
                 }
             } else
@@ -182,6 +189,7 @@ public class DV_InputManager : MonoBehaviour
 
             bool valid = gameManager.musicHandler.ValidateBeat();
             bool obstruction = false;
+            bool enemy = false;
             bool successfulInput = false;
 
             if (gameManager.currentGamePhase == "move")
@@ -194,16 +202,18 @@ public class DV_InputManager : MonoBehaviour
                         case TileState.Occupied:
                             obstruction = true;
                             break;
+                        case TileState.Ennemy:
+                            enemy = true;
+                            break;
                     }
                     if (!obstruction)
                     {
                         gameManager.ValidateBeat();
                         successfulInput = true;
-                    }
-                    else
-                    {
-                        gameManager.BeginDanceSequence();
-                        successfulInput = true;
+                        if (enemy)
+                        {
+                            gameManager.BeginDanceSequence();
+                        }
                     }
                 }
             } else
@@ -248,6 +258,7 @@ public class DV_InputManager : MonoBehaviour
 
             bool valid = gameManager.musicHandler.ValidateBeat();
             bool obstruction = false;
+            bool enemy = false;
             bool successfulInput = false;
 
             if (gameManager.currentGamePhase == "move")
@@ -261,18 +272,19 @@ public class DV_InputManager : MonoBehaviour
                         case TileState.Occupied:
                             obstruction = true;
                             break;
+                        case TileState.Ennemy:
+                            enemy = true;
+                            break;
                     }
                     if (!obstruction)
                     {
                         gameManager.ValidateBeat();
                         successfulInput = true;
+                        if (enemy)
+                        {
+                            gameManager.BeginDanceSequence();
+                        }
                     }
-                    else
-                    {
-                        gameManager.BeginDanceSequence();
-                        successfulInput = true;
-                    }
-
                 }
             } else
             {
