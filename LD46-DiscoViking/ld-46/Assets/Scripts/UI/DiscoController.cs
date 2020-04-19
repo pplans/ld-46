@@ -59,6 +59,11 @@ public class DiscoController : MonoBehaviour
         boogieBarRight.SetBoogie(currBoogie);
     }
 
+    public void ChangeColor()
+    {
+        beatsCircle.ChangeColor();
+    }
+
     //void AddValhalla(int amount)
     //{
     //    currValhalla = Mathf.Clamp(currValhalla + amount, 0, maxValhalla);

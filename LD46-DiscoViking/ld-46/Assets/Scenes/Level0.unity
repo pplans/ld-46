@@ -581,7 +581,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 734140185939141832, guid: 04e16e7828e969b45a828f3239446179, type: 3}
   m_PrefabInstance: {fileID: 1189267195}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1361761697}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c142f9bc76110d54c9468c4c7753ea28, type: 3}
@@ -1200,7 +1200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
       propertyPath: OnBeat.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
       propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1248,6 +1248,46 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
       propertyPath: OnBeat.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+      propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: DV_GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+      propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+      propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+      propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1361761697}
+    - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+      propertyPath: OnBeat.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: DiscoController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+      propertyPath: OnBeat.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+      propertyPath: OnBeat.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+      propertyPath: OnBeat.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 202270317}
+    - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+      propertyPath: OnBeat.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ChangeColor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+      propertyPath: OnBeat.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7104218156940426857, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
@@ -2142,8 +2182,17 @@ PrefabInstance:
       propertyPath: musicHandler
       value: 
       objectReference: {fileID: 560581624}
+    - target: {fileID: 7546460501941916319, guid: 04e16e7828e969b45a828f3239446179, type: 3}
+      propertyPath: colorIntensity
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04e16e7828e969b45a828f3239446179, type: 3}
+--- !u!1 &1361761697 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4055351747145985889, guid: 04e16e7828e969b45a828f3239446179, type: 3}
+  m_PrefabInstance: {fileID: 1189267195}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1389386445
 GameObject:
   m_ObjectHideFlags: 0
@@ -2327,7 +2376,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 52.899994}
+  m_AnchoredPosition: {x: 0, y: 52.900024}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1529425641
