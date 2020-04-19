@@ -44,14 +44,14 @@ public class MusicHandler : MonoBehaviour
 
 	public void StartMusic()
 	{
-		bpmOffset += Time.time;
+		bpmOffset += Time.unscaledTime;
 		music.Play();
 		started = true;
 	}
 
 	public float GetBeatOffset()
 	{
-		float timeValue = Time.time - bpmOffset;
+		float timeValue = Time.unscaledTime - bpmOffset;
 
 		timeValue *= bpm / 60;
 
