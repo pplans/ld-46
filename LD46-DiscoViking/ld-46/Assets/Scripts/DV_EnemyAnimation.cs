@@ -25,4 +25,9 @@ public class DV_EnemyAnimation : MonoBehaviour
         anim.SetTrigger("WakeUp");
         bWokenUp = true;
     }
+
+    public void Dance()
+    {
+        anim.SetTrigger("Dance");
+    }
 }
