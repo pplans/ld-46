@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2876069830818552170}
   - component: {fileID: 882815450808637286}
+  - component: {fileID: 2219426746508331839}
   m_Layer: 0
-  m_Name: Obstacle_Mailbox
+  m_Name: Obstacle_Garbage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,6 +43,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df4de20e18a2f61409200e42a7b50696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2219426746508331839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2266449620936700163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de590b14a69b37a4395065e206552ad3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6357962309431263013
