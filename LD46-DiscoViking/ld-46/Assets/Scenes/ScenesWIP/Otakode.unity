@@ -215,6 +215,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1123874259 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2935200068729525401, guid: 04e16e7828e969b45a828f3239446179, type: 3}
+  m_PrefabInstance: {fileID: 4055351749071525243}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3c54392e4abda54daa7a9b190102d73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1261400254 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
@@ -666,7 +677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
       propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
       propertyPath: BeatCallback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -750,7 +761,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
       propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
       propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -759,14 +770,14 @@ PrefabInstance:
     - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
       propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1123874259}
     - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
       propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.UI.Text, UnityEngine.UI
+      value: DiscoBall, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
       propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: set_text
+      value: FailAnimation
       objectReference: {fileID: 0}
     - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
       propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -774,7 +785,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
       propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Miss
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7104218156940426857, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
       propertyPath: m_LocalPosition.x
