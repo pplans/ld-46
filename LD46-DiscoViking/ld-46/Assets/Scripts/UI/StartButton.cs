@@ -13,6 +13,7 @@ public class StartButton : MonoBehaviour
     void Start()
     {
         gameManager.StartGame();
+        Invoke("StartGame", 1.5f);
     }
 
     // Update is called once per frame
