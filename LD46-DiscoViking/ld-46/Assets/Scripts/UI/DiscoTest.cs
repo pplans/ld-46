@@ -30,6 +30,7 @@ public class DiscoTest : MonoBehaviour
         }
         else if (UnityEngine.Input.GetKeyDown(KeyCode.RightArrow))
         {
+            discoController.ChangeColor();
             //discoController.AddValhalla(+5);
         }
     }

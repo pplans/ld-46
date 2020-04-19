@@ -7,9 +7,11 @@ public class BeatsCircle : MonoBehaviour
 {
     public MusicHandler musicHandler;
     public AnimationCurve curve;
+    public float colorIntensity = 1.0f;
 
     private Material material;
     private static string CircleRadiusStr = "_BeatsCircleRadius";
+    private static string ColorStr = "_Color";
 
     void Start()
     {
@@ -25,5 +27,13 @@ public class BeatsCircle : MonoBehaviour
     public void SetBeatsCircleRadius(float radius01)
     {
         material.SetFloat(CircleRadiusStr, radius01);
+    }
+
+    public void ChangeColor()
+    {
+        Vector3 col = new Vector3(Random.value, Random.value, Random.value);
+        col = col.normalized * colorIntensity;
+        Color color = new Color(col.x, col.y, col.z, 1.0f);
+        material.SetColor(ColorStr, color);
     }
 }
