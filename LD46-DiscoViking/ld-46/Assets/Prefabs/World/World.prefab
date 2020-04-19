@@ -59,6 +59,7 @@ MonoBehaviour:
   - {fileID: -7804277929848383382, guid: 461b14d24795194489c13c16f0dc0e13, type: 3}
   filePaths:
   - Assets/GridsData/grid0.txt
+  - Assets/GridsData/grid1.txt
   smokePuffPuff: {fileID: 3147357638000749736}
 --- !u!1 &4019794048755132876
 GameObject:

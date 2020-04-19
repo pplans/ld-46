@@ -16,6 +16,7 @@ public interface ITileInfo
 {
 	void SetBorderColor(Color _c);
 	void SetEmissiveScale(float _v);
+	void SetVisited();
 	TileState GetState();
 }
 
@@ -46,6 +47,7 @@ public class World : MonoBehaviour
 			Material mat = m_tile.Tile.GetComponent<MeshRenderer>().material;
 			mat.SetFloat("Vector1_237226DD", _v);
 		}
+		public void SetVisited() { m_tile.Visited = true; }
 		public TileState GetState() { return m_state; }
 	}
 	#endregion
@@ -55,8 +57,10 @@ public class World : MonoBehaviour
 	{
 		private GameObject tileObject;
 		private WorldObject worldObject;
+		private bool bVisited;
 
 		public GameObject Tile { get => tileObject; set { tileObject = value; } }
+		public bool Visited { get => bVisited; set { bVisited = value; } }
 		public WorldObject Object { get => worldObject;
 			set
 			{
@@ -71,6 +75,18 @@ public class World : MonoBehaviour
 					worldObject.transform.parent = tileObject.transform;
 					worldObject.transform.localPosition = Vector3.zero;
 				}
+			}
+		}
+		public void Reset()
+		{
+			Visited = false;
+		}
+		public void Update(float emissiveScale)
+		{
+			if (Visited)
+			{
+				Material mat = Tile.GetComponent<MeshRenderer>().material;
+				mat.SetFloat("Vector1_237226DD", 4f * emissiveScale);
 			}
 		}
 	}
@@ -94,6 +110,8 @@ public class World : MonoBehaviour
 	private List<WorldObject> PrefabList = null;
 	[SerializeField]
 	private List<string> filePaths = null;
+	[SerializeField]
+	private MusicHandler musicHandler = null;
 
 	[SerializeField]
 	private UnityEngine.VFX.VisualEffect smokePuffPuff = null;
@@ -111,6 +129,22 @@ public class World : MonoBehaviour
 	public World Instance { get { if (s_Instance) s_Instance = new World(); return s_Instance; } }
 
 	private World() => m_bIsWorldInit = false;
+
+	public void Update()
+	{
+		if (m_2dGrid == null) return;
+
+		Vector2 gridSize = GetNumberOfTiles();
+		Vector2Int iGridSize = new Vector2Int(Mathf.RoundToInt(gridSize.x), Mathf.RoundToInt(gridSize.y));
+		for (int i = 0; i < iGridSize.x; ++i)
+		{
+			for (int j = 0; j < iGridSize.y; ++j)
+			{
+				if(m_2dGrid[i,j]!=null)
+					m_2dGrid[i, j].Update(sampleBeat(musicHandler));
+			}
+		}
+	}
 
 	public int GetCacheSize()
 	{
@@ -193,7 +227,7 @@ public class World : MonoBehaviour
 					int indexPrefab = (int)c - '0';
 					m_2dGrid[i, j].Object = Instantiate(PrefabList[indexPrefab]);
 				}
-
+				m_2dGrid[i, j].Reset();
 				Color rdrCol = new Color(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), Random.Range(0.5f, 1f));
 				Material mat = m_2dGrid[i, j].Tile.GetComponent<MeshRenderer>().material;
 				mat.SetColor("Color_D10C4CBD", rdrCol);
@@ -215,10 +249,6 @@ public class World : MonoBehaviour
 						Destroy(m_2dGrid[i, j].Object);
 					m_2dGrid[i, j].Object = null;
 				}
-				Color rdrCol = new Color(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), Random.Range(0.5f, 1f));
-				Material mat = m_2dGrid[i, j].Tile.GetComponent<MeshRenderer>().material;
-				mat.SetColor("Color_D10C4CBD", rdrCol);
-				mat.SetFloat("Vector1_237226DD", 1f);
 			}
 		}
 		m_bIsWorldInit = true;
@@ -323,6 +353,11 @@ public class World : MonoBehaviour
 		m_2dGrid[Mathf.RoundToInt(newPos.x), Mathf.RoundToInt(newPos.y)].Object = wo;
 	}
 
+	private float sampleBeat(MusicHandler mh)
+	{
+		return mh?1f - Mathf.Cos(mh.GetBeatOffset() * Mathf.PI * 0.5f):1f;
+	}
+
 	public TileState MoveObject(Vector2 _pos, Vector2 _d)
 	{
 		Vector2 newPos = _pos + _d;
@@ -333,7 +368,9 @@ public class World : MonoBehaviour
 			return tileInfo.GetState();
 
 		ITileInfo oldTileInfo = GetTileInfo(_pos);
-		oldTileInfo.SetEmissiveScale(4f);
+		oldTileInfo.SetVisited();
+
+		oldTileInfo.SetEmissiveScale(4f * sampleBeat(musicHandler));
 
 		WorldObject owo = m_2dGrid[Mathf.RoundToInt(_pos.x), Mathf.RoundToInt(_pos.y)].Object;
 		m_2dGrid[Mathf.RoundToInt(_pos.x), Mathf.RoundToInt(_pos.y)].Object = null;
