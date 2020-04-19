@@ -88,7 +88,7 @@ public abstract class Character : WorldObject
 			m_Position.x = 0;
 			m_World.SetObject(this, m_Position);
 			return tileInfo.GetState();
-		} else if (tileInfo.GetState() == TileState.Occupied)
+		} else if (tileInfo.GetState() == TileState.Occupied || tileInfo.GetState()==TileState.Ennemy)
         {
 			return tileInfo.GetState();
         }

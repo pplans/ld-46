@@ -19,6 +19,7 @@ public interface ITileInfo
 	void SetEmissiveScale(float _v);
 	void SetVisited();
 	TileState GetState();
+	WorldObject GetWorldObject();
 }
 
 public class World : MonoBehaviour
@@ -47,6 +48,10 @@ public class World : MonoBehaviour
 		{
 			Material mat = m_tile.Tile.GetComponent<MeshRenderer>().material;
 			mat.SetFloat("Vector1_237226DD", _v);
+		}
+		public WorldObject GetWorldObject()
+		{
+			return m_tile.Object;
 		}
 		public void SetVisited() { m_tile.Visited = true; }
 		public TileState GetState() { return m_state; }
