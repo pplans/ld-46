@@ -21,11 +21,12 @@ public class DV_GameManager : MonoBehaviour
     public string currentGamePhase;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         bGameStarted = false;
         bBeatValidated = false;
         currentGamePhase = "move";
+        wokeEnemies = new List<DV_EnemyAnimation>();
     }
 
     // Update is called once per frame
@@ -64,8 +65,7 @@ public class DV_GameManager : MonoBehaviour
         }
         else
         {
-            discoController.AddDisco(1);
-            discoController.AddBoogie(1);
+            
         }
 
         bBeatValidated = false;
@@ -80,10 +80,11 @@ public class DV_GameManager : MonoBehaviour
 
     public void WokenEnemyDance()
     {
-        //foreach(DV_EnemyAnimation anim in wokeEnemies)
-        //{
-            //anim.Dance();
-        //}
+        foreach(DV_EnemyAnimation anim in wokeEnemies)
+        {
+            anim.Dance();
+        }
+        //Debug.Log(wokeEnemies.Count);
     }
 
     public void SucceedDanceSequence()
@@ -92,5 +93,7 @@ public class DV_GameManager : MonoBehaviour
         currentGamePhase = "move";
         currentDanceTarget.GetComponent<DV_EnemyAnimation>().WakeUp();
         wokeEnemies.Add(currentDanceTarget.GetComponent<DV_EnemyAnimation>());
+        discoController.AddDisco(3);
+        discoController.AddBoogie(3);
     }
 }

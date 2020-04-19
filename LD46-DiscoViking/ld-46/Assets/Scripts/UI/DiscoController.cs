@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class DiscoController : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class DiscoController : MonoBehaviour
     public BoogieBar boogieBarLeft;
     public BoogieBar boogieBarRight;
 
+    public UnityEvent OnGameOver;
+
     void Start()
     {
         currDisco = maxDisco;
@@ -37,11 +40,6 @@ public class DiscoController : MonoBehaviour
         //valhallaBar.SetValhalla(currValhalla);
     }
 
-    void Update()
-    {
-
-    }
-
     public void AddDisco(int amount)
     {
         currDisco = Mathf.Clamp(currDisco + amount, 0, maxDisco);
@@ -49,7 +47,10 @@ public class DiscoController : MonoBehaviour
         if (amount < 0)
             discoBall.FailAnimation();
 
-        musicEffect.ratio = (float)currDisco / maxDisco;
+        musicEffect.ratio = (float)currDisco / (float)maxDisco;
+
+        if (currDisco == 0)
+            OnGameOver.Invoke();
     }
 
     public void AddBoogie(int amount)
@@ -57,6 +58,11 @@ public class DiscoController : MonoBehaviour
         currBoogie = Mathf.Clamp(currBoogie + amount, 0, maxBoogie);
         boogieBarLeft.SetBoogie(currBoogie);
         boogieBarRight.SetBoogie(currBoogie);
+    }
+
+    public void ChangeColor()
+    {
+        beatsCircle.ChangeColor();
     }
 
     //void AddValhalla(int amount)

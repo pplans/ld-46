@@ -96,6 +96,7 @@ public class DV_InputManager : MonoBehaviour
                     }
                     else
                     {
+                        danceStepIndex = 0;
                         gameManager.SucceedDanceSequence();
                         successfulInput = true;
                     }
@@ -168,6 +169,7 @@ public class DV_InputManager : MonoBehaviour
                     }
                     else
                     {
+                        danceStepIndex = 0;
                         gameManager.SucceedDanceSequence();
                         successfulInput = true;
                     }
@@ -239,6 +241,7 @@ public class DV_InputManager : MonoBehaviour
                     }
                     else
                     {
+                        danceStepIndex = 0;
                         gameManager.SucceedDanceSequence();
                         successfulInput = true;
                     }
@@ -310,6 +313,7 @@ public class DV_InputManager : MonoBehaviour
                         successfulInput = true;
                     } else
                     {
+                        danceStepIndex = 0;
                         gameManager.SucceedDanceSequence();
                         successfulInput = true;
                     }
