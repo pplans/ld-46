@@ -183,7 +183,7 @@ public class World : MonoBehaviour
 				m_2dGrid[i, j].Tile.transform.parent = WorldObject.transform;
 				Material mat = m_2dGrid[i, j].Tile.GetComponent<MeshRenderer>().material;
 				mat.SetColor("Color_D10C4CBD", rdrCol);
-				mat.SetFloat("Vector1_237226DD", 1f);
+				mat.SetFloat("Vector1_237226DD", 0f);
 			}
 		}
 		m_bIsWorldInit = true;
@@ -243,7 +243,7 @@ public class World : MonoBehaviour
 				Color rdrCol = new Color(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), Random.Range(0.5f, 1f));
 				Material mat = m_2dGrid[i, j].Tile.GetComponent<MeshRenderer>().material;
 				mat.SetColor("Color_D10C4CBD", rdrCol);
-				mat.SetFloat("Vector1_237226DD", 1f);
+				mat.SetFloat("Vector1_237226DD", 0f);
 			}
 		}
 	}
@@ -363,8 +363,24 @@ public class World : MonoBehaviour
 		ITileInfo tileInfo = GetTileInfo(newPos);
 		if (tileInfo.GetState() == TileState.Occupied || tileInfo.GetState() == TileState.Ennemy)
 			return;
+		tileInfo.SetVisited();
 		m_2dGrid[Mathf.RoundToInt(_pos.x), Mathf.RoundToInt(_pos.y)].Object = null;
 		m_2dGrid[Mathf.RoundToInt(newPos.x), Mathf.RoundToInt(newPos.y)].Object = wo;
+	}
+
+	List<ITileInfo> GetNeighbors(Vector2 pos, int dist)
+	{
+		List<ITileInfo> ret = new List<ITileInfo>();
+		Vector2 gridSize = GetNumberOfTiles();
+		Vector2Int iGridSize = new Vector2Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
+		for (int i = Mathf.Max(0, iGridSize.x-dist); i < Mathf.Min(iGridSize.x+dist, gridSize.x); ++i)
+		{
+			for (int j = Mathf.Max(0, iGridSize.y - dist); j < Mathf.Min(0, iGridSize.y - dist); ++j)
+			{
+				ret.Add(GetTileInfo(pos));
+			}
+		}
+		return ret;
 	}
 
 	private float sampleBeat(MusicHandler mh)
@@ -386,6 +402,8 @@ public class World : MonoBehaviour
 
 		WorldObject owo = m_2dGrid[Mathf.RoundToInt(_pos.x), Mathf.RoundToInt(_pos.y)].Object;
 		m_2dGrid[Mathf.RoundToInt(_pos.x), Mathf.RoundToInt(_pos.y)].Object = null;
+		if (owo.IsPlayer())
+			tileInfo.SetVisited();
 		m_2dGrid[Mathf.RoundToInt(newPos.x), Mathf.RoundToInt(newPos.y)].Object = owo;
 		return tileInfo.GetState();
 	}
@@ -395,6 +413,7 @@ public class World : MonoBehaviour
 		ITileInfo tileInfo = GetTileInfo(_pos);
 		if (tileInfo.GetState() == TileState.Occupied || tileInfo.GetState() == TileState.Ennemy)
 			return;
+		tileInfo.SetVisited();
 		m_2dGrid[Mathf.RoundToInt(_pos.x), Mathf.RoundToInt(_pos.y)].Object = _wo;
 	}
 #endregion
