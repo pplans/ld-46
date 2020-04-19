@@ -26,6 +26,7 @@ public class DV_GameManager : MonoBehaviour
         bGameStarted = false;
         bBeatValidated = false;
         currentGamePhase = "move";
+        wokeEnemies = new List<DV_EnemyAnimation>();
     }
 
     // Update is called once per frame
@@ -80,10 +81,11 @@ public class DV_GameManager : MonoBehaviour
 
     public void WokenEnemyDance()
     {
-        //foreach(DV_EnemyAnimation anim in wokeEnemies)
-        //{
-            //anim.Dance();
-        //}
+        foreach(DV_EnemyAnimation anim in wokeEnemies)
+        {
+            anim.Dance();
+        }
+        //Debug.Log(wokeEnemies.Count);
     }
 
     public void SucceedDanceSequence()
