@@ -1043,6 +1043,10 @@ PrefabInstance:
       propertyPath: filePaths.Array.data[9]
       value: Assets/GridsData/grid9.txt
       objectReference: {fileID: 0}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 575766787}
     - target: {fileID: 2513952563832989651, guid: 448f826e873337b45a3d77871866944a, type: 3}
       propertyPath: m_Materials.Array.size
       value: 2
@@ -1614,6 +1618,7 @@ MonoBehaviour:
   progressThreshold: 3
   failBeatBoogieCost: 1
   progressEffectArray: 020000000100000002000000010000000200000001000000
+  bPaneCleared: 0
   currentGamePhase: 
 --- !u!1001 &577466821
 PrefabInstance:
