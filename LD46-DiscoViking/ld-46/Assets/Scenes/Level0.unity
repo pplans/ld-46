@@ -1919,6 +1919,7 @@ MonoBehaviour:
   - {fileID: 1543297989}
   - {fileID: 272738128}
   - {fileID: 1984901985}
+  discoController: {fileID: 202270317}
 --- !u!114 &651435385 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1086594947828508245, guid: 04e16e7828e969b45a828f3239446179, type: 3}

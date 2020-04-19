@@ -39,4 +39,10 @@ public class BeatsCircle : MonoBehaviour
         material.SetColor(ColorStr, color);
         return color;
     }
+
+    public Color GetColor()
+    {
+        return material.GetColor(ColorStr);
+    }
+
 }

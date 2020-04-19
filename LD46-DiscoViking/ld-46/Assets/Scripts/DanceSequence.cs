@@ -18,6 +18,7 @@ public class DanceSequence : MonoBehaviour
     public Sprite[] spriteLeft;
     public Sprite[] spriteRight;
     public SpriteRenderer[] stepDisplays;
+    public DiscoController discoController;
 
 
     // Start is called before the first frame update
@@ -69,7 +70,11 @@ public class DanceSequence : MonoBehaviour
 
     public void ValidateStep(int danceStepIndex)
     {
-        ChangeSpriteFromStepValue(stepDisplays[danceStepIndex], DanceSequenceSteps[danceStepIndex], 1);
+        SpriteRenderer renderer = stepDisplays[danceStepIndex];
+
+        print("Validate step " + renderer.material.GetFloat("_Intensity"));
+        renderer.material.SetFloat("_Intensity", 1.0f);
+        //ChangeSpriteFromStepValue(stepDisplays[danceStepIndex], DanceSequenceSteps[danceStepIndex], 1);
     }
 
     public void ResetDanceSequence()
@@ -78,6 +83,7 @@ public class DanceSequence : MonoBehaviour
         foreach (SpriteRenderer rend in stepDisplays)
         {
             ChangeSpriteFromStepValue(rend, DanceSequenceSteps[index], 0);
+            rend.material.SetFloat("_Intensity", 0.1f);
             index++;
         }
     }
@@ -136,6 +142,8 @@ public class DanceSequence : MonoBehaviour
             DanceSequenceSteps[index] = GenerateRandomStep();
             ChangeSpriteFromStepValue(stepDisplays[index], DanceSequenceSteps[index],0);
             stepDisplays[index].enabled = true;
+            stepDisplays[index].material.SetFloat("_Intensity", 0.1f);
+            stepDisplays[index].material.SetColor("_Color", discoController.beatsCircle.GetColor());
             index++;
         }
 
