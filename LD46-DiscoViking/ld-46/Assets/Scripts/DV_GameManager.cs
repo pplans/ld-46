@@ -16,9 +16,21 @@ public class DV_GameManager : MonoBehaviour
     public DanceSequence danceSequence;
     public ITileInfo currentDanceTargetTile;
     private List<DV_EnemyAnimation> wokeEnemies;
+    private int progressIndex;
+    private int difficultyLevel;
+    public int progressThreshold;
+    public int failBeatBoogieCost;
+    public ProgressEffect[] progressEffectArray;
 
 
     public string currentGamePhase;
+
+    public enum ProgressEffect
+    {
+        Nothing,
+        BadBeatCost,
+        ValidationWindow
+    }
 
     // Start is called before the first frame update
     void Awake()
@@ -27,6 +39,8 @@ public class DV_GameManager : MonoBehaviour
         bBeatValidated = false;
         currentGamePhase = "move";
         wokeEnemies = new List<DV_EnemyAnimation>();
+        progressIndex = 0;
+        difficultyLevel = 0;
     }
 
     // Update is called once per frame
@@ -60,8 +74,8 @@ public class DV_GameManager : MonoBehaviour
         if (!bBeatValidated)
         {
             Debug.Log("BAD BEAT");
-            discoController.AddDisco(-1);
-            discoController.AddBoogie(-1);
+            discoController.AddDisco(-failBeatBoogieCost);
+            discoController.AddBoogie(-failBeatBoogieCost);
         }
         else
         {
@@ -97,5 +111,44 @@ public class DV_GameManager : MonoBehaviour
         wokeEnemies.Add(currentDanceTargetTile.GetWorldObject().GetComponent<DV_EnemyAnimation>());
         discoController.AddDisco(3);
         discoController.AddBoogie(3);
+    }
+
+    public void IncrementProgress()
+    {
+        progressIndex++;
+        if (progressIndex > progressThreshold-1)
+        {
+            progressIndex = 0;
+            if (difficultyLevel< progressEffectArray.Length - 1)
+            {
+                switch (progressEffectArray[difficultyLevel])
+                {
+                    case ProgressEffect.Nothing:
+                        break;
+                    case ProgressEffect.BadBeatCost:
+                        IncreaseBadBeatCost();
+                        break;
+                    case ProgressEffect.ValidationWindow:
+                        ReduceValidationWindow();
+                        break;
+                }
+                difficultyLevel++;
+            } else
+            {
+                Debug.Log("max difficulty reached");
+            }            
+        }
+    }
+
+    private void IncreaseBadBeatCost()
+    {
+        failBeatBoogieCost++;
+        Debug.Log("increase fail cost");
+    }
+
+    private void ReduceValidationWindow()
+    {
+        musicHandler.inputValidity -= 0.05f;
+        Debug.Log("reducing valid window");
     }
 }
