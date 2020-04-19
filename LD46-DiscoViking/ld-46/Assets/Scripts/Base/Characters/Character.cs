@@ -81,13 +81,15 @@ public abstract class Character : WorldObject
 
 	public void DoMove(Vector2 direction)
 	{
-		TileState tileState = m_World.MoveObject(m_Position, direction);
-		if(tileState==TileState.BorderRight)
+		ITileInfo tileInfo = m_World.GetTileInfo(m_Position + direction);
+		if (tileInfo.GetState() == TileState.BorderRight)
 		{
 			m_World.UseCache(Random.Range(0, m_World.GetCacheSize()));
 			m_Position.x = 0;
+			m_World.SetObject(this, m_Position);
 			return;
 		}
+		TileState tileState = m_World.MoveObject(m_Position, direction);
 		m_Position += direction;
 	}
     #endregion
