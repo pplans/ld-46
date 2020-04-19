@@ -197,28 +197,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 23294483}
   m_CullTransparentMesh: 0
---- !u!114 &319827463 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1085929403702908652, guid: 04e16e7828e969b45a828f3239446179, type: 3}
-  m_PrefabInstance: {fileID: 620318944}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52578daaac0930249a5d62768e9b1817, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &333997232 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7546460501941916319, guid: 04e16e7828e969b45a828f3239446179, type: 3}
-  m_PrefabInstance: {fileID: 620318944}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7ead96a9b07ded4cab13524a477bd92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &365544802
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,17 +497,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04e16e7828e969b45a828f3239446179, type: 3}
---- !u!114 &772431685 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2935200068729525401, guid: 04e16e7828e969b45a828f3239446179, type: 3}
-  m_PrefabInstance: {fileID: 620318944}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3c54392e4abda54daa7a9b190102d73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &782245819
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,15 +740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98e934d32aa58f54fa2d7fbc64b029da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDisco: 15
-  maxBoogie: 15
-  maxValhalla: 100
-  discoBall: {fileID: 772431685}
-  beatsCircle: {fileID: 333997232}
-  valhallaBar: {fileID: 1642370436}
-  boogieBarLeft: {fileID: 1496997564}
-  boogieBarRight: {fileID: 319827463}
-  beatsCircleRadius: 0.204
+  discoController: {fileID: 1614962223}
 --- !u!224 &1485993339
 RectTransform:
   m_ObjectHideFlags: 0
@@ -801,15 +760,15 @@ RectTransform:
   m_AnchoredPosition: {x: 2.4258337, y: 11.563232}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1496997564 stripped
+--- !u!114 &1614962223 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1086594947828508245, guid: 04e16e7828e969b45a828f3239446179, type: 3}
+  m_CorrespondingSourceObject: {fileID: 734140185939141832, guid: 04e16e7828e969b45a828f3239446179, type: 3}
   m_PrefabInstance: {fileID: 620318944}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52578daaac0930249a5d62768e9b1817, type: 3}
+  m_Script: {fileID: 11500000, guid: c142f9bc76110d54c9468c4c7753ea28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1642370433

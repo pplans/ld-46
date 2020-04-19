@@ -9,7 +9,7 @@ public class BoogieBar : MonoBehaviour
     private static string MaxBoggieStr = "_MaxBoogie";
     private static string BoggieStr = "_Boogie";
 
-    void Start()
+    void Awake()
     {
         material = GetComponent<Image>().material;
     }

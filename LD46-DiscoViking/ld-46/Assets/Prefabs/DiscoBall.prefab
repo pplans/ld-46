@@ -109,6 +109,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4055351747145985888}
+  - component: {fileID: 734140185939141832}
   m_Layer: 0
   m_Name: DiscoBall
   m_TagString: Untagged
@@ -132,6 +133,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &734140185939141832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4055351747145985889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c142f9bc76110d54c9468c4c7753ea28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDisco: 15
+  maxBoogie: 15
+  discoBall: {fileID: 2935200068729525401}
+  beatsCircle: {fileID: 7546460501941916319}
+  boogieBarLeft: {fileID: 1086594947828508245}
+  boogieBarRight: {fileID: 1085929403702908652}
 --- !u!1 &4055351747637973012
 GameObject:
   m_ObjectHideFlags: 0
