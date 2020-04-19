@@ -121,7 +121,9 @@ public class World : MonoBehaviour
 	{
 		if (m_bIsWorldInit) return;
 
-		TileStartPos = _gridStartPos; TileEndPos = _gridEndPos; TileSize = _gridSize;
+		TileStartPos = new Vector2(Mathf.RoundToInt(_gridStartPos.x), Mathf.RoundToInt(_gridStartPos.y));
+		TileEndPos = new Vector2(Mathf.RoundToInt(_gridEndPos.x), Mathf.RoundToInt(_gridEndPos.y));
+		TileSize = new Vector2(Mathf.RoundToInt(_gridSize.x), Mathf.RoundToInt(_gridSize.y));
 
 		Vector2 gridSize = GetNumberOfTiles();
 		Vector2Int iGridSize = new Vector2Int(Mathf.RoundToInt(gridSize.x), Mathf.RoundToInt(gridSize.y));
@@ -148,7 +150,7 @@ public class World : MonoBehaviour
 		{
 			ReadFile(filePath);
 		}
-		UseCache(0);
+		UseCache(Random.Range(0, cache.cache.Count));
 
 		smokePuffPuff.transform.localPosition = new Vector3(iGridSize.x * 0.5f, 0f, iGridSize.y * 0.5f);
 		smokePuffPuff.SetFloat("SpawnRadius", Mathf.Max(gridSize.x, gridSize.y));
@@ -329,6 +331,8 @@ public class World : MonoBehaviour
 		Vector2 newPos = _pos + _d;
 		ITileInfo tileInfo = GetTileInfo(newPos);
 		if (tileInfo.GetState() == TileState.Occupied)
+			return tileInfo.GetState();
+		if (tileInfo.GetState() == TileState.Border || tileInfo.GetState() == TileState.BorderRight)
 			return tileInfo.GetState();
 
 		ITileInfo oldTileInfo = GetTileInfo(_pos);
