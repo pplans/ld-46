@@ -1194,6 +1194,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 575766786}
     m_Modifications:
+    - target: {fileID: 516891732584433510, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+      propertyPath: ratio
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617567618818256705, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2677665085210044178, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
       propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -2037,7 +2049,7 @@ PrefabInstance:
     - target: {fileID: 734140185939141832, guid: 04e16e7828e969b45a828f3239446179, type: 3}
       propertyPath: musicEffect
       value: 
-      objectReference: {fileID: 516891732584433510, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+      objectReference: {fileID: 2052783086}
     - target: {fileID: 734140185939141832, guid: 04e16e7828e969b45a828f3239446179, type: 3}
       propertyPath: OnGameOver.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
@@ -3206,5 +3218,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f98afb78d1baeeb4ea129b6e10b1c84b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2052783086 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 516891732584433510, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+  m_PrefabInstance: {fileID: 504842224}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02771aef46e83774f9e35be8563982ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

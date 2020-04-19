@@ -47,7 +47,7 @@ public class DiscoController : MonoBehaviour
         if (amount < 0)
             discoBall.FailAnimation();
 
-        musicEffect.ratio = (float)currDisco / maxDisco;
+        musicEffect.ratio = (float)currDisco / (float)maxDisco;
 
         if (currDisco == 0)
             OnGameOver.Invoke();
