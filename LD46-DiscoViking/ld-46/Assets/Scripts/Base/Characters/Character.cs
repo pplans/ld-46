@@ -94,7 +94,7 @@ public abstract class Character : WorldObject
 				return tileInfo;
 			} else
             {
-				Debug.Log("Cant go next");
+				//POUR PM -> Pour l'instant on reste bloqué
 				//RETURN FAKE OCCUPIED
 			}
 			
