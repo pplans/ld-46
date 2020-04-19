@@ -90,6 +90,7 @@ public abstract class Character : WorldObject
 				m_World.UseCache(Random.Range(0, m_World.GetCacheSize()));
 				m_Position.x = 0;
 				m_World.SetObject(this, m_Position);
+				m_World.gameManager.SwitchPane();
 				return tileInfo;
 			} else
             {
