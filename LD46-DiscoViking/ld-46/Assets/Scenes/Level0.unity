@@ -905,12 +905,56 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: PrefabList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
       propertyPath: smokePuffPuff
       value: 
       objectReference: {fileID: 371435861}
     - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
       propertyPath: filePaths.Array.data[1]
       value: Assets/GridsData/grid1.txt
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: PrefabList.Array.data[1]
+      value: 
+      objectReference: {fileID: 882815450808637286, guid: 0b8312d007992ba4d946a758f09e4a58, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: PrefabList.Array.data[6]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: musicHandler
+      value: 
+      objectReference: {fileID: 560581624}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: PrefabList.Array.data[2]
+      value: 
+      objectReference: {fileID: 882815450808637286, guid: 758a15b7a4295c040b7001dc699c81be, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: PrefabList.Array.data[0]
+      value: 
+      objectReference: {fileID: 882815450808637286, guid: 3985d678c80fcaf4d87fdaf62bc97e1f, type: 3}
+    - target: {fileID: 2513952563832989651, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2513952563832989651, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2513952563832989651, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937122537629855221, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937122537629855221, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 448f826e873337b45a3d77871866944a, type: 3}
@@ -1280,7 +1324,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 840431612}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 2
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
