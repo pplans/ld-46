@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -463,6 +463,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &202270317 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 734140185939141832, guid: 04e16e7828e969b45a828f3239446179, type: 3}
+  m_PrefabInstance: {fileID: 1189267195}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c142f9bc76110d54c9468c4c7753ea28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &272738126
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,6 +1080,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bGameStarted: 0
   musicHandler: {fileID: 560581624}
+  discoController: {fileID: 202270317}
   world: {fileID: 284306275}
   player: {fileID: 50272070}
   inputManager: {fileID: 2007830881}
@@ -1531,6 +1543,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1426507036}
     m_Modifications:
+    - target: {fileID: 734140185939141832, guid: 04e16e7828e969b45a828f3239446179, type: 3}
+      propertyPath: musicEffect
+      value: 
+      objectReference: {fileID: 516891732584433510, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
     - target: {fileID: 4055351747145985888, guid: 04e16e7828e969b45a828f3239446179, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.57
