@@ -23,7 +23,7 @@
         { 
             "Queue"="Transparent" 
             "IgnoreProjector"="True" 
-            "RenderType"="Transparent" 
+            "RenderType"="Overlay" 
             "PreviewType"="Plane"
             "CanUseSpriteAtlas"="True"
         }
