@@ -906,7 +906,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
       propertyPath: filePaths.Array.size
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
       propertyPath: PrefabList.Array.size
@@ -964,6 +964,38 @@ PrefabInstance:
       propertyPath: EnnemyList.Array.data[0]
       value: 
       objectReference: {fileID: 4499204764405805612, guid: 68157bbea2059664eaa6751d46a54311, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: filePaths.Array.data[2]
+      value: Assets/GridsData/grid2.txt
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: filePaths.Array.data[3]
+      value: Assets/GridsData/grid3.txt
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: filePaths.Array.data[4]
+      value: Assets/GridsData/grid4.txt
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: filePaths.Array.data[5]
+      value: Assets/GridsData/grid5.txt
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: filePaths.Array.data[6]
+      value: Assets/GridsData/grid6.txt
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: filePaths.Array.data[7]
+      value: Assets/GridsData/grid7.txt
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: filePaths.Array.data[8]
+      value: Assets/GridsData/grid8.txt
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: filePaths.Array.data[9]
+      value: Assets/GridsData/grid9.txt
+      objectReference: {fileID: 0}
     - target: {fileID: 2513952563832989651, guid: 448f826e873337b45a3d77871866944a, type: 3}
       propertyPath: m_Materials.Array.size
       value: 2
