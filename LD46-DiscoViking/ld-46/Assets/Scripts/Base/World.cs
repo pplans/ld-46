@@ -91,7 +91,7 @@ public class World : MonoBehaviour
 	[SerializeField]
 	private GameObject tilePrefab = null;
 	[SerializeField]
-	private WorldObject DefaultPrefab = null;
+	private List<WorldObject> PrefabList = null;
 	[SerializeField]
 	private List<string> filePaths = null;
 
@@ -188,15 +188,12 @@ public class World : MonoBehaviour
 			{
 				char c = buffers[j][i];
 				// here we pick the things to spawn
-				switch(c)
+				if(c>='0' && c<='9')
 				{
-					case '.':
-						
-					break;
-					default:
-						m_2dGrid[i, j].Object = Instantiate(DefaultPrefab);
-					break;
+					int indexPrefab = (int)c - '0';
+					m_2dGrid[i, j].Object = Instantiate(PrefabList[indexPrefab]);
 				}
+
 				Color rdrCol = new Color(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), Random.Range(0.5f, 1f));
 				Material mat = m_2dGrid[i, j].Tile.GetComponent<MeshRenderer>().material;
 				mat.SetColor("Color_D10C4CBD", rdrCol);
