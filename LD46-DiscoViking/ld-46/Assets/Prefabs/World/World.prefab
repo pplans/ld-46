@@ -53,12 +53,18 @@ MonoBehaviour:
   tilePrefab: {fileID: 6688268635194366996, guid: 751f9d0ad02798d419705ef368e3f158, type: 3}
   ObstacleList: []
   EnnemyList: []
-  filePaths:
-  - Assets/GridsData/grid0.txt
-  - Assets/GridsData/grid1.txt
+  textAssets:
+  - {fileID: 4900000, guid: a1ed52cb31acdea40a8f9efa51b15be1, type: 3}
+  - {fileID: 4900000, guid: f6a9ecf120679304ba0e8d417f00ea4c, type: 3}
+  - {fileID: 4900000, guid: 5979aff13c3c8e841b265199e5de024a, type: 3}
+  - {fileID: 4900000, guid: d57da0a88e54b93489aae357715115e7, type: 3}
+  - {fileID: 4900000, guid: 72ae02925821bf142a9200e251e9c908, type: 3}
+  - {fileID: 4900000, guid: 5caa789e175357244a4c96cd183aba53, type: 3}
+  - {fileID: 4900000, guid: 4a0e5541eae826b4fb33ccc151626cbb, type: 3}
+  - {fileID: 4900000, guid: c7cd1f3a5d1f58e4bb4b7055069eb743, type: 3}
+  - {fileID: 4900000, guid: 1915175c07bb5784dbe41cc4eba3844b, type: 3}
+  - {fileID: 4900000, guid: 14b05c36c5ad72443ac14970f470f8ab, type: 3}
   musicHandler: {fileID: 0}
-  smokePuffPuff: {fileID: 9035039785621684553}
-  dancingImpactEnnemyVFX: {fileID: 6710965414094699915}
 --- !u!1 &3641900255657848341
 GameObject:
   m_ObjectHideFlags: 0
