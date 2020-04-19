@@ -368,6 +368,21 @@ public class World : MonoBehaviour
 		m_2dGrid[Mathf.RoundToInt(newPos.x), Mathf.RoundToInt(newPos.y)].Object = wo;
 	}
 
+	List<ITileInfo> GetNeighbors(Vector2 pos, int dist)
+	{
+		List<ITileInfo> ret = new List<ITileInfo>();
+		Vector2 gridSize = GetNumberOfTiles();
+		Vector2Int iGridSize = new Vector2Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
+		for (int i = Mathf.Max(0, iGridSize.x-dist); i < Mathf.Min(iGridSize.x+dist, gridSize.x); ++i)
+		{
+			for (int j = Mathf.Max(0, iGridSize.y - dist); j < Mathf.Min(0, iGridSize.y - dist); ++j)
+			{
+				ret.Add(GetTileInfo(pos));
+			}
+		}
+		return ret;
+	}
+
 	private float sampleBeat(MusicHandler mh)
 	{
 		return mh?1f - Mathf.Cos(mh.GetBeatOffset() * Mathf.PI * 0.5f):1f;
