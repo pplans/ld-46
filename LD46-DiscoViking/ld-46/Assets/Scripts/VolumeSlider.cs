@@ -11,8 +11,8 @@ public class VolumeSlider : MonoBehaviour
 
 	private void Awake()
 	{
-		//SetVolume();
 		slider.value = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+		SetVolume(slider.value);
 	}
 
 	public void SetVolume(float newVolume)
