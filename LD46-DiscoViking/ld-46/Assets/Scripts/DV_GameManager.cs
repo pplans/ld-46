@@ -22,6 +22,10 @@ public class DV_GameManager : MonoBehaviour
     public int failBeatBoogieCost;
     public ProgressEffect[] progressEffectArray;
 
+    private int successfulDanceOnThisPlate;
+
+    public bool bPaneCleared;
+
 
     public string currentGamePhase;
 
@@ -41,6 +45,8 @@ public class DV_GameManager : MonoBehaviour
         wokeEnemies = new List<DV_EnemyAnimation>();
         progressIndex = 0;
         difficultyLevel = 0;
+        successfulDanceOnThisPlate = 0;
+        bPaneCleared = false;
     }
 
     // Update is called once per frame
@@ -103,6 +109,7 @@ public class DV_GameManager : MonoBehaviour
 
     public void SucceedDanceSequence()
     {
+
         danceSequence.HideSequence();
         currentGamePhase = "move";
         currentDanceTargetTile.SetVisited();
@@ -111,6 +118,13 @@ public class DV_GameManager : MonoBehaviour
         wokeEnemies.Add(currentDanceTargetTile.GetWorldObject().GetComponent<DV_EnemyAnimation>());
         discoController.AddDisco(3);
         discoController.AddBoogie(3);
+        successfulDanceOnThisPlate++;
+        bPaneCleared = successfulDanceOnThisPlate >= world.GetEnnemyCount();
+        if (bPaneCleared)
+        {
+            Debug.Log("You Can Go Now");
+        }
+
     }
 
     public void IncrementProgress()

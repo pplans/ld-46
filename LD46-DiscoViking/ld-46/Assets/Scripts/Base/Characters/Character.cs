@@ -84,10 +84,19 @@ public abstract class Character : WorldObject
 		ITileInfo tileInfo = m_World.GetTileInfo(m_Position + direction);
 		if (tileInfo.GetState() == TileState.BorderRight)
 		{
-			m_World.UseCache(Random.Range(0, m_World.GetCacheSize()));
-			m_Position.x = 0;
-			m_World.SetObject(this, m_Position);
-			return tileInfo;
+			if (m_World.gameManager.bPaneCleared)
+            {
+				Debug.Log("Loading Next Pane");
+				m_World.UseCache(Random.Range(0, m_World.GetCacheSize()));
+				m_Position.x = 0;
+				m_World.SetObject(this, m_Position);
+				return tileInfo;
+			} else
+            {
+				Debug.Log("Cant go next");
+				//RETURN FAKE OCCUPIED
+			}
+			
 		} else if (tileInfo.GetState() == TileState.Occupied || tileInfo.GetState()==TileState.Ennemy)
         {
 			return tileInfo;
