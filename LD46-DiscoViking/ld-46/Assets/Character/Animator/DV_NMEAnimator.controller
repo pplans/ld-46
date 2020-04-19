@@ -17,7 +17,7 @@ AnimatorStateMachine:
     m_Position: {x: 220, y: 420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2722241773201994217}
-    m_Position: {x: 489, y: 555, z: 0}
+    m_Position: {x: 490, y: 550, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -36,7 +36,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Drunk
-  m_Speed: 1
+  m_Speed: 0.72
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 868956873237620584}
@@ -63,7 +63,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: DiscoPose
-  m_Speed: 1
+  m_Speed: 0.72
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 3127647807759550023}
@@ -76,7 +76,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 8414467406476088940, guid: d53f54cc07336f04da0432e5bbc1b06c, type: 3}
+  m_Motion: {fileID: -7840499609321468656, guid: 6ab158a267e418e45ba6cdb5bcea8896, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -96,13 +96,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Dance
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -149,7 +149,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: discoDown
-  m_Speed: 1
+  m_Speed: 0.72
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 5175615419693340917}
@@ -162,7 +162,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 9151604070986319513, guid: d53f54cc07336f04da0432e5bbc1b06c, type: 3}
+  m_Motion: {fileID: 6339822147499247323, guid: 6ab158a267e418e45ba6cdb5bcea8896, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
