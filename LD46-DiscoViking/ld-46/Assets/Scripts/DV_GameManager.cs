@@ -15,6 +15,7 @@ public class DV_GameManager : MonoBehaviour
     public bool bBeatValidated;
     public DanceSequence danceSequence;
     public WorldObject currentDanceTarget;
+    private List<DV_EnemyAnimation> wokeEnemies;
 
 
     public string currentGamePhase;
@@ -77,10 +78,19 @@ public class DV_GameManager : MonoBehaviour
         currentGamePhase = "dance";
     }
 
+    public void WokenEnemyDance()
+    {
+        //foreach(DV_EnemyAnimation anim in wokeEnemies)
+        //{
+            //anim.Dance();
+        //}
+    }
+
     public void SucceedDanceSequence()
     {
         danceSequence.HideSequence();
         currentGamePhase = "move";
         currentDanceTarget.GetComponent<DV_EnemyAnimation>().WakeUp();
+        wokeEnemies.Add(currentDanceTarget.GetComponent<DV_EnemyAnimation>());
     }
 }
