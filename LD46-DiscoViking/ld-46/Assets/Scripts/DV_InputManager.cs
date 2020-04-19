@@ -15,6 +15,7 @@ public class DV_InputManager : MonoBehaviour
     private float timeBetweenStuff;
     public Player m_player;
     public World m_world;
+    public int danceStepIndex;
 
     private void Start()
     {
@@ -50,21 +51,47 @@ public class DV_InputManager : MonoBehaviour
             bool valid = gameManager.musicHandler.ValidateBeat();
             bool obstruction = false;
 
-            if (valid)
+            if (gameManager.currentGamePhase == "move")
             {
-                Debug.Log("Up");
-                TileState state = m_player.DoMove(new Vector2(0, 1));
-                switch (state)
+                if (valid)
                 {
-                    case TileState.Occupied:
-                        obstruction = true;
-                        break;
+                    TileState state = m_player.DoMove(new Vector2(0, 1));
+                    switch (state)
+                    {
+                        case TileState.Occupied:
+                            obstruction = true;
+                            break;
+                    }
+                    if (!obstruction)
+                    {
+                        gameManager.ValidateBeat();
+                    }
+                    else
+                    {
+                        gameManager.BeginDanceSequence();
+                    }
                 }
-                if (!obstruction)
+            } else
+            {
+                if (gameManager.danceSequence.CheckStepValidityAgainstInput("Up", danceStepIndex))
                 {
-                    gameManager.ValidateBeat();
+                    gameManager.danceSequence.ValidateStep(danceStepIndex);
+                    if (danceStepIndex < 3)
+                    {
+                        danceStepIndex++;
+                    }
+                    else
+                    {
+                        gameManager.SucceedDanceSequence();
+                    }
+                }
+                else
+                {
+                    gameManager.danceSequence.ResetDanceSequence();
+                    danceStepIndex = 0;
                 }
             }
+            
             
         }        
 
@@ -79,19 +106,44 @@ public class DV_InputManager : MonoBehaviour
             bool valid = gameManager.musicHandler.ValidateBeat();
             bool obstruction = false;
 
-            if (valid)
+            if (gameManager.currentGamePhase == "move")
             {
-                Debug.Log("Down");
-                TileState state = m_player.DoMove(new Vector2(0, -1));
-                switch (state)
+                if (valid)
                 {
-                    case TileState.Occupied:
-                        obstruction = true;
-                        break;
+                    TileState state = m_player.DoMove(new Vector2(0, -1));
+                    switch (state)
+                    {
+                        case TileState.Occupied:
+                            obstruction = true;
+                            break;
+                    }
+                    if (!obstruction)
+                    {
+                        gameManager.ValidateBeat();
+                    }
+                    else
+                    {
+                        gameManager.BeginDanceSequence();
+                    }
                 }
-                if (!obstruction)
+            } else
+            {
+                if (gameManager.danceSequence.CheckStepValidityAgainstInput("Down", danceStepIndex))
                 {
-                    gameManager.ValidateBeat();
+                    gameManager.danceSequence.ValidateStep(danceStepIndex);
+                    if (danceStepIndex < 3)
+                    {
+                        danceStepIndex++;
+                    }
+                    else
+                    {
+                        gameManager.SucceedDanceSequence();
+                    }
+                }
+                else
+                {
+                    gameManager.danceSequence.ResetDanceSequence();
+                    danceStepIndex = 0;
                 }
             }
 
@@ -108,21 +160,48 @@ public class DV_InputManager : MonoBehaviour
             bool valid = gameManager.musicHandler.ValidateBeat();
             bool obstruction = false;
 
-            if (valid)
+            if (gameManager.currentGamePhase == "move")
             {
-                Debug.Log("Left");
-                TileState state = m_player.DoMove(new Vector2(-1, 0));
-                switch (state)
+                if (valid)
                 {
-                    case TileState.Occupied:
-                        obstruction = true;
-                        break;
+                    TileState state = m_player.DoMove(new Vector2(-1, 0));
+                    switch (state)
+                    {
+                        case TileState.Occupied:
+                            obstruction = true;
+                            break;
+                    }
+                    if (!obstruction)
+                    {
+                        gameManager.ValidateBeat();
+                    }
+                    else
+                    {
+                        gameManager.BeginDanceSequence();
+                    }
                 }
-                if (!obstruction)
+            } else
+            {
+                if (gameManager.danceSequence.CheckStepValidityAgainstInput("Left", danceStepIndex))
                 {
-                    gameManager.ValidateBeat();
+                    gameManager.danceSequence.ValidateStep(danceStepIndex);
+                    if (danceStepIndex < 3)
+                    {
+                        danceStepIndex++;
+                    }
+                    else
+                    {
+                        gameManager.SucceedDanceSequence();
+                    }
+                }
+                else
+                {
+                    gameManager.danceSequence.ResetDanceSequence();
+                    danceStepIndex = 0;
                 }
             }
+
+
 
         }
 
@@ -137,22 +216,50 @@ public class DV_InputManager : MonoBehaviour
             bool valid = gameManager.musicHandler.ValidateBeat();
             bool obstruction = false;
 
-            if (valid)
+            if (gameManager.currentGamePhase == "move")
             {
-                Debug.Log("Right");
-                TileState state = m_player.DoMove(new Vector2(1,0));
-                switch (state)
+                if (valid)
                 {
-                    case TileState.Occupied:
-                        obstruction = true;
-                        break;                    
+                    Debug.Log("Right");
+                    TileState state = m_player.DoMove(new Vector2(1, 0));
+                    switch (state)
+                    {
+                        case TileState.Occupied:
+                            obstruction = true;
+                            break;
+                    }
+                    if (!obstruction)
+                    {
+                        gameManager.ValidateBeat();
+                    }
+                    else
+                    {
+                        gameManager.BeginDanceSequence();
+                    }
+
                 }
-                if (!obstruction)
+            } else
+            {
+                if (gameManager.danceSequence.CheckStepValidityAgainstInput("Right", danceStepIndex))
                 {
-                    gameManager.ValidateBeat();
+                    gameManager.danceSequence.ValidateStep(danceStepIndex);
+                    if (danceStepIndex < 3)
+                    {
+                        danceStepIndex++;
+                    } else
+                    {
+                        gameManager.SucceedDanceSequence();
+                    }
+                    
                 }
-                
+                else
+                {
+                    gameManager.danceSequence.ResetDanceSequence();
+                    danceStepIndex = 0;
+                }
             }
+
+
 
         }
 
