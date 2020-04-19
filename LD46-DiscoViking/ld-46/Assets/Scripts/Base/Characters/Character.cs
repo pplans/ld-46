@@ -79,7 +79,7 @@ public abstract class Character : WorldObject
 		}
 	}
 
-	public void DoMove(Vector2 direction)
+	public TileState DoMove(Vector2 direction)
 	{
 		ITileInfo tileInfo = m_World.GetTileInfo(m_Position + direction);
 		if (tileInfo.GetState() == TileState.BorderRight)
@@ -87,10 +87,14 @@ public abstract class Character : WorldObject
 			m_World.UseCache(Random.Range(0, m_World.GetCacheSize()));
 			m_Position.x = 0;
 			m_World.SetObject(this, m_Position);
-			return;
-		}
+			return tileInfo.GetState();
+		} else if (tileInfo.GetState() == TileState.Occupied)
+        {
+			return tileInfo.GetState();
+        }
 		TileState tileState = m_World.MoveObject(m_Position, direction);
 		m_Position += direction;
+		return tileState;
 	}
     #endregion
 }

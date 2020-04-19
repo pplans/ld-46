@@ -48,11 +48,22 @@ public class DV_InputManager : MonoBehaviour
         {
 
             bool valid = gameManager.musicHandler.ValidateBeat();
+            bool obstruction = false;
 
             if (valid)
             {
                 Debug.Log("Up");
-                m_player.DoMove(new Vector2(0, 1));
+                TileState state = m_player.DoMove(new Vector2(0, 1));
+                switch (state)
+                {
+                    case TileState.Occupied:
+                        obstruction = true;
+                        break;
+                }
+                if (!obstruction)
+                {
+                    gameManager.ValidateBeat();
+                }
             }
             
         }        
@@ -66,11 +77,22 @@ public class DV_InputManager : MonoBehaviour
         {
 
             bool valid = gameManager.musicHandler.ValidateBeat();
+            bool obstruction = false;
 
             if (valid)
             {
                 Debug.Log("Down");
-                m_player.DoMove(new Vector2(0, -1));
+                TileState state = m_player.DoMove(new Vector2(0, -1));
+                switch (state)
+                {
+                    case TileState.Occupied:
+                        obstruction = true;
+                        break;
+                }
+                if (!obstruction)
+                {
+                    gameManager.ValidateBeat();
+                }
             }
 
         }
@@ -84,11 +106,22 @@ public class DV_InputManager : MonoBehaviour
         {
 
             bool valid = gameManager.musicHandler.ValidateBeat();
+            bool obstruction = false;
 
             if (valid)
             {
                 Debug.Log("Left");
-                m_player.DoMove(new Vector2(-1, 0));
+                TileState state = m_player.DoMove(new Vector2(-1, 0));
+                switch (state)
+                {
+                    case TileState.Occupied:
+                        obstruction = true;
+                        break;
+                }
+                if (!obstruction)
+                {
+                    gameManager.ValidateBeat();
+                }
             }
 
         }
@@ -102,11 +135,23 @@ public class DV_InputManager : MonoBehaviour
         {
 
             bool valid = gameManager.musicHandler.ValidateBeat();
+            bool obstruction = false;
 
             if (valid)
             {
                 Debug.Log("Right");
-                m_player.DoMove(new Vector2(1,0));
+                TileState state = m_player.DoMove(new Vector2(1,0));
+                switch (state)
+                {
+                    case TileState.Occupied:
+                        obstruction = true;
+                        break;                    
+                }
+                if (!obstruction)
+                {
+                    gameManager.ValidateBeat();
+                }
+                
             }
 
         }
