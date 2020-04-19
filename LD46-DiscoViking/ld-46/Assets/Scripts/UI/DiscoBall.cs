@@ -59,4 +59,14 @@ public class DiscoBall : MonoBehaviour
     {
         material.SetFloat(IntensityOccStr, intensity);
     }
+
+    public void SetDissolveColor(Color color)
+    {
+        material.SetColor("_EdgeColor", color);
+    }
+
+    public void SetDissolveRatio(float ratio)
+    {
+        material.SetFloat("_AlphaThreshold", ratio);
+    }
 }
