@@ -82,6 +82,12 @@ public abstract class Character : WorldObject
 	public void DoMove(Vector2 direction)
 	{
 		TileState tileState = m_World.MoveObject(m_Position, direction);
+		if(tileState==TileState.BorderRight)
+		{
+			m_World.UseCache(Random.Range(0, m_World.GetCacheSize()));
+			m_Position.x = 0;
+			return;
+		}
 		m_Position += direction;
 	}
     #endregion
