@@ -62,7 +62,7 @@ MonoBehaviour:
   - Assets/GridsData/grid0.txt
   - Assets/GridsData/grid1.txt
   musicHandler: {fileID: 0}
-  smokePuffPuff: {fileID: 3147357638000749736}
+  smokePuffPuff: {fileID: 9035039785621684553}
 --- !u!1 &4019794048755132876
 GameObject:
   m_ObjectHideFlags: 0
