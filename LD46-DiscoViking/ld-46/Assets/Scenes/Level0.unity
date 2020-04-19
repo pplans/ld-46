@@ -913,6 +913,14 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: ObstacleList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: EnnemyList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
       propertyPath: smokePuffPuff
       value: 
       objectReference: {fileID: 371435861}
@@ -940,6 +948,22 @@ PrefabInstance:
       propertyPath: PrefabList.Array.data[0]
       value: 
       objectReference: {fileID: 882815450808637286, guid: 3985d678c80fcaf4d87fdaf62bc97e1f, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: ObstacleList.Array.data[0]
+      value: 
+      objectReference: {fileID: 2219426746508331839, guid: 3985d678c80fcaf4d87fdaf62bc97e1f, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: ObstacleList.Array.data[1]
+      value: 
+      objectReference: {fileID: 1667243232026919557, guid: 0b8312d007992ba4d946a758f09e4a58, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: ObstacleList.Array.data[2]
+      value: 
+      objectReference: {fileID: 4334479449125196222, guid: 758a15b7a4295c040b7001dc699c81be, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: EnnemyList.Array.data[0]
+      value: 
+      objectReference: {fileID: 4499204764405805612, guid: 68157bbea2059664eaa6751d46a54311, type: 3}
     - target: {fileID: 2513952563832989651, guid: 448f826e873337b45a3d77871866944a, type: 3}
       propertyPath: m_Materials.Array.size
       value: 2

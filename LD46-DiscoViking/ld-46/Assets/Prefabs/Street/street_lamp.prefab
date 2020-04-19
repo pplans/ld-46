@@ -182,7 +182,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5531890645444177429}
-  - component: {fileID: 3449095308438064096}
+  - component: {fileID: -8414178210129776877}
   m_Layer: 0
   m_Name: street_lamp
   m_TagString: Untagged
@@ -206,7 +206,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3449095308438064096
+--- !u!114 &-8414178210129776877
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -215,6 +215,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4974521752732760786}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df4de20e18a2f61409200e42a7b50696, type: 3}
+  m_Script: {fileID: 11500000, guid: de590b14a69b37a4395065e206552ad3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

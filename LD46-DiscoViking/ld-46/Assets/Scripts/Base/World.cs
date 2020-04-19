@@ -6,6 +6,7 @@ using System.IO;
 public enum TileState
 {
 	Empty,
+	Ennemy,
 	Occupied,
 	Player,
 	BorderRight,
@@ -107,7 +108,9 @@ public class World : MonoBehaviour
 	[SerializeField]
 	private GameObject tilePrefab = null;
 	[SerializeField]
-	private List<WorldObject> PrefabList = null;
+	private List<Obstacle> ObstacleList = null;
+	[SerializeField]
+	private List<Ennemy> EnnemyList = null;
 	[SerializeField]
 	private List<string> filePaths = null;
 	[SerializeField]
@@ -222,10 +225,14 @@ public class World : MonoBehaviour
 			{
 				char c = buffers[j][i];
 				// here we pick the things to spawn
-				if(c>='0' && c<='9')
+				if (c == 'e')
+				{
+					m_2dGrid[i, j].Object = Instantiate(EnnemyList[0]);
+				}
+				else if (c>='0' && c<='9')
 				{
 					int indexPrefab = (int)c - '0';
-					m_2dGrid[i, j].Object = Instantiate(PrefabList[indexPrefab]);
+					m_2dGrid[i, j].Object = Instantiate(ObstacleList[indexPrefab]);
 				}
 				m_2dGrid[i, j].Reset();
 				Color rdrCol = new Color(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), Random.Range(0.5f, 1f));
@@ -275,8 +282,10 @@ public class World : MonoBehaviour
 			wo = m_2dGrid[Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y)];
 			if (wo.Object == null)
 				state = TileState.Empty;
-			else
+			else if (wo.Object.IsObstacle())
 				state = TileState.Occupied;
+			else if (wo.Object.IsIA())
+				state = TileState.Ennemy;
 		}
 		return new TileInfo(state, wo);
 	}
@@ -347,7 +356,7 @@ public class World : MonoBehaviour
 		WorldObject wo = Instantiate<WorldObject>(_wo);
 		Vector2 newPos = _pos + _d;
 		ITileInfo tileInfo = GetTileInfo(newPos);
-		if (tileInfo.GetState() == TileState.Occupied)
+		if (tileInfo.GetState() == TileState.Occupied || tileInfo.GetState() == TileState.Ennemy)
 			return;
 		m_2dGrid[Mathf.RoundToInt(_pos.x), Mathf.RoundToInt(_pos.y)].Object = null;
 		m_2dGrid[Mathf.RoundToInt(newPos.x), Mathf.RoundToInt(newPos.y)].Object = wo;
@@ -362,9 +371,7 @@ public class World : MonoBehaviour
 	{
 		Vector2 newPos = _pos + _d;
 		ITileInfo tileInfo = GetTileInfo(newPos);
-		if (tileInfo.GetState() == TileState.Occupied)
-			return tileInfo.GetState();
-		if (tileInfo.GetState() == TileState.Border || tileInfo.GetState() == TileState.BorderRight)
+		if (tileInfo.GetState() != TileState.Empty)
 			return tileInfo.GetState();
 
 		ITileInfo oldTileInfo = GetTileInfo(_pos);
@@ -381,7 +388,7 @@ public class World : MonoBehaviour
 	public void SetObject(WorldObject _wo, Vector2 _pos)
 	{
 		ITileInfo tileInfo = GetTileInfo(_pos);
-		if (tileInfo.GetState() == TileState.Occupied)
+		if (tileInfo.GetState() == TileState.Occupied || tileInfo.GetState() == TileState.Ennemy)
 			return;
 		m_2dGrid[Mathf.RoundToInt(_pos.x), Mathf.RoundToInt(_pos.y)].Object = _wo;
 	}
