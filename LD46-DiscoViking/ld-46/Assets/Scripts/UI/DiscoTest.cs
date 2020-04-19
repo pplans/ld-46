@@ -9,9 +9,9 @@ public class DiscoTest : MonoBehaviour
     public int maxBoogie = 15;
     public int maxValhalla = 100;
 
-    public int currDisco;
-    public int currBoogie;
-    public int currValhalla;
+    private int currDisco;
+    private int currBoogie;
+    private int currValhalla;
 
     public DiscoBall discoBall;
     public BeatsCircle beatsCircle;
