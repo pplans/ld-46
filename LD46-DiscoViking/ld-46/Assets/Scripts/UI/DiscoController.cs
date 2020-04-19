@@ -13,6 +13,7 @@ public class DiscoController : MonoBehaviour
     private int currBoogie;
     //private int currValhalla;
 
+    public MusicEffect musicEffect;
     public DiscoBall discoBall;
     public BeatsCircle beatsCircle;
     //public ValhallaBar valhallaBar;
@@ -45,6 +46,10 @@ public class DiscoController : MonoBehaviour
     {
         currDisco = Mathf.Clamp(currDisco + amount, 0, maxDisco);
         discoBall.SetDisco(currDisco);
+        if (amount < 0)
+            discoBall.FailAnimation();
+
+        musicEffect.ratio = (float)currDisco / maxDisco;
     }
 
     public void AddBoogie(int amount)

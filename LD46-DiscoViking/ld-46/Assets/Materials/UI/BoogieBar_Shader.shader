@@ -16,6 +16,7 @@
         Cull Off
         Lighting Off
         ZWrite Off
+        ZTest Off
         Blend One OneMinusSrcAlpha
 
         Tags
