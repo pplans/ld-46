@@ -1545,7 +1545,9 @@ MonoBehaviour:
   endGridPos: {fileID: 1070471531}
   bBeatValidated: 0
   danceSequence: {fileID: 625947778}
-  currentDanceTarget: {fileID: 0}
+  progressThreshold: 3
+  failBeatBoogieCost: 1
+  progressEffectArray: 020000000100000002000000010000000200000001000000
   currentGamePhase: 
 --- !u!1 &625947776
 GameObject:
