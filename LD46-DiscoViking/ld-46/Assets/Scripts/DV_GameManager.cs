@@ -107,6 +107,12 @@ public class DV_GameManager : MonoBehaviour
         
     }
 
+    public void SwitchPane()
+    {
+        successfulDanceOnThisPlate = 0;
+        bPaneCleared = successfulDanceOnThisPlate >= world.GetEnnemyCount();
+    }
+
     public void SucceedDanceSequence()
     {
 
