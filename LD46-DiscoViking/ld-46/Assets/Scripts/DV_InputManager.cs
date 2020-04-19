@@ -58,8 +58,8 @@ public class DV_InputManager : MonoBehaviour
                 
                 if (valid)
                 {
-                    TileState state = m_player.DoMove(new Vector2(0, 1));
-                    switch (state)
+                    ITileInfo tileInfo = m_player.DoMove(new Vector2(0, 1));
+                    switch (tileInfo.GetState())
                     {
                         case TileState.Occupied:
                             obstruction = true;
@@ -74,7 +74,11 @@ public class DV_InputManager : MonoBehaviour
                         successfulInput = true;
                         if (enemy)
                         {
-                            gameManager.BeginDanceSequence();
+                            if (!tileInfo.GetWorldObject().GetComponent<DV_EnemyAnimation>().bWokenUp)
+                            {
+                                gameManager.BeginDanceSequence(tileInfo.GetWorldObject());
+                            }
+                            
                         }
                     }
                     
@@ -128,8 +132,8 @@ public class DV_InputManager : MonoBehaviour
             {
                 if (valid)
                 {
-                    TileState state = m_player.DoMove(new Vector2(0, -1));
-                    switch (state)
+                    ITileInfo tileInfo = m_player.DoMove(new Vector2(0, -1));
+                    switch (tileInfo.GetState())
                     {
                         case TileState.Occupied:
                             obstruction = true;
@@ -144,7 +148,10 @@ public class DV_InputManager : MonoBehaviour
                         successfulInput = true;
                         if (enemy)
                         {
-                            gameManager.BeginDanceSequence();
+                            if (!tileInfo.GetWorldObject().GetComponent<DV_EnemyAnimation>().bWokenUp)
+                            {
+                                gameManager.BeginDanceSequence(tileInfo.GetWorldObject());
+                            }
                         }
                     }
                 }
@@ -196,8 +203,8 @@ public class DV_InputManager : MonoBehaviour
             {
                 if (valid)
                 {
-                    TileState state = m_player.DoMove(new Vector2(-1, 0));
-                    switch (state)
+                    ITileInfo tileInfo = m_player.DoMove(new Vector2(-1, 0));
+                    switch (tileInfo.GetState())
                     {
                         case TileState.Occupied:
                             obstruction = true;
@@ -212,7 +219,10 @@ public class DV_InputManager : MonoBehaviour
                         successfulInput = true;
                         if (enemy)
                         {
-                            gameManager.BeginDanceSequence();
+                            if (!tileInfo.GetWorldObject().GetComponent<DV_EnemyAnimation>().bWokenUp)
+                            {
+                                gameManager.BeginDanceSequence(tileInfo.GetWorldObject());
+                            }
                         }
                     }
                 }
@@ -265,9 +275,8 @@ public class DV_InputManager : MonoBehaviour
             {
                 if (valid)
                 {
-                    Debug.Log("Right");
-                    TileState state = m_player.DoMove(new Vector2(1, 0));
-                    switch (state)
+                    ITileInfo tileInfo = m_player.DoMove(new Vector2(1, 0));
+                    switch (tileInfo.GetState())
                     {
                         case TileState.Occupied:
                             obstruction = true;
@@ -282,7 +291,10 @@ public class DV_InputManager : MonoBehaviour
                         successfulInput = true;
                         if (enemy)
                         {
-                            gameManager.BeginDanceSequence();
+                            if (!tileInfo.GetWorldObject().GetComponent<DV_EnemyAnimation>().bWokenUp)
+                            {
+                                gameManager.BeginDanceSequence(tileInfo.GetWorldObject());
+                            }
                         }
                     }
                 }

@@ -14,6 +14,7 @@ public class DV_GameManager : MonoBehaviour
     public Transform endGridPos;
     public bool bBeatValidated;
     public DanceSequence danceSequence;
+    public WorldObject currentDanceTarget;
 
 
     public string currentGamePhase;
@@ -69,9 +70,10 @@ public class DV_GameManager : MonoBehaviour
         bBeatValidated = false;
     }
 
-    public void BeginDanceSequence()
+    public void BeginDanceSequence(WorldObject danceTarget)
     {
         danceSequence.InitializeDanceSequence();
+        currentDanceTarget = danceTarget;
         currentGamePhase = "dance";
     }
 
@@ -79,5 +81,6 @@ public class DV_GameManager : MonoBehaviour
     {
         danceSequence.HideSequence();
         currentGamePhase = "move";
+        currentDanceTarget.GetComponent<DV_EnemyAnimation>().WakeUp();
     }
 }
