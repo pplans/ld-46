@@ -1,22 +1,9 @@
 fileFormatVersion: 2
-guid: 6ab158a267e418e45ba6cdb5bcea8896
+guid: d44a2435b32eb0f4b8cbd7a091bd8c63
 ModelImporter:
   serializedVersion: 20100
-  internalIDToNameTable:
-  - first:
-      74: 3374748389425109202
-    second: rig|rigAction
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: 6f462f0b9bdbf56499cc4378d99f51dd, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.001
-    second: {fileID: 2100000, guid: 0f6bd8b61fd5a654bb26849cf0a103ae, type: 2}
+  internalIDToNameTable: []
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -25,7 +12,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleCurves: 0
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
