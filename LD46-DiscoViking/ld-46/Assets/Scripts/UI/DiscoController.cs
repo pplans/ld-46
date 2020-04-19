@@ -45,6 +45,8 @@ public class DiscoController : MonoBehaviour
     {
         currDisco = Mathf.Clamp(currDisco + amount, 0, maxDisco);
         discoBall.SetDisco(currDisco);
+        if (amount < 0)
+            discoBall.FailAnimation();
     }
 
     public void AddBoogie(int amount)

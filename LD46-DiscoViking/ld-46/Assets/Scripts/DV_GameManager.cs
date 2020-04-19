@@ -6,6 +6,7 @@ public class DV_GameManager : MonoBehaviour
 {
     public bool bGameStarted;
     public MusicHandler musicHandler;
+    public DiscoController discoController;
     public World world;
     public Player player;
     public Transform startGridPos;
@@ -45,6 +46,13 @@ public class DV_GameManager : MonoBehaviour
         if (!bBeatValidated)
         {
             Debug.Log("BAD BEAT");
+            discoController.AddDisco(-1);
+            discoController.AddBoogie(-1);
+        }
+        else
+        {
+            discoController.AddDisco(1);
+            discoController.AddBoogie(1);
         }
 
         bBeatValidated = false;
