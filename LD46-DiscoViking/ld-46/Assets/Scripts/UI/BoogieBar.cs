@@ -1,17 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BoogieBar : MonoBehaviour
 {
-    private Material material;
-    private static string MaxBoggieStr = "_MaxBoogie";
-    private static string BoggieStr = "_Boogie";
+    public BoogieLight[] lights;
 
     void Start()
     {
-        material = GetComponent<Image>().material;
+
     }
 
     void Update()
@@ -19,13 +16,34 @@ public class BoogieBar : MonoBehaviour
         
     }
 
-    public void SetMaxBoogie(int val)
+    public void SetIntensityMultiplier(float multiplier)
     {
-        material.SetInt(MaxBoggieStr, val);
+        for (int i = 0; i < lights.Length; ++i)
+        {
+            lights[i].intensityMultiplier = multiplier;
+        }
     }
 
-    public void SetBoogie(int val)
+    public void SetBoogie(int boogie)
     {
-        material.SetInt(BoggieStr, val);
+        int n = Mathf.Min(boogie, lights.Length);
+
+        for(int i = 0; i < n; ++i)
+        {
+            lights[i].SetActive(true);
+        }
+
+        for(int i = n; i < lights.Length; ++i)
+        {
+            lights[i].SetActive(false);
+        }
+    }
+
+    public void SetColor(Color color)
+    {
+        for(int i = 0; i < lights.Length; ++i)
+        {
+            lights[i].SetColor(color);
+        }
     }
 }
