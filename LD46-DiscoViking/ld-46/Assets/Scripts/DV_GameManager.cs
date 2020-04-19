@@ -65,8 +65,7 @@ public class DV_GameManager : MonoBehaviour
         }
         else
         {
-            discoController.AddDisco(1);
-            discoController.AddBoogie(1);
+            
         }
 
         bBeatValidated = false;
@@ -94,5 +93,7 @@ public class DV_GameManager : MonoBehaviour
         currentGamePhase = "move";
         currentDanceTarget.GetComponent<DV_EnemyAnimation>().WakeUp();
         wokeEnemies.Add(currentDanceTarget.GetComponent<DV_EnemyAnimation>());
+        discoController.AddDisco(3);
+        discoController.AddBoogie(3);
     }
 }
