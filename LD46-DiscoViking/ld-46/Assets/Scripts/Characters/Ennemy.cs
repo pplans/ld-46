@@ -5,8 +5,10 @@ using UnityEngine;
 public class Ennemy : Character
 {
 	#region Attributes
-	UnityEngine.VFX.VisualEffect m_dancingImpactVFX;
+	[SerializeField]
+	UnityEngine.VFX.VisualEffect m_dancingImpactVFX = null;
 	float m_timerPlay = 0f;
+	public float m_dancingImpactVFXDuration = 5f;
 	#endregion
 
 	#region UnityEvents
@@ -22,20 +24,19 @@ public class Ennemy : Character
 	#endregion
 
 	#region Methods
-	public void SetDancingImpactVFX(UnityEngine.VFX.VisualEffect _vfx) { m_dancingImpactVFX = _vfx; }
 	public override bool IsIA() { return true; }
 	public void StartDancingImpactVFX()
 	{
-		m_timerPlay = 5f;
+		m_timerPlay = m_dancingImpactVFXDuration;
 		if(m_dancingImpactVFX)
-			m_dancingImpactVFX.Play();
+			m_dancingImpactVFX.SendEvent("Start");
 	}
 	public void Update()
 	{
 		float dt = Time.deltaTime;
 		float currDt = m_timerPlay - dt;
 		if (currDt < 0f && m_timerPlay>0f && m_dancingImpactVFX)
-			m_dancingImpactVFX.Stop();
+			m_dancingImpactVFX.SendEvent("Stop");
 
 		m_timerPlay -= dt;
 	}

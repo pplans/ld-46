@@ -128,12 +128,6 @@ public class World : MonoBehaviour
 	[SerializeField]
 	private MusicHandler musicHandler = null;
 
-	[SerializeField]
-	private UnityEngine.VFX.VisualEffect smokePuffPuff = null;
-
-	[SerializeField]
-	private UnityEngine.VFX.VisualEffect dancingImpactEnnemyVFX = null;
-
 	private bool m_bIsWorldInit;
 
 	private Vector2 m_worldAnchor;
@@ -203,10 +197,6 @@ public class World : MonoBehaviour
 			ReadFile(filePath);
 		}
 		UseCache(Random.Range(0, cache.cache.Count));
-
-		smokePuffPuff.transform.localPosition = new Vector3(iGridSize.x * 0.5f, 0f, iGridSize.y * 0.5f);
-		smokePuffPuff.SetFloat("SpawnRadius", Mathf.Max(gridSize.x, gridSize.y));
-		//smokePuffPuff.SendEvent("Start");
 	}
 
 	public void ReadFile(string filePath)
@@ -243,8 +233,6 @@ public class World : MonoBehaviour
 				if (c == 'e')
 				{
 					m_2dGrid[i, j].Object = Instantiate(EnnemyList[0]);
-					if(dancingImpactEnnemyVFX)
-						m_2dGrid[i, j].Object.GetComponent<Ennemy>().SetDancingImpactVFX(dancingImpactEnnemyVFX);
 				}
 				else if (c>='0' && c<='9')
 				{

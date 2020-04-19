@@ -48,6 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0}
   m_World: {fileID: 0}
+  m_dancingImpactVFX: {fileID: 5294829783821886465}
+  m_dancingImpactVFXDuration: 3
 --- !u!114 &1006504095542577669
 MonoBehaviour:
   m_ObjectHideFlags: 0
