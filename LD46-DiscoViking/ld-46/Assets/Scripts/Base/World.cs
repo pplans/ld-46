@@ -25,6 +25,8 @@ public interface ITileInfo
 
 public class World : MonoBehaviour
 {
+	public DV_GameManager gameManager;
+
 	public class WorldCache
 	{
 		public List<List<string>> cache = new List<List<string>>();

@@ -30,4 +30,9 @@ public class DV_EnemyAnimation : MonoBehaviour
     {
         anim.SetTrigger("Dance");
     }
+
+    public void Done()
+    {
+        anim.SetTrigger("Done");
+    }
 }
