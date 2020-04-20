@@ -151,6 +151,7 @@ public class DV_GameManager : MonoBehaviour
 
     public void SwitchPane()
     {
+        world.StopAnimationWaveLeftToRight();
         successfulDanceOnThisPlate = 0;
         bPaneCleared = successfulDanceOnThisPlate >= world.GetEnnemyCount();
         IncrementProgress();
@@ -174,7 +175,7 @@ public class DV_GameManager : MonoBehaviour
         if (bPaneCleared)
         {
             world.ActivateEndColumn();
-            world.ActiveAllCells();
+            world.PlayAnimationWaveLeftToRight();
             foreach (DV_EnemyAnimation anim in wokeEnemies)
             {
                 anim.Done();
