@@ -395,6 +395,22 @@ public class World : MonoBehaviour
 		CurrentCacheEnnemyCount = 0;
 	}
 
+	public void ActiveAllCells()
+	{
+		Vector2 gridSize = GetNumberOfTiles();
+		for (int i = 0; i < gridSize.x; ++i)
+		{
+			for (int j = 0; j < gridSize.y; ++j)
+			{
+				if (m_2dGrid[i, j].Object != null)
+				{
+					if (m_2dGrid[i, j]!=null)
+						m_2dGrid[i, j].Visited = true;
+				}
+			}
+		}
+	}
+
 	public TileState ProjectToGrid(ref Vector2 pos)
 	{
 		if (pos.x >= TileEndPos.x)
