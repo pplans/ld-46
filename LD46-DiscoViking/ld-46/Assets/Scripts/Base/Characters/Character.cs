@@ -94,8 +94,7 @@ public abstract class Character : WorldObject
 				return tileInfo;
 			} else
             {
-				//POUR PM -> Pour l'instant on reste bloqué
-				//RETURN FAKE OCCUPIED
+				return tileInfo;
 			}
 			
 		} else if (tileInfo.GetState() == TileState.Occupied || tileInfo.GetState()==TileState.Ennemy)
