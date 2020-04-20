@@ -160,7 +160,7 @@ public class DV_InputManager : MonoBehaviour
         TileState tileState = m_player.GetTileState(newDirection);
         if (tileState == TileState.BorderRight)
         {
-            m_world.UseCache(Random.Range(0, m_world.GetCacheSize()));
+			m_world.NextCache();
             // Load next grid
             m_player.ResetPosition(tileState);
         }
