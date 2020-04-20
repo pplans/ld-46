@@ -49,15 +49,16 @@ public class DiscoController : MonoBehaviour
 
     public void AddDisco(int amount)
     {
-        currDisco = Mathf.Clamp(currDisco + amount, 0, maxDisco);
-        discoBall.SetDisco(currDisco);
         if (amount < 0)
+        {
             discoBall.FailAnimation();
+            if (currDisco == 0)
+                OnGameOver.Invoke();
+        }
+        currDisco = Mathf.Clamp(currDisco + amount, 0, maxDisco);
 
+        discoBall.SetDisco(currDisco);
         musicEffect.ratio = GetDiscoRatio();
-
-        if (currDisco == 0)
-            OnGameOver.Invoke();
     }
 
     public void AddBoogie(int amount)
