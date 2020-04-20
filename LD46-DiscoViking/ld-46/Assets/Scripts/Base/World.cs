@@ -402,7 +402,7 @@ public class World : MonoBehaviour
 		{
 			for (int j = 0; j < gridSize.y; ++j)
 			{
-				if (m_2dGrid[i, j].Object != null)
+				if (m_2dGrid[i, j] != null)
 				{
 					if (m_2dGrid[i, j]!=null)
 						m_2dGrid[i, j].Visited = true;
