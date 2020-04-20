@@ -108,6 +108,9 @@ public class DV_InputManager : MonoBehaviour
                     {
                         gameManager.discoController.OnFailBeat();
                     }
+                } else
+                {
+                    gameManager.discoController.OnFailBeat();
                 }
             }
             else
