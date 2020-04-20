@@ -116,6 +116,7 @@ public class DV_GameManager : MonoBehaviour
     {
         successfulDanceOnThisPlate = 0;
         bPaneCleared = successfulDanceOnThisPlate >= world.GetEnnemyCount();
+        IncrementProgress();
     }
 
     public void SucceedDanceSequence()

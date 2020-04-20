@@ -84,10 +84,6 @@ public class DV_InputManager : MonoBehaviour
                         case TileState.Ennemy:
                             enemy = true;
                             break;
-                        case TileState.BorderRight:
-                            if (gameManager.bPaneCleared)
-                                gameManager.IncrementProgress();
-                            break;
                     }
                     if (!obstruction)
                     {
