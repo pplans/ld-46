@@ -40,6 +40,8 @@ public class DV_GameManager : MonoBehaviour
     public string currentGamePhase;
     private int scoreValue;
 
+    public MusicEffect musicEffect;
+
     public enum ProgressEffect
     {
         Nothing,
@@ -62,6 +64,7 @@ public class DV_GameManager : MonoBehaviour
         bTutoCleared = false;
         bFirstInputCleared = false;
         firstInputCount = 0;
+        musicEffect.tutoMode = true;
     }
 
     public void StartGame()
@@ -197,6 +200,7 @@ public class DV_GameManager : MonoBehaviour
             {
                 bTutoCleared = true;
                 progressIndex = 0;
+                musicEffect.tutoMode = false;
                 Debug.Log("Tuto Cleared");
             }
         } else
