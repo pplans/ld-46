@@ -94,6 +94,12 @@ public class DV_GameManager : MonoBehaviour
     {
         bBeatValidated = false;
         bBeatInput = false;
+
+        if (inputManager.danceStepIndex == 4)
+        {
+            inputManager.danceStepIndex = 0;
+            SucceedDanceSequence();
+        }
     }
 
     public void BeginDanceSequence(ITileInfo tileInfo)

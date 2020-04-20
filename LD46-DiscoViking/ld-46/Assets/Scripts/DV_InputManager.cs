@@ -120,13 +120,7 @@ public class DV_InputManager : MonoBehaviour
                 if (successfulInput)
                 {
                     gameManager.danceSequence.ValidateStep(danceStepIndex);
-                    if (danceStepIndex < 3)
-                        danceStepIndex++;
-                    else
-                    {
-                        danceStepIndex = 0;
-                        gameManager.SucceedDanceSequence();
-                    }
+                    danceStepIndex++;
                 }
                 else
                 {
