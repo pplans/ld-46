@@ -57,7 +57,8 @@ public class DiscoController : MonoBehaviour
         if (postprocess.profile.TryGet<ColorAdjustments>(out colorAdjustments))
         {
             float beat = Mathf.Clamp(musicHandler.GetBeatOffset() * 2.0f, 0.0f, 1.0f);
-            beat = Mathf.Pow(beat, 1.0f / 16.0f);
+            //beat = Mathf.Pow(beat, 1.0f / 2.0f);
+            beat *= beat;
             colorAdjustments.saturation.value = Mathf.Lerp(currSaturationTarget, 0.0f, beat);
             //colorAdjustments.contrast.value -= 0.5f;
             //colorAdjustments.contrast.value = Mathf.Max(colorAdjustments.contrast.value, 0);
@@ -68,7 +69,6 @@ public class DiscoController : MonoBehaviour
     {
         if (amount < 0)
         {
-            discoBall.FailAnimation();
             if (currDisco == 0)
                 OnGameOver.Invoke();
         }
@@ -110,10 +110,28 @@ public class DiscoController : MonoBehaviour
     public void OnBeat()
     {
         ChangeColor();
+    }
+
+    public void OnBeatReset()
+    {
         currSaturationTarget = 0.0f;
+        AdjustSaturation();
     }
 
     public void OnBeatSucceed()
+    {
+        currSaturationTarget = 0.0f;
+        AdjustSaturation();
+    }
+
+    public void OnFailBeat()
+    {
+        discoBall.FailAnimation();
+        currSaturationTarget = -100.0f;
+        AdjustSaturation();
+    }
+
+    private void AdjustSaturation()
     {
         ColorAdjustments colorAdjustments;
         if (postprocess.profile.TryGet<ColorAdjustments>(out colorAdjustments))
@@ -121,11 +139,6 @@ public class DiscoController : MonoBehaviour
             colorAdjustments.saturation.value = 0.0f;
             colorAdjustments.contrast.value = 0.0f;
         }
-    }
-
-    public void OnFailBeat()
-    {
-        currSaturationTarget = -100.0f;
     }
 
     private float GetDiscoRatio()
