@@ -29,7 +29,7 @@ public class World : MonoBehaviour
 
 	public class WorldCacheItem
 	{
-		public string Desc;
+		public List<string> Desc;
 		public List<string> RawData;
 	}
 
@@ -325,6 +325,7 @@ public class World : MonoBehaviour
 		Vector2 actualGridSize = GetNumberOfTiles();
 		//if (GridSize != actualGridSize) throw new System.Exception("World Cache grid sizes inconsistent.");
 		Reinit();
+		cache.Desc = new List<string>();
 		bool bAggregateDesc = false;
 		for (int j = 0; j < GridSize.y; ++j)
 		{
@@ -354,14 +355,16 @@ public class World : MonoBehaviour
 			else
 			{
 				if (line.Contains("--")) continue;
-				if (line.Contains("##") && !bAggregateDesc)
+				if (line.Contains("##"))
 				{
 					bAggregateDesc = !bAggregateDesc;
+					continue;
 				}
 				if(bAggregateDesc)
-					cache.Desc += line;
+					cache.Desc.Add(line);
 			}
 		}
+		cache.Desc.Reverse();
 		int k = 0;
 		foreach(WorldTile tile in m_2dGridEndColumn)
 		{

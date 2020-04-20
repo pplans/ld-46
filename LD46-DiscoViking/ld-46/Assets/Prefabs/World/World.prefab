@@ -62,7 +62,7 @@ MonoBehaviour:
   - {fileID: 7707651868335911370, guid: 2750c7d9203640143ab364dfe0182376, type: 3}
   EnnemyList: []
   textTutosAssets:
-  - {fileID: 4900000, guid: 3924c49eaf3e9b24d9f3ced4fc08e54e, type: 3}
+  - {fileID: 4900000, guid: 4ff729e3d7695224a98895100419f9c3, type: 3}
   textAssets:
   - {fileID: 4900000, guid: a1ed52cb31acdea40a8f9efa51b15be1, type: 3}
   - {fileID: 4900000, guid: f6a9ecf120679304ba0e8d417f00ea4c, type: 3}
