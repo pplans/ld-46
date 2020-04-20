@@ -13,6 +13,8 @@ public class DiscoController : MonoBehaviour
     private int currDisco;
     private int currBoogie;
     //private int currValhalla;
+    public Color discoColor;
+    public float discoColorIntensity = 10.0f;
 
     public MusicEffect musicEffect;
     public DiscoBall discoBall;
@@ -23,7 +25,6 @@ public class DiscoController : MonoBehaviour
 
     public BoogieBar boogieBarLeft;
     public BoogieBar boogieBarRight;
-    public float boogieLightsIntensityMultiplier = 1.0f;
 
     public UnityEvent OnGameOver;
 
@@ -38,10 +39,6 @@ public class DiscoController : MonoBehaviour
         //boogieBarLeftOld.SetMaxBoogie(maxBoogie);
         //boogieBarRightOld.SetBoogie(currBoogie);
         //boogieBarRightOld.SetMaxBoogie(maxBoogie);
-
-        boogieBarLeft.SetIntensityMultiplier(boogieLightsIntensityMultiplier);
-        boogieBarRight.SetIntensityMultiplier(boogieLightsIntensityMultiplier);
-
         //currValhalla = 25;
         //valhallaBar.SetMaxValhalla(maxValhalla);
         //valhallaBar.SetValhalla(currValhalla);
@@ -72,14 +69,22 @@ public class DiscoController : MonoBehaviour
 
     public void ChangeColor()
     {
-        Color color = beatsCircle.ChangeColor();
-        discoBall.SetDissolveColor(color);
+        Vector3 color = new Vector3(Random.value, Random.value, Random.value);
+
+        float minValue = 0.1f;
+        Vector3 minValue3 = new Vector3(minValue, minValue, minValue);
+        color = color.normalized + minValue3;
+        
+        discoColor = new Color(color.x, color.y, color.z, 1.0f);
+
+        Color boostedColor = discoColor * discoColorIntensity;
+
+        beatsCircle.SetColor(boostedColor * 0.25f);
+        discoBall.SetDissolveColor(boostedColor);
         discoBall.SetDissolveRatio(1.0f-GetDiscoRatio());
 
-        boogieBarLeft.SetIntensityMultiplier(boogieLightsIntensityMultiplier);
-        boogieBarRight.SetIntensityMultiplier(boogieLightsIntensityMultiplier);
-        boogieBarLeft.SetColor(color);
-        boogieBarRight.SetColor(color);
+        boogieBarLeft.SetColor(boostedColor);
+        boogieBarRight.SetColor(boostedColor);
     }
 
     private float GetDiscoRatio()
