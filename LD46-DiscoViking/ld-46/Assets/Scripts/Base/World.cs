@@ -190,9 +190,17 @@ public class World : MonoBehaviour
 		}
 	}
 
-	Color PickColor()
+	private float RandomFromCoords(Vector2 p)
 	{
-		return m_tileColorPalette!=null ? m_tileColorPalette[Random.Range(0, m_tileColorPalette.Count)] : new Color(1f, 0f, 0f);
+		float d = p.x*p.x+p.y*p.y;
+		d = 0.5f*(1f+ Mathf.Sin(d * 13.9384934f));
+		return Mathf.Clamp01(d);
+	}
+
+	private Color PickColor(Vector2 p)
+	{
+		float random = RandomFromCoords(p);
+		return m_tileColorPalette!=null ? m_tileColorPalette[Mathf.FloorToInt(random * m_tileColorPalette.Count)] : new Color(1f, 0f, 0f);
 	}
 
 	public void Init(Vector2 _gridStartPos, Vector2 _gridEndPos, Vector2 _gridSize)
@@ -218,7 +226,7 @@ public class World : MonoBehaviour
 				m_2dGrid[i, j].Tile.transform.position = new Vector3(pos.x, 0, pos.y);
 				m_2dGrid[i, j].Tile.transform.parent = WorldObject.transform;
 				Material mat = m_2dGrid[i, j].Tile.GetComponent<MeshRenderer>().material;
-				mat.SetColor("Color_D10C4CBD", PickColor());
+				mat.SetColor("Color_D10C4CBD", PickColor(it));
 				mat.SetFloat("Vector1_237226DD", 0f);
 				mat.SetTexture("Texture2D_67BA07E5", m_tileMainTex);
 			}
@@ -232,7 +240,7 @@ public class World : MonoBehaviour
 			m_2dGridEndColumn[j].Tile.transform.position = new Vector3(pos.x, 0, pos.y);
 			m_2dGridEndColumn[j].Tile.transform.parent = WorldObject.transform;
 			Material mat = m_2dGridEndColumn[j].Tile.GetComponent<MeshRenderer>().material;
-			mat.SetColor("Color_D10C4CBD", PickColor());
+			mat.SetColor("Color_D10C4CBD", PickColor(it));
 			mat.SetFloat("Vector1_237226DD", 0f);
 			mat.SetTexture("Texture2D_67BA07E5", m_tileNextLevelTex);
 		}
@@ -285,16 +293,18 @@ public class World : MonoBehaviour
 				}
 				m_2dGrid[i, j].Reset();
 				Material mat = m_2dGrid[i, j].Tile.GetComponent<MeshRenderer>().material;
-				mat.SetColor("Color_D10C4CBD", PickColor());
+				mat.SetColor("Color_D10C4CBD", PickColor(new Vector2(i, j)));
 				mat.SetFloat("Vector1_237226DD", 0f);
 			}
 		}
+		int k = 0;
 		foreach(WorldTile tile in m_2dGridEndColumn)
 		{
 			tile.Reset();
 			Material mat = tile.Tile.GetComponent<MeshRenderer>().material;
-			mat.SetColor("Color_D10C4CBD", PickColor());
+			mat.SetColor("Color_D10C4CBD", PickColor(new Vector2(GridSize.x, k)));
 			mat.SetFloat("Vector1_237226DD", 0f);
+			k++;
 		}
 	}
 
@@ -437,7 +447,7 @@ public class World : MonoBehaviour
 
 	private float sampleBeat(MusicHandler mh)
 	{
-		return mh?1f-Mathf.Abs(Mathf.Sin(mh.GetBeatOffset() * Mathf.PI)):1f;
+		return mh?1f-Mathf.Abs(Mathf.Sin(Mathf.Clamp(2f*mh.GetBeatOffset(), -0.5f, 0.5f) * Mathf.PI)):1f;
 	}
 
 	public TileState MoveObject(Vector2 _pos, Vector2 _d)
