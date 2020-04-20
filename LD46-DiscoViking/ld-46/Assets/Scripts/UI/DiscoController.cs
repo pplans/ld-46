@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.HighDefinition;
 
 public class DiscoController : MonoBehaviour
 {
@@ -28,6 +30,8 @@ public class DiscoController : MonoBehaviour
 
     public UnityEvent OnGameOver;
 
+    public Volume postprocess;
+
     void Start()
     {
         currDisco = maxDisco;
@@ -42,6 +46,19 @@ public class DiscoController : MonoBehaviour
         //currValhalla = 25;
         //valhallaBar.SetMaxValhalla(maxValhalla);
         //valhallaBar.SetValhalla(currValhalla);
+
+
+        ColorAdjustments ca;
+        if (postprocess.profile.TryGet<ColorAdjustments>(out ca))
+        {
+            print(ca.saturation);
+        }
+
+        for (int i = 0; i < postprocess.profile.components.Count; i++)
+        {
+            print(postprocess.profile.components[i].name);
+            print(postprocess.profile.components[i]);
+        }
     }
 
     public void AddDisco(int amount)
@@ -80,11 +97,34 @@ public class DiscoController : MonoBehaviour
         Color boostedColor = discoColor * discoColorIntensity;
 
         beatsCircle.SetColor(boostedColor * 0.25f);
-        discoBall.SetDissolveColor(boostedColor);
+        discoBall.SetDissolveColor(boostedColor * 0.10f);
         discoBall.SetDissolveRatio(1.0f-GetDiscoRatio());
 
         boogieBarLeft.SetColor(boostedColor);
         boogieBarRight.SetColor(boostedColor);
+    }
+
+    public void OnBeat()
+    {
+        ChangeColor();
+    }
+
+    public void OnBeatSucceed()
+    {
+        ColorAdjustments colorAdjustments;
+        if (postprocess.profile.TryGet<ColorAdjustments>(out colorAdjustments))
+        {
+            colorAdjustments.saturation.value = 0.0f;
+        }
+    }
+
+    public void OnFailBeat()
+    {
+        ColorAdjustments colorAdjustments;
+        if (postprocess.profile.TryGet<ColorAdjustments>(out colorAdjustments))
+        {
+            colorAdjustments.saturation.value = -100.0f;
+        }
     }
 
     private float GetDiscoRatio()
