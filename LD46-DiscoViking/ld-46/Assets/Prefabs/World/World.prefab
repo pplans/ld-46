@@ -56,6 +56,10 @@ MonoBehaviour:
   - {fileID: 2219426746508331839, guid: 3985d678c80fcaf4d87fdaf62bc97e1f, type: 3}
   - {fileID: 1667243232026919557, guid: 0b8312d007992ba4d946a758f09e4a58, type: 3}
   - {fileID: 4334479449125196222, guid: 758a15b7a4295c040b7001dc699c81be, type: 3}
+  - {fileID: 3719810850373682474, guid: bb77522c8e20c9d42b16865aed7d8714, type: 3}
+  - {fileID: 7809352597070367835, guid: ca1f769894cda88469268ee1103fe259, type: 3}
+  - {fileID: 5594182867281230921, guid: 1d7ae4dd77b147047921895fcad6ccb1, type: 3}
+  - {fileID: 7707651868335911370, guid: 2750c7d9203640143ab364dfe0182376, type: 3}
   EnnemyList: []
   textTutosAssets:
   - {fileID: 4900000, guid: 3924c49eaf3e9b24d9f3ced4fc08e54e, type: 3}

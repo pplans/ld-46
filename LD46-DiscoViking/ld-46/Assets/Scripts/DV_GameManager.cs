@@ -24,6 +24,7 @@ public class DV_GameManager : MonoBehaviour
     public ProgressEffect[] progressEffectArray;
 
     private int successfulDanceOnThisPlate;
+    private bool bTutoCleared;
 
     public bool bPaneCleared;
 
@@ -49,6 +50,7 @@ public class DV_GameManager : MonoBehaviour
         difficultyLevel = 0;
         successfulDanceOnThisPlate = 0;
         bPaneCleared = false;
+        bTutoCleared = false;
     }
 
     public void StartGame()
@@ -149,28 +151,44 @@ public class DV_GameManager : MonoBehaviour
     public void IncrementProgress()
     {
         progressIndex++;
-        if (progressIndex > progressThreshold-1)
+        if (!bTutoCleared)
         {
-            progressIndex = 0;
-            if (difficultyLevel< progressEffectArray.Length - 1)
+            if (progressIndex == 2)
             {
-                switch (progressEffectArray[difficultyLevel])
+                bTutoCleared = true;
+                progressIndex = 0;
+                Debug.Log("Tuto Cleared");
+            }
+        } else
+        {
+            if (progressIndex > progressThreshold - 1)
+            {
+                progressIndex = 0;
+                if (difficultyLevel < progressEffectArray.Length - 1)
                 {
-                    case ProgressEffect.Nothing:
-                        break;
-                    case ProgressEffect.BadBeatCost:
-                        IncreaseBadBeatCost();
-                        break;
-                    case ProgressEffect.ValidationWindow:
-                        ReduceValidationWindow();
-                        break;
+                    switch (progressEffectArray[difficultyLevel])
+                    {
+                        case ProgressEffect.Nothing:
+                            break;
+                        case ProgressEffect.BadBeatCost:
+                            IncreaseBadBeatCost();
+                            break;
+                        case ProgressEffect.ValidationWindow:
+                            ReduceValidationWindow();
+                            break;
+                    }
+                    difficultyLevel++;
+                    Debug.Log("difficulty increased");
                 }
-                difficultyLevel++;
-            } else
-            {
-                Debug.Log("max difficulty reached");
-            }            
+                else
+                {
+                    Debug.Log("max difficulty reached");
+                }
+            }
         }
+        
+
+        
     }
 
     private void IncreaseBadBeatCost()
@@ -181,7 +199,7 @@ public class DV_GameManager : MonoBehaviour
 
     private void ReduceValidationWindow()
     {
-        musicHandler.inputValidity -= 0.05f;
+        musicHandler.inputValidity -= 0.035f;
         Debug.Log("reducing valid window");
     }
 }
