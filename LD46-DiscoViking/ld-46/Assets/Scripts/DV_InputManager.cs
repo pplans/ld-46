@@ -104,6 +104,10 @@ public class DV_InputManager : MonoBehaviour
                             }
                         }
                     }
+                    else
+                    {
+                        gameManager.discoController.OnFailBeat();
+                    }
                 }
             }
             else
@@ -136,6 +140,7 @@ public class DV_InputManager : MonoBehaviour
                 {
                     gameManager.danceSequence.ResetDanceSequence();
                     danceStepIndex = 0;
+                    gameManager.discoController.OnFailBeat();
                 }
             }
 
