@@ -73,11 +73,9 @@ public class World : MonoBehaviour
 		private GameObject tileObject;
 		private WorldObject worldObject;
 		private bool bVisited;
-		private bool bActive;
 
 		public GameObject Tile { get => tileObject; set { tileObject = value; } }
 		public bool Visited { get => bVisited; set { bVisited = value; } }
-		public bool Active { get => bActive; set { bActive = value; } }
 		public WorldObject Object { get => worldObject;
 			set
 			{
@@ -101,11 +99,6 @@ public class World : MonoBehaviour
 		public void Update(float emissiveScale)
 		{
 			if (Visited)
-			{
-				Material mat = Tile.GetComponent<MeshRenderer>().material;
-				mat.SetFloat("Vector1_237226DD", 4f * emissiveScale);
-			}
-			if (Active)
 			{
 				Material mat = Tile.GetComponent<MeshRenderer>().material;
 				mat.SetFloat("Vector1_237226DD", 4f * emissiveScale);
@@ -149,6 +142,7 @@ public class World : MonoBehaviour
 	private Vector2 m_worldAnchor;
 
 	private WorldTile[,] m_2dGrid;
+	private WorldTile[] m_2dGridEndColumn;
 
 	private static World s_Instance = null;
 
@@ -172,6 +166,10 @@ public class World : MonoBehaviour
 					m_2dGrid[i, j].Update(sampleBeat(musicHandler));
 			}
 		}
+		foreach (WorldTile wo in m_2dGridEndColumn)
+		{
+			wo.Update(sampleBeat(musicHandler));
+		}
 	}
 
 	public int GetEnnemyCount() { return CurrentCacheEnnemyCount; }
@@ -179,6 +177,14 @@ public class World : MonoBehaviour
 	public int GetCacheSize()
 	{
 		return cache.cache.Count;
+	}
+
+	public void ActivateEndColumn()
+	{
+		foreach (WorldTile wo in m_2dGridEndColumn)
+		{
+			wo.Visited = true;
+		}
 	}
 
 	public void Init(Vector2 _gridStartPos, Vector2 _gridEndPos, Vector2 _gridSize)
@@ -192,7 +198,8 @@ public class World : MonoBehaviour
 		Vector2 gridSize = GetNumberOfTiles();
 		Vector2Int iGridSize = new Vector2Int(Mathf.RoundToInt(gridSize.x), Mathf.RoundToInt(gridSize.y));
 		m_2dGrid = new WorldTile[iGridSize.x, iGridSize.y];
-		for(int i = 0; i < iGridSize.x; ++i)
+		m_2dGridEndColumn = new WorldTile[iGridSize.y];
+		for (int i = 0; i < iGridSize.x; ++i)
 		{
 			for(int j = 0; j < iGridSize.y; ++j)
 			{
@@ -206,8 +213,22 @@ public class World : MonoBehaviour
 				Material mat = m_2dGrid[i, j].Tile.GetComponent<MeshRenderer>().material;
 				mat.SetColor("Color_D10C4CBD", rdrCol);
 				mat.SetFloat("Vector1_237226DD", 0f);
-				mat.SetTexture("", i == (iGridSize.x - 1) ? m_tileNextLevelTex : m_tileMainTex);
+				mat.SetTexture("Texture2D_67BA07E5", m_tileMainTex);
 			}
+		}
+		for (int j = 0; j < iGridSize.y; ++j)
+		{
+			m_2dGridEndColumn[j] = new WorldTile();
+			Color rdrCol = new Color(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), Random.Range(0.5f, 1f));
+			m_2dGridEndColumn[j].Tile = Instantiate(tilePrefab);
+			Vector2 it = new Vector2(iGridSize.x, j);
+			Vector2 pos = TileStartPos + it * TileSize;
+			m_2dGridEndColumn[j].Tile.transform.position = new Vector3(pos.x, 0, pos.y);
+			m_2dGridEndColumn[j].Tile.transform.parent = WorldObject.transform;
+			Material mat = m_2dGridEndColumn[j].Tile.GetComponent<MeshRenderer>().material;
+			mat.SetColor("Color_D10C4CBD", rdrCol);
+			mat.SetFloat("Vector1_237226DD", 0f);
+			mat.SetTexture("Texture2D_67BA07E5", m_tileNextLevelTex);
 		}
 		m_bIsWorldInit = true;
 
