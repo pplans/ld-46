@@ -29,6 +29,7 @@ public class World : MonoBehaviour
 
 	public class WorldCache
 	{
+		public List<List<string>> TutoCache = new List<List<string>>();
 		public List<List<string>> cache = new List<List<string>>();
 	}
 	#region TileInfo
@@ -126,6 +127,8 @@ public class World : MonoBehaviour
 	[SerializeField]
 	private List<Ennemy> EnnemyList = null;
 	[SerializeField]
+	private List<TextAsset> textTutosAssets = null;
+	[SerializeField]
 	private List<TextAsset> textAssets = null;
 	[SerializeField]
 	private MusicHandler musicHandler = null;
@@ -137,6 +140,9 @@ public class World : MonoBehaviour
 
 	[SerializeField]
 	private List<Color> m_tileColorPalette = null;
+
+	private int m_currentCacheIndex = 0;
+	private bool m_bTutosPassed = false;
 
 	private int CurrentCacheEnnemyCount = -1;
 
@@ -154,6 +160,9 @@ public class World : MonoBehaviour
 	public World Instance { get { if (s_Instance) s_Instance = new World(); return s_Instance; } }
 
 	private World() => m_bIsWorldInit = false;
+
+	public bool IsInTuto() { return m_bIsWorldInit; }
+	public int GetNumberTutorials() { return cache.TutoCache.Count; }
 
 	public void Update()
 	{
@@ -248,12 +257,16 @@ public class World : MonoBehaviour
 
 		foreach(TextAsset textFile in textAssets)
 		{
-			ReadFile(textFile);
+			ReadFile(cache.cache, textFile);
 		}
-		UseCache(Random.Range(0, cache.cache.Count));
+		foreach(TextAsset textTutoFile in textTutosAssets)
+		{
+			ReadFile(cache.TutoCache, textTutoFile);
+		}
+		UseCache(cache.TutoCache[0]);
 	}
 
-	public void ReadFile(TextAsset textAsset)
+	public void ReadFile(List<List<string>> _cache, TextAsset textAsset)
 	{
 		string text = textAsset.text;
 		string line;
@@ -264,14 +277,31 @@ public class World : MonoBehaviour
 			StringRows.Add(row);
 		}
 		StringRows.Reverse();
-		cache.cache.Add(StringRows);
+		_cache.Add(StringRows);
 	}
 
-	public void UseCache(int cacheIndex)
+	public void NextCache()
 	{
-		if (cacheIndex > cache.cache.Count) throw new System.Exception("World Cache unknown.");
-		List<string> buffers = cache.cache[cacheIndex];
-		Vector2 GridSize = new Vector2(buffers[0].Length, buffers.Count);
+		if(!m_bTutosPassed && m_currentCacheIndex > textTutosAssets.Count-1)
+		{
+			m_bTutosPassed = true;
+		}
+		
+		if(m_bTutosPassed)
+		{
+			m_currentCacheIndex = Random.Range(0, cache.cache.Count);
+			UseCache(cache.cache[m_currentCacheIndex]);
+		}
+		else
+		{
+			m_currentCacheIndex++;
+			UseCache(cache.TutoCache[m_currentCacheIndex]);
+		}
+	}
+
+	private void UseCache(List<string> cache)
+	{
+		Vector2 GridSize = new Vector2(cache[0].Length, cache.Count);
 		Vector2 actualGridSize = GetNumberOfTiles();
 		if (GridSize != actualGridSize) throw new System.Exception("World Cache grid sizes inconsistent.");
 		Reinit();
@@ -279,7 +309,7 @@ public class World : MonoBehaviour
 		{
 			for (int j = 0; j < GridSize.y; ++j)
 			{
-				char c = buffers[j][i];
+				char c = cache[j][i];
 				// here we pick the things to spawn
 				if (c == 'e')
 				{
@@ -447,7 +477,10 @@ public class World : MonoBehaviour
 
 	private float sampleBeat(MusicHandler mh)
 	{
-		return mh?1f-Mathf.Abs(Mathf.Sin(Mathf.Clamp(2f*mh.GetBeatOffset(), -0.5f, 0.5f) * Mathf.PI)):1f;
+		float x = mh.GetBeatOffset();
+		float leftPart = 1f - Mathf.Sin(Mathf.Clamp(4f*x, -0.25f, 0.25f) * Mathf.PI);
+		float rightPart = Mathf.SmoothStep(1f, 0f, 2f * x);
+		return Mathf.Clamp01(Mathf.Min(leftPart, rightPart));
 	}
 
 	public TileState MoveObject(Vector2 _pos, Vector2 _d)

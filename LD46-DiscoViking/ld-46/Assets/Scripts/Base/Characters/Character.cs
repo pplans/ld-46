@@ -87,7 +87,7 @@ public abstract class Character : WorldObject
 			if (m_World.gameManager.bPaneCleared)
             {
 				Debug.Log("Loading Next Pane");
-				m_World.UseCache(Random.Range(0, m_World.GetCacheSize()));
+				m_World.NextCache();
 				m_Position.x = 0;
 				m_World.SetObject(this, m_Position);
 				m_World.gameManager.SwitchPane();
