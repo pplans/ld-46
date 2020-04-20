@@ -325,6 +325,7 @@ public class World : MonoBehaviour
 		Vector2 actualGridSize = GetNumberOfTiles();
 		//if (GridSize != actualGridSize) throw new System.Exception("World Cache grid sizes inconsistent.");
 		Reinit();
+		bool bAggregateDesc = false;
 		for (int j = 0; j < GridSize.y; ++j)
 		{
 			string line = cache.RawData[j];
@@ -352,9 +353,13 @@ public class World : MonoBehaviour
 			}
 			else
 			{
-				if (line == "--\r") continue;
-				// parse other data
-				cache.Desc = line;
+				if (line.Contains("--")) continue;
+				if (line.Contains("##") && !bAggregateDesc)
+				{
+					bAggregateDesc = !bAggregateDesc;
+				}
+				if(bAggregateDesc)
+					cache.Desc += line;
 			}
 		}
 		int k = 0;
