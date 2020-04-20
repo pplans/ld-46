@@ -302,7 +302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   music: {fileID: 3224057529007657259}
   bpm: 100
-  bpmOffset: 0
+  bpmOffset: 2.4
   inputValidity: 0.28
   started: 0
   OnResetBeat:

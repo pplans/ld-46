@@ -16,12 +16,12 @@ public class MusicHandler : MonoBehaviour
 	public UnityEvent OnBeat;
 	public UnityEvent OnBeatInvalid;
 
-	private float previousBeat = 1f;
+	private float previousBeat = 0f;
 	private float focusTime = 0f;
 
 	private void Update()
 	{
-		if (!started || Time.unscaledTime < bpmOffset || focusTime > 0f)
+		if (!started || focusTime > 0f)
 			return;
 
 		// check OnBeat
@@ -34,6 +34,8 @@ public class MusicHandler : MonoBehaviour
 			else
 				OnResetBeat.Invoke();
 		}
+		if (Time.unscaledTime < bpmOffset)
+			return;
 		if (previousBeat < inputValidity && newBeat > inputValidity)
 			OnBeatInvalid.Invoke();
 
