@@ -2001,17 +2001,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DanceSequenceSteps: 00000000000000000000000000000000
   spriteUp:
-  - {fileID: 21300000, guid: 00aa80c533b15034584a898894647231, type: 3}
-  - {fileID: 21300000, guid: 3f31dfc8d4762a04089c1b63e3e191fa, type: 3}
+  - {fileID: 21300000, guid: 63c87aa64216d134991d5154f3191977, type: 3}
+  - {fileID: 21300000, guid: 17aa53053f60d574cb850a717b13d6b2, type: 3}
   spriteDown:
-  - {fileID: 21300000, guid: 822ed8545fb38484d81e83b0b15d7e18, type: 3}
-  - {fileID: 21300000, guid: 61c890f58c49e4141a2da4766bcc092e, type: 3}
+  - {fileID: 21300000, guid: ef4b24037351cf047aa7352a179cf055, type: 3}
+  - {fileID: 21300000, guid: 81318681a5bade345b25edc65450bcda, type: 3}
   spriteLeft:
-  - {fileID: 21300000, guid: e9c189ed9760b5b4d805ed0208e70eb3, type: 3}
-  - {fileID: 21300000, guid: 95b56941784e77845ad71864bac1cdd2, type: 3}
+  - {fileID: 21300000, guid: 95d4f1538597a7948ad247ee7c6c9798, type: 3}
+  - {fileID: 21300000, guid: 92ade85039912f3439471768744b8a06, type: 3}
   spriteRight:
-  - {fileID: 21300000, guid: fd775da0269bb564998ef8713299dc19, type: 3}
-  - {fileID: 21300000, guid: b1b27ca1085fddc468caafbc515daccd, type: 3}
+  - {fileID: 21300000, guid: a86c2925c75795746950ec8b555ad462, type: 3}
+  - {fileID: 21300000, guid: 00901ff11d7d72545b17f732947aa293, type: 3}
   stepDisplays:
   - {fileID: 1389386447}
   - {fileID: 1543297989}

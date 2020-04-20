@@ -79,9 +79,9 @@ public class DanceSequence : MonoBehaviour
         danceStepIndex = Mathf.Min(3, danceStepIndex);
         SpriteRenderer renderer = stepDisplays[danceStepIndex];
 
-        print("Validate step " + renderer.material.GetFloat("_Intensity"));
-        renderer.material.SetFloat("_Intensity", 1.0f);
-        //ChangeSpriteFromStepValue(stepDisplays[danceStepIndex], DanceSequenceSteps[danceStepIndex], 1);
+        //print("Validate step " + renderer.material.GetFloat("_Intensity"));
+        //renderer.material.SetFloat("_Intensity", 1.0f);
+        ChangeSpriteFromStepValue(stepDisplays[danceStepIndex], DanceSequenceSteps[danceStepIndex], 1);
     }
 
     public void ResetDanceSequence()
@@ -90,7 +90,7 @@ public class DanceSequence : MonoBehaviour
         foreach (SpriteRenderer rend in stepDisplays)
         {
             ChangeSpriteFromStepValue(rend, DanceSequenceSteps[index], 0);
-            rend.material.SetFloat("_Intensity", 0.1f);
+            //rend.material.SetFloat("_Intensity", 0.1f);
             index++;
         }
     }
@@ -149,8 +149,8 @@ public class DanceSequence : MonoBehaviour
             DanceSequenceSteps[index] = GenerateRandomStep();
             ChangeSpriteFromStepValue(stepDisplays[index], DanceSequenceSteps[index],0);
             stepDisplays[index].enabled = true;
-            stepDisplays[index].material.SetFloat("_Intensity", 0.1f);
-            stepDisplays[index].material.SetColor("_Color", discoController.beatsCircle.GetColor());
+            //stepDisplays[index].material.SetFloat("_Intensity", 0.1f);
+            //stepDisplays[index].material.SetColor("_Color", discoController.beatsCircle.GetColor());
             index++;
         }
 
