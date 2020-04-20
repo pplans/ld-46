@@ -16,14 +16,6 @@ public class BoogieBar : MonoBehaviour
         
     }
 
-    public void SetIntensityMultiplier(float multiplier)
-    {
-        for (int i = 0; i < lights.Length; ++i)
-        {
-            lights[i].intensityMultiplier = multiplier;
-        }
-    }
-
     public void SetBoogie(int boogie)
     {
         int n = Mathf.Min(boogie, lights.Length);
