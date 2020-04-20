@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DV_GameManager : MonoBehaviour
 {
@@ -23,7 +24,10 @@ public class DV_GameManager : MonoBehaviour
     public int failBeatBoogieCost;
     public ProgressEffect[] progressEffectArray;
 
+	public Text tutoText;
+
     private int successfulDanceOnThisPlate;
+    private bool bTutoCleared;
 
     public bool bPaneCleared;
 
@@ -49,6 +53,7 @@ public class DV_GameManager : MonoBehaviour
         difficultyLevel = 0;
         successfulDanceOnThisPlate = 0;
         bPaneCleared = false;
+        bTutoCleared = false;
     }
 
     public void StartGame()
@@ -58,8 +63,11 @@ public class DV_GameManager : MonoBehaviour
 
         world.Init(new Vector2 (startGridPos.position.x,startGridPos.position.z), new Vector2(endGridPos.position.x, endGridPos.position.z), new Vector2(1, 1));
         player.Init(new Vector2(0, 0), world);
-
-    }
+		tutoText.text = "";
+		List<string> descs = world.GetCurrentWorldCacheItem().Desc;
+		foreach (string s in descs)
+			tutoText.text += s + "\n";
+	}
 
     public void ValidateBeat(bool succeed)
     {
@@ -119,7 +127,11 @@ public class DV_GameManager : MonoBehaviour
         successfulDanceOnThisPlate = 0;
         bPaneCleared = successfulDanceOnThisPlate >= world.GetEnnemyCount();
         IncrementProgress();
-    }
+		tutoText.text = "";
+		List<string> descs = world.GetCurrentWorldCacheItem().Desc;
+		foreach (string s in descs)
+			tutoText.text += s + "\n";
+	}
 
     public void SucceedDanceSequence()
     {
@@ -149,28 +161,44 @@ public class DV_GameManager : MonoBehaviour
     public void IncrementProgress()
     {
         progressIndex++;
-        if (progressIndex > progressThreshold-1)
+        if (!bTutoCleared)
         {
-            progressIndex = 0;
-            if (difficultyLevel< progressEffectArray.Length - 1)
+            if (progressIndex == 2)
             {
-                switch (progressEffectArray[difficultyLevel])
+                bTutoCleared = true;
+                progressIndex = 0;
+                Debug.Log("Tuto Cleared");
+            }
+        } else
+        {
+            if (progressIndex > progressThreshold - 1)
+            {
+                progressIndex = 0;
+                if (difficultyLevel < progressEffectArray.Length - 1)
                 {
-                    case ProgressEffect.Nothing:
-                        break;
-                    case ProgressEffect.BadBeatCost:
-                        IncreaseBadBeatCost();
-                        break;
-                    case ProgressEffect.ValidationWindow:
-                        ReduceValidationWindow();
-                        break;
+                    switch (progressEffectArray[difficultyLevel])
+                    {
+                        case ProgressEffect.Nothing:
+                            break;
+                        case ProgressEffect.BadBeatCost:
+                            IncreaseBadBeatCost();
+                            break;
+                        case ProgressEffect.ValidationWindow:
+                            ReduceValidationWindow();
+                            break;
+                    }
+                    difficultyLevel++;
+                    Debug.Log("difficulty increased");
                 }
-                difficultyLevel++;
-            } else
-            {
-                Debug.Log("max difficulty reached");
-            }            
+                else
+                {
+                    Debug.Log("max difficulty reached");
+                }
+            }
         }
+        
+
+        
     }
 
     private void IncreaseBadBeatCost()
@@ -181,7 +209,7 @@ public class DV_GameManager : MonoBehaviour
 
     private void ReduceValidationWindow()
     {
-        musicHandler.inputValidity -= 0.05f;
+        musicHandler.inputValidity -= 0.035f;
         Debug.Log("reducing valid window");
     }
 }
