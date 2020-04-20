@@ -23,7 +23,7 @@ public class MusicHandler : MonoBehaviour
 		if (!started)
 			return;
 
-		if (Time.time < bpmOffset)
+		if (Time.unscaledTime < bpmOffset)
 			return;
 
 		// check OnBeat
