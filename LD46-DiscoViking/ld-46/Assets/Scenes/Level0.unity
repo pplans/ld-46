@@ -2079,6 +2079,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   currentGamePhase: 
+  musicEffect: {fileID: 2052783086}
 --- !u!1001 &577466821
 PrefabInstance:
   m_ObjectHideFlags: 0
