@@ -85,7 +85,6 @@ public class DV_GameManager : MonoBehaviour
                 if (firstInputCount == 4)
                 {
                     world.ActivateEndColumn();
-                    world.ActiveAllCells();
                     bFirstInputCleared = true;
                 }
             }
@@ -123,7 +122,7 @@ public class DV_GameManager : MonoBehaviour
         if (inputManager.danceStepIndex == 4)
         {
             inputManager.danceStepIndex = 0;
-            SucceedDanceSequence();
+            danceSequence.HideSequence();
         }
     }
 
@@ -157,8 +156,6 @@ public class DV_GameManager : MonoBehaviour
 
     public void SucceedDanceSequence()
     {
-
-        danceSequence.HideSequence();
         currentGamePhase = "move";
         currentDanceTargetTile.SetVisited();
         currentDanceTargetTile.GetWorldObject().GetComponent<DV_EnemyAnimation>().WakeUp();
