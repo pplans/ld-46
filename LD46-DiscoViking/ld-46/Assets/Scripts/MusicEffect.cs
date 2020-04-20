@@ -9,6 +9,7 @@ public class MusicEffect : MonoBehaviour
 	public MusicHandler musicHandler;
 
 	public float ratio = 1f;
+	public bool tutoMode = false;
 
 	private void Start()
 	{
@@ -17,8 +18,16 @@ public class MusicEffect : MonoBehaviour
 
 	private void Update()
 	{
-		music.volume = ratio;
-		beep.volume = 1f - ratio;
+		if (tutoMode)
+		{
+			music.volume = 1f;
+			beep.volume = 1f;
+		}
+		else
+		{
+			music.volume = ratio;
+			beep.volume = 1f - ratio;
+		}
 	}
 
 	private void PlayBeep()
