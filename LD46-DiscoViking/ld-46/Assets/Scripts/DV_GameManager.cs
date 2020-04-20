@@ -85,6 +85,7 @@ public class DV_GameManager : MonoBehaviour
                 if (firstInputCount == 4)
                 {
                     world.ActivateEndColumn();
+                    world.ActiveAllCells();
                     bFirstInputCleared = true;
                 }
             }
@@ -169,8 +170,8 @@ public class DV_GameManager : MonoBehaviour
         bPaneCleared = successfulDanceOnThisPlate >= world.GetEnnemyCount();
         if (bPaneCleared)
         {
-            Debug.Log("You Can Go Now");
             world.ActivateEndColumn();
+            world.ActiveAllCells();
             foreach (DV_EnemyAnimation anim in wokeEnemies)
             {
                 anim.Done();
