@@ -116,9 +116,22 @@ public class DiscoController : MonoBehaviour
     public void OnBeatReset()
     {
         currSaturationTarget = 0.0f;
+        AdjustSaturation();
     }
 
     public void OnBeatSucceed()
+    {
+        currSaturationTarget = 0.0f;
+        AdjustSaturation();
+    }
+
+    public void OnFailBeat()
+    {
+        currSaturationTarget = -100.0f;
+        AdjustSaturation();
+    }
+
+    private void AdjustSaturation()
     {
         ColorAdjustments colorAdjustments;
         if (postprocess.profile.TryGet<ColorAdjustments>(out colorAdjustments))
@@ -126,11 +139,6 @@ public class DiscoController : MonoBehaviour
             colorAdjustments.saturation.value = 0.0f;
             colorAdjustments.contrast.value = 0.0f;
         }
-    }
-
-    public void OnFailBeat()
-    {
-        currSaturationTarget = -100.0f;
     }
 
     private float GetDiscoRatio()
