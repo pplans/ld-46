@@ -1,7 +1,5 @@
 ##
-Ceci est un joli tuto
-Wesh
-Bonne chance
+DANCE! Use WASD keys to move ON! THE! BEAT!
 ##
 --
 ....2...2.

@@ -77,15 +77,19 @@ public class DV_GameManager : MonoBehaviour
     {
         bBeatInput = true;
         bBeatValidated = succeed;
-        if (!bFirstInputCleared)
+        if (bBeatValidated)
         {
-            firstInputCount++;
-            if (firstInputCount == 4)
+            if (!bFirstInputCleared)
             {
-                world.ActivateEndColumn();
-                bFirstInputCleared = true;
+                firstInputCount++;
+                if (firstInputCount == 4)
+                {
+                    world.ActivateEndColumn();
+                    bFirstInputCleared = true;
+                }
             }
         }
+        
     }
 
     public void EndOfBeatManager()
