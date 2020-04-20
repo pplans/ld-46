@@ -2994,6 +2994,10 @@ PrefabInstance:
       propertyPath: postprocess
       value: 
       objectReference: {fileID: 1634954236}
+    - target: {fileID: 734140185939141832, guid: 04e16e7828e969b45a828f3239446179, type: 3}
+      propertyPath: musicHandler
+      value: 
+      objectReference: {fileID: 560581624}
     - target: {fileID: 1366115763054470441, guid: 04e16e7828e969b45a828f3239446179, type: 3}
       propertyPath: m_Material
       value: 

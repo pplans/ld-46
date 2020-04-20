@@ -19,6 +19,7 @@ public class DiscoController : MonoBehaviour
     public float discoColorIntensity = 10.0f;
 
     public MusicEffect musicEffect;
+    public MusicHandler musicHandler;
     public DiscoBall discoBall;
     public BeatsCircle beatsCircle;
     //public ValhallaBar valhallaBar;
@@ -31,6 +32,8 @@ public class DiscoController : MonoBehaviour
     public UnityEvent OnGameOver;
 
     public Volume postprocess;
+
+    private float currSaturationTarget = 0.0f;
 
     void Start()
     {
@@ -46,18 +49,18 @@ public class DiscoController : MonoBehaviour
         //currValhalla = 25;
         //valhallaBar.SetMaxValhalla(maxValhalla);
         //valhallaBar.SetValhalla(currValhalla);
+    }
 
-
-        ColorAdjustments ca;
-        if (postprocess.profile.TryGet<ColorAdjustments>(out ca))
+    public void Update()
+    {
+        ColorAdjustments colorAdjustments;
+        if (postprocess.profile.TryGet<ColorAdjustments>(out colorAdjustments))
         {
-            print(ca.saturation);
-        }
-
-        for (int i = 0; i < postprocess.profile.components.Count; i++)
-        {
-            print(postprocess.profile.components[i].name);
-            print(postprocess.profile.components[i]);
+            float beat = Mathf.Clamp(musicHandler.GetBeatOffset() * 2.0f, 0.0f, 1.0f);
+            beat = Mathf.Pow(beat, 1.0f / 16.0f);
+            colorAdjustments.saturation.value = Mathf.Lerp(currSaturationTarget, 0.0f, beat);
+            //colorAdjustments.contrast.value -= 0.5f;
+            //colorAdjustments.contrast.value = Mathf.Max(colorAdjustments.contrast.value, 0);
         }
     }
 
@@ -107,6 +110,7 @@ public class DiscoController : MonoBehaviour
     public void OnBeat()
     {
         ChangeColor();
+        currSaturationTarget = 0.0f;
     }
 
     public void OnBeatSucceed()
@@ -115,16 +119,13 @@ public class DiscoController : MonoBehaviour
         if (postprocess.profile.TryGet<ColorAdjustments>(out colorAdjustments))
         {
             colorAdjustments.saturation.value = 0.0f;
+            colorAdjustments.contrast.value = 0.0f;
         }
     }
 
     public void OnFailBeat()
     {
-        ColorAdjustments colorAdjustments;
-        if (postprocess.profile.TryGet<ColorAdjustments>(out colorAdjustments))
-        {
-            colorAdjustments.saturation.value = -100.0f;
-        }
+        currSaturationTarget = -100.0f;
     }
 
     private float GetDiscoRatio()
