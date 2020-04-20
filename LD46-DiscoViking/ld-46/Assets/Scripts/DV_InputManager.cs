@@ -129,6 +129,8 @@ public class DV_InputManager : MonoBehaviour
                 {
                     gameManager.danceSequence.ValidateStep(danceStepIndex);
                     danceStepIndex++;
+                    if (danceStepIndex >= 4)
+                        gameManager.SucceedDanceSequence();
                 }
                 else
                 {

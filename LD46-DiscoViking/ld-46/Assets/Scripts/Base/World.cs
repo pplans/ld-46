@@ -107,9 +107,13 @@ public class World : MonoBehaviour
 		{
 			if (Visited)
 			{
-				Material mat = Tile.GetComponent<MeshRenderer>().material;
-				mat.SetFloat("Vector1_237226DD", 20f * emissiveScale);
+				Emissive(5f, emissiveScale);
 			}
+		}
+		public void Emissive(float s, float emissiveScale)
+		{
+			Material mat = Tile.GetComponent<MeshRenderer>().material;
+			mat.SetFloat("Vector1_237226DD", s * emissiveScale);
 		}
 	}
 	#endregion
@@ -147,6 +151,10 @@ public class World : MonoBehaviour
 	[SerializeField]
 	private List<Color> m_tileColorPalette = null;
 
+	// animations
+	private float timerAnim = 0f;
+	private bool playAnimationWaveLeftToRight = false;
+
 	private int m_currentCacheIndex = 0;
 	private bool m_bTutosPassed = false;
 
@@ -170,6 +178,9 @@ public class World : MonoBehaviour
 	public bool IsInTuto() { return m_bIsWorldInit; }
 	public int GetNumberTutorials() { return cache.TutoCache.Count; }
 
+	public void PlayAnimationWaveLeftToRight() { playAnimationWaveLeftToRight = true; }
+	public void StopAnimationWaveLeftToRight() { playAnimationWaveLeftToRight = false; }
+
 	public void Update()
 	{
 		if (m_2dGrid == null) return;
@@ -180,7 +191,7 @@ public class World : MonoBehaviour
 		{
 			for (int j = 0; j < iGridSize.y; ++j)
 			{
-				if(m_2dGrid[i,j]!=null)
+				if (m_2dGrid[i, j] != null)
 					m_2dGrid[i, j].Update(sampleBeat(musicHandler));
 			}
 		}
@@ -188,6 +199,23 @@ public class World : MonoBehaviour
 		{
 			wo.Update(sampleBeat(musicHandler));
 		}
+
+		// animation wave from left to right
+		if (playAnimationWaveLeftToRight)
+		{
+			for (int i = 0; i < iGridSize.x; ++i)
+			{
+				for (int j = 0; j < iGridSize.y; ++j)
+				{
+					if (m_2dGrid[i, j] != null)
+					{
+						float e = 0.5f * (1f + Mathf.Sin(4f * (((float)i) / iGridSize.x * Mathf.PI - 0.72f * timerAnim)));
+						m_2dGrid[i, j].Emissive(5f, e);
+					}
+				}
+			}
+		}
+		timerAnim += Time.deltaTime;
 	}
 
 	public int GetEnnemyCount() { return CurrentCacheEnnemyCount; }
@@ -298,7 +326,10 @@ public class World : MonoBehaviour
 		
 		if(m_bTutosPassed)
 		{
-			m_currentCacheIndex = Random.Range(0, cache.cache.Count);
+			int nextIndex = Random.Range(0, cache.cache.Count);
+			if (m_currentCacheIndex == nextIndex)
+				nextIndex = (nextIndex + 1) % cache.cache.Count;
+			m_currentCacheIndex = nextIndex;
 			UseCache(cache.cache[m_currentCacheIndex]);
 		}
 		else

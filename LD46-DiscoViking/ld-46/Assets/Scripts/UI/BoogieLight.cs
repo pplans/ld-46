@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BoogieLight : MonoBehaviour
 {
-    public float intensityMultiplier = 1.0f;
     public bool active = true;
 
     private Material material;
@@ -30,7 +29,7 @@ public class BoogieLight : MonoBehaviour
         }
         else
         {
-            material.SetColor("_EmissiveColor", color * intensityMultiplier);
+            material.SetColor("_EmissiveColor", color);
         }
     }
 
@@ -38,7 +37,7 @@ public class BoogieLight : MonoBehaviour
     {
         color = c;
         if(active)
-            material.SetColor("_EmissiveColor", color * intensityMultiplier);
+            material.SetColor("_EmissiveColor", color);
     }
 
 }
