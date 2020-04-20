@@ -84,10 +84,10 @@ public abstract class Character : WorldObject
 		ITileInfo tileInfo = m_World.GetTileInfo(m_Position + direction);
 		if (tileInfo.GetState() == TileState.BorderRight)
 		{
-			if (m_World.gameManager.bPaneCleared)
+			if (m_World.gameManager.bPaneCleared || m_World.IsInTuto())
             {
 				Debug.Log("Loading Next Pane");
-				m_World.UseCache(Random.Range(0, m_World.GetCacheSize()));
+				m_World.NextCache();
 				m_Position.x = 0;
 				m_World.SetObject(this, m_Position);
 				m_World.gameManager.SwitchPane();
