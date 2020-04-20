@@ -79,13 +79,9 @@ public class DV_GameManager : MonoBehaviour
     {
         if (!bBeatValidated)
         {
-            Debug.Log("BAD BEAT");
+            //Debug.Log("BAD BEAT");
             discoController.AddDisco(-failBeatBoogieCost);
             discoController.AddBoogie(-failBeatBoogieCost);
-        }
-        else
-        {
-            
         }
 
         bBeatValidated = false;
