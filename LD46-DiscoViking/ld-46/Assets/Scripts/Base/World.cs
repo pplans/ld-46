@@ -297,7 +297,8 @@ public class World : MonoBehaviour
 		{
 			ReadFile(cache.TutoCache, textTutoFile);
 		}
-		UseCache(cache.TutoCache[0]);
+
+		UseCache(Settings.DoSkipTutorials()?cache.cache[0]:cache.TutoCache[0]);
 	}
 
 	public void ReadFile(List<WorldCacheItem> _cache, TextAsset textAsset)
@@ -316,15 +317,20 @@ public class World : MonoBehaviour
 		_cache.Add(item);
 	}
 
+	public void SwitchTutosPassed()
+	{
+		m_bTutosPassed = !m_bTutosPassed;
+	}
+
 	public void NextCache()
 	{
 		m_currentCacheIndex++;
 		if (!m_bTutosPassed && m_currentCacheIndex > textTutosAssets.Count-1)
 		{
-			m_bTutosPassed = true;
+			SwitchTutosPassed();
 		}
 		
-		if(m_bTutosPassed)
+		if(Settings.DoSkipTutorials() || m_bTutosPassed)
 		{
 			int nextIndex = Random.Range(0, cache.cache.Count);
 			if (m_currentCacheIndex == nextIndex)

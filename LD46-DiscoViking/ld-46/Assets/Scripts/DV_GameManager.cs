@@ -42,8 +42,6 @@ public class DV_GameManager : MonoBehaviour
 
     public MusicEffect musicEffect;
 
-    public bool bIgnoreTuto;
-
     public Text scoreDisplay;
 
     public enum ProgressEffect
@@ -69,7 +67,6 @@ public class DV_GameManager : MonoBehaviour
     void Awake()
     {
         //TEMP set to true if ignore tuto from menu
-        bIgnoreTuto = false;
         //
         bGameStarted = false;
         bBeatInput = false;
@@ -82,32 +79,33 @@ public class DV_GameManager : MonoBehaviour
         bPaneCleared = false;
         bTutoCleared = false;
         SetScore(0);
-        if (!bIgnoreTuto)
-        {
-            bFirstInputCleared = false;
-            firstInputCount = 0;
-            musicEffect.tutoMode = true;
-            musicHandler.bpmOffset = 0;
-        } else
-        {
-            bFirstInputCleared = true;
-            bTutoCleared = true;
-        }
         
     }
 
     public void StartGame()
-    {
-        bGameStarted = true;
-        Debug.Log("Game Is Started motherfucker");
+	{
+		bGameStarted = true;
 
         world.Init(new Vector2 (startGridPos.position.x,startGridPos.position.z), new Vector2(endGridPos.position.x, endGridPos.position.z), new Vector2(1, 1));
         player.Init(new Vector2(0, 0), world);
         tutoText.text = "";
         List<string> descs = world.GetCurrentWorldCacheItem().Desc;
-        foreach (string s in descs)
-            tutoText.text += s + "\n";
-    }
+		if(descs!=null)
+			foreach (string s in descs)
+				tutoText.text += s + "\n";
+		if (!Settings.DoSkipTutorials())
+		{
+			bFirstInputCleared = false;
+			firstInputCount = 0;
+			musicEffect.tutoMode = true;
+			musicHandler.bpmOffset = 0;
+		}
+		else
+		{
+			bFirstInputCleared = true;
+			bTutoCleared = true;
+		}
+	}
 
     public void ValidateBeat(bool succeed)
     {
