@@ -84,10 +84,6 @@ public class DV_InputManager : MonoBehaviour
                         case TileState.Ennemy:
                             enemy = true;
                             break;
-                        case TileState.BorderRight:
-                            if (gameManager.bPaneCleared)
-                                gameManager.IncrementProgress();
-                            break;
                     }
                     if (!obstruction)
                     {
@@ -124,13 +120,7 @@ public class DV_InputManager : MonoBehaviour
                 if (successfulInput)
                 {
                     gameManager.danceSequence.ValidateStep(danceStepIndex);
-                    if (danceStepIndex < 3)
-                        danceStepIndex++;
-                    else
-                    {
-                        danceStepIndex = 0;
-                        gameManager.SucceedDanceSequence();
-                    }
+                    danceStepIndex++;
                 }
                 else
                 {

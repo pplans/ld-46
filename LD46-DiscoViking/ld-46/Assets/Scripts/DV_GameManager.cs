@@ -86,6 +86,9 @@ public class DV_GameManager : MonoBehaviour
 
     public void MissBeatDamage()
     {
+        if (!musicHandler.started)
+            return;
+
         discoController.AddDisco(-failBeatBoogieCost);
         discoController.AddBoogie(-failBeatBoogieCost);
     }
@@ -94,6 +97,12 @@ public class DV_GameManager : MonoBehaviour
     {
         bBeatValidated = false;
         bBeatInput = false;
+
+        if (inputManager.danceStepIndex == 4)
+        {
+            inputManager.danceStepIndex = 0;
+            SucceedDanceSequence();
+        }
     }
 
     public void BeginDanceSequence(ITileInfo tileInfo)
@@ -116,6 +125,7 @@ public class DV_GameManager : MonoBehaviour
     {
         successfulDanceOnThisPlate = 0;
         bPaneCleared = successfulDanceOnThisPlate >= world.GetEnnemyCount();
+        IncrementProgress();
     }
 
     public void SucceedDanceSequence()
