@@ -73,9 +73,11 @@ public class World : MonoBehaviour
 		private GameObject tileObject;
 		private WorldObject worldObject;
 		private bool bVisited;
+		private bool bActive;
 
 		public GameObject Tile { get => tileObject; set { tileObject = value; } }
 		public bool Visited { get => bVisited; set { bVisited = value; } }
+		public bool Active { get => bActive; set { bActive = value; } }
 		public WorldObject Object { get => worldObject;
 			set
 			{
@@ -99,6 +101,11 @@ public class World : MonoBehaviour
 		public void Update(float emissiveScale)
 		{
 			if (Visited)
+			{
+				Material mat = Tile.GetComponent<MeshRenderer>().material;
+				mat.SetFloat("Vector1_237226DD", 4f * emissiveScale);
+			}
+			if (Active)
 			{
 				Material mat = Tile.GetComponent<MeshRenderer>().material;
 				mat.SetFloat("Vector1_237226DD", 4f * emissiveScale);
@@ -129,6 +136,11 @@ public class World : MonoBehaviour
 	private List<TextAsset> textAssets = null;
 	[SerializeField]
 	private MusicHandler musicHandler = null;
+
+	[SerializeField]
+	private Texture m_tileMainTex = null;
+	[SerializeField]
+	private Texture m_tileNextLevelTex = null;
 
 	private int CurrentCacheEnnemyCount = -1;
 
@@ -194,6 +206,7 @@ public class World : MonoBehaviour
 				Material mat = m_2dGrid[i, j].Tile.GetComponent<MeshRenderer>().material;
 				mat.SetColor("Color_D10C4CBD", rdrCol);
 				mat.SetFloat("Vector1_237226DD", 0f);
+				mat.SetTexture("", i == (iGridSize.x - 1) ? m_tileNextLevelTex : m_tileMainTex);
 			}
 		}
 		m_bIsWorldInit = true;
