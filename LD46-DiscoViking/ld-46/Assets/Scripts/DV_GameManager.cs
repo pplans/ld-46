@@ -38,6 +38,9 @@ public class DV_GameManager : MonoBehaviour
     public UnityEvent OnFailBeat;
 
     public string currentGamePhase;
+    private int scoreValue;
+
+    public MusicEffect musicEffect;
 
     public enum ProgressEffect
     {
@@ -61,6 +64,7 @@ public class DV_GameManager : MonoBehaviour
         bTutoCleared = false;
         bFirstInputCleared = false;
         firstInputCount = 0;
+        musicEffect.tutoMode = true;
     }
 
     public void StartGame()
@@ -92,6 +96,7 @@ public class DV_GameManager : MonoBehaviour
                 }
             }
             OnSucceedBeat.Invoke();
+            scoreValue += 10;
         }
         
     }
@@ -151,6 +156,8 @@ public class DV_GameManager : MonoBehaviour
 
     public void SwitchPane()
     {
+        scoreValue += 100;
+        world.StopAnimationWaveLeftToRight();
         successfulDanceOnThisPlate = 0;
         bPaneCleared = successfulDanceOnThisPlate >= world.GetEnnemyCount();
         IncrementProgress();
@@ -171,10 +178,11 @@ public class DV_GameManager : MonoBehaviour
         discoController.AddBoogie(3);
         successfulDanceOnThisPlate++;
         bPaneCleared = successfulDanceOnThisPlate >= world.GetEnnemyCount();
+        scoreValue += 50;
         if (bPaneCleared)
         {
             world.ActivateEndColumn();
-            world.ActiveAllCells();
+            world.PlayAnimationWaveLeftToRight();
             foreach (DV_EnemyAnimation anim in wokeEnemies)
             {
                 anim.Done();
@@ -192,6 +200,7 @@ public class DV_GameManager : MonoBehaviour
             {
                 bTutoCleared = true;
                 progressIndex = 0;
+                musicEffect.tutoMode = false;
                 Debug.Log("Tuto Cleared");
             }
         } else
