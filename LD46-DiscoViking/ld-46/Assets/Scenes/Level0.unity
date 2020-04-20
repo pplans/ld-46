@@ -1594,7 +1594,7 @@ PrefabInstance:
       objectReference: {fileID: 202270317}
     - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
       propertyPath: OnBeat.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ChangeColor
+      value: OnBeat
       objectReference: {fileID: 0}
     - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
       propertyPath: OnBeat.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1622,6 +1622,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
       propertyPath: OnResetBeat.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+      propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: DiscoController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+      propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+      propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+      propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 202270317}
+    - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+      propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnBeatInvalid
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104218156940426856, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
+      propertyPath: OnBeatInvalid.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7104218156940426857, guid: 27b9506a84dfc2d44ac5def49914a067, type: 3}
@@ -1880,6 +1904,36 @@ MonoBehaviour:
   progressEffectArray: 020000000100000002000000010000000200000001000000
   tutoText: {fileID: 2014625538}
   bPaneCleared: 0
+  OnSucceedBeat:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 202270317}
+        m_TargetAssemblyTypeName: DiscoController, Assembly-CSharp
+        m_MethodName: OnBeatSucceed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnFailBeat:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 202270317}
+        m_TargetAssemblyTypeName: DiscoController, Assembly-CSharp
+        m_MethodName: OnFailBeat
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   currentGamePhase: 
 --- !u!1001 &577466821
 PrefabInstance:
@@ -2934,8 +2988,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 734140185939141832, guid: 04e16e7828e969b45a828f3239446179, type: 3}
       propertyPath: discoColorIntensity
-      value: 43.27
+      value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 734140185939141832, guid: 04e16e7828e969b45a828f3239446179, type: 3}
+      propertyPath: postprocess
+      value: 
+      objectReference: {fileID: 1634954236}
     - target: {fileID: 1366115763054470441, guid: 04e16e7828e969b45a828f3239446179, type: 3}
       propertyPath: m_Material
       value: 
