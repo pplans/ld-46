@@ -977,6 +977,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: textTutosAssets.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
       propertyPath: smokePuffPuff
       value: 
       objectReference: {fileID: 371435861}
@@ -1044,6 +1048,86 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 575766787}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: textTutosAssets.Array.data[1]
+      value: 
+      objectReference: {fileID: 4900000, guid: b62fbd3cff0c2e947a0b33ccec3dea27, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: textTutosAssets.Array.data[2]
+      value: 
+      objectReference: {fileID: 4900000, guid: 4ff729e3d7695224a98895100419f9c3, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: textTutosAssets.Array.data[3]
+      value: 
+      objectReference: {fileID: 4900000, guid: 4ff729e3d7695224a98895100419f9c3, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: textTutosAssets.Array.data[4]
+      value: 
+      objectReference: {fileID: 4900000, guid: 4ff729e3d7695224a98895100419f9c3, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: textTutosAssets.Array.data[5]
+      value: 
+      objectReference: {fileID: 4900000, guid: 4ff729e3d7695224a98895100419f9c3, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: textTutosAssets.Array.data[6]
+      value: 
+      objectReference: {fileID: 4900000, guid: 4ff729e3d7695224a98895100419f9c3, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: textTutosAssets.Array.data[7]
+      value: 
+      objectReference: {fileID: 4900000, guid: 4ff729e3d7695224a98895100419f9c3, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: textTutosAssets.Array.data[8]
+      value: 
+      objectReference: {fileID: 4900000, guid: 4ff729e3d7695224a98895100419f9c3, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: textTutosAssets.Array.data[9]
+      value: 
+      objectReference: {fileID: 4900000, guid: 4ff729e3d7695224a98895100419f9c3, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: textTutosAssets.Array.data[10]
+      value: 
+      objectReference: {fileID: 4900000, guid: 4ff729e3d7695224a98895100419f9c3, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: textTutosAssets.Array.data[11]
+      value: 
+      objectReference: {fileID: 4900000, guid: 4ff729e3d7695224a98895100419f9c3, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: textTutosAssets.Array.data[12]
+      value: 
+      objectReference: {fileID: 4900000, guid: 4ff729e3d7695224a98895100419f9c3, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: textTutosAssets.Array.data[13]
+      value: 
+      objectReference: {fileID: 4900000, guid: 4ff729e3d7695224a98895100419f9c3, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: textTutosAssets.Array.data[14]
+      value: 
+      objectReference: {fileID: 4900000, guid: 4ff729e3d7695224a98895100419f9c3, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: textTutosAssets.Array.data[15]
+      value: 
+      objectReference: {fileID: 4900000, guid: 4ff729e3d7695224a98895100419f9c3, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: textTutosAssets.Array.data[16]
+      value: 
+      objectReference: {fileID: 4900000, guid: 4ff729e3d7695224a98895100419f9c3, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: textTutosAssets.Array.data[17]
+      value: 
+      objectReference: {fileID: 4900000, guid: 4ff729e3d7695224a98895100419f9c3, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: textTutosAssets.Array.data[18]
+      value: 
+      objectReference: {fileID: 4900000, guid: 4ff729e3d7695224a98895100419f9c3, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: textTutosAssets.Array.data[19]
+      value: 
+      objectReference: {fileID: 4900000, guid: 4ff729e3d7695224a98895100419f9c3, type: 3}
+    - target: {fileID: 1132295859119932123, guid: 448f826e873337b45a3d77871866944a, type: 3}
+      propertyPath: textTutosAssets.Array.data[20]
+      value: 
+      objectReference: {fileID: 4900000, guid: 4ff729e3d7695224a98895100419f9c3, type: 3}
     - target: {fileID: 2513952563832989651, guid: 448f826e873337b45a3d77871866944a, type: 3}
       propertyPath: m_Materials.Array.size
       value: 2
@@ -1796,6 +1880,7 @@ MonoBehaviour:
   progressThreshold: 3
   failBeatBoogieCost: 1
   progressEffectArray: 020000000100000002000000010000000200000001000000
+  tutoText: {fileID: 2014625538}
   bPaneCleared: 0
   currentGamePhase: 
 --- !u!1001 &577466821

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DV_GameManager : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class DV_GameManager : MonoBehaviour
     public int progressThreshold;
     public int failBeatBoogieCost;
     public ProgressEffect[] progressEffectArray;
+
+	public Text tutoText;
 
     private int successfulDanceOnThisPlate;
     private bool bTutoCleared;
@@ -64,9 +67,17 @@ public class DV_GameManager : MonoBehaviour
 
         world.Init(new Vector2 (startGridPos.position.x,startGridPos.position.z), new Vector2(endGridPos.position.x, endGridPos.position.z), new Vector2(1, 1));
         player.Init(new Vector2(0, 0), world);
+
         
 
     }
+
+		tutoText.text = "";
+		List<string> descs = world.GetCurrentWorldCacheItem().Desc;
+		foreach (string s in descs)
+			tutoText.text += s + "\n";
+	}
+
 
     public void ValidateBeat(bool succeed)
     {
@@ -139,7 +150,11 @@ public class DV_GameManager : MonoBehaviour
         successfulDanceOnThisPlate = 0;
         bPaneCleared = successfulDanceOnThisPlate >= world.GetEnnemyCount();
         IncrementProgress();
-    }
+		tutoText.text = "";
+		List<string> descs = world.GetCurrentWorldCacheItem().Desc;
+		foreach (string s in descs)
+			tutoText.text += s + "\n";
+	}
 
     public void SucceedDanceSequence()
     {
