@@ -36,6 +36,14 @@ public class DV_InputManager : MonoBehaviour
         danceStepIndex = 0;
     }
 
+    private void OnDestroy()
+    {
+        up.Dispose();
+        down.Dispose();
+        left.Dispose();
+        right.Dispose();
+    }
+
     // Update is called once per frame
     void Update()
     {
