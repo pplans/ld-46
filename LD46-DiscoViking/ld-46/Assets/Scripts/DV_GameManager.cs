@@ -134,6 +134,7 @@ public class DV_GameManager : MonoBehaviour
         if (bPaneCleared)
         {
             Debug.Log("You Can Go Now");
+            world.ActivateEndColumn();
             foreach (DV_EnemyAnimation anim in wokeEnemies)
             {
                 anim.Done();
