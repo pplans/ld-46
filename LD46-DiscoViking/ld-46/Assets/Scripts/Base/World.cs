@@ -27,10 +27,16 @@ public class World : MonoBehaviour
 {
 	public DV_GameManager gameManager;
 
+	public class WorldCacheItem
+	{
+		public string Desc;
+		public List<string> RawData;
+	}
+
 	public class WorldCache
 	{
-		public List<List<string>> TutoCache = new List<List<string>>();
-		public List<List<string>> cache = new List<List<string>>();
+		public List<WorldCacheItem> TutoCache = new List<WorldCacheItem>();
+		public List<WorldCacheItem> cache = new List<WorldCacheItem>();
 	}
 	#region TileInfo
 	private class TileInfo : ITileInfo
@@ -266,7 +272,7 @@ public class World : MonoBehaviour
 		UseCache(cache.TutoCache[0]);
 	}
 
-	public void ReadFile(List<List<string>> _cache, TextAsset textAsset)
+	public void ReadFile(List<WorldCacheItem> _cache, TextAsset textAsset)
 	{
 		string text = textAsset.text;
 		string line;
@@ -277,12 +283,15 @@ public class World : MonoBehaviour
 			StringRows.Add(row);
 		}
 		StringRows.Reverse();
-		_cache.Add(StringRows);
+		WorldCacheItem item = new WorldCacheItem();
+		item.RawData = StringRows;
+		_cache.Add(item);
 	}
 
 	public void NextCache()
 	{
-		if(!m_bTutosPassed && m_currentCacheIndex > textTutosAssets.Count-1)
+		m_currentCacheIndex++;
+		if (!m_bTutosPassed && m_currentCacheIndex > textTutosAssets.Count-1)
 		{
 			m_bTutosPassed = true;
 		}
@@ -294,37 +303,58 @@ public class World : MonoBehaviour
 		}
 		else
 		{
-			m_currentCacheIndex++;
 			UseCache(cache.TutoCache[m_currentCacheIndex]);
 		}
 	}
 
-	private void UseCache(List<string> cache)
+	public WorldCacheItem GetCurrentWorldCacheItem()
 	{
-		Vector2 GridSize = new Vector2(cache[0].Length, cache.Count);
-		Vector2 actualGridSize = GetNumberOfTiles();
-		if (GridSize != actualGridSize) throw new System.Exception("World Cache grid sizes inconsistent.");
-		Reinit();
-		for (int i = 0; i < GridSize.x; ++i)
+		if (m_bTutosPassed)
 		{
-			for (int j = 0; j < GridSize.y; ++j)
+			return cache.cache[m_currentCacheIndex];
+		}
+		else
+		{
+			return cache.TutoCache[m_currentCacheIndex];
+		}
+	}
+
+	private void UseCache(WorldCacheItem cache)
+	{
+		Vector2 GridSize = new Vector2(cache.RawData[0].Length, cache.RawData.Count);
+		Vector2 actualGridSize = GetNumberOfTiles();
+		//if (GridSize != actualGridSize) throw new System.Exception("World Cache grid sizes inconsistent.");
+		Reinit();
+		for (int j = 0; j < GridSize.y; ++j)
+		{
+			string line = cache.RawData[j];
+			if (j < actualGridSize.y)
 			{
-				char c = cache[j][i];
-				// here we pick the things to spawn
-				if (c == 'e')
+				for (int i = 0; i < actualGridSize.x; ++i)
 				{
-					m_2dGrid[i, j].Object = Instantiate(EnnemyList[0]);
-					CurrentCacheEnnemyCount++;
+					char c = line[i];
+					// here we pick the things to spawn
+					if (c == 'e')
+					{
+						m_2dGrid[i, j].Object = Instantiate(EnnemyList[0]);
+						CurrentCacheEnnemyCount++;
+					}
+					else if (c >= '0' && c <= '9')
+					{
+						int indexPrefab = (int)c - '0';
+						m_2dGrid[i, j].Object = Instantiate(ObstacleList[indexPrefab]);
+					}
+					m_2dGrid[i, j].Reset();
+					Material mat = m_2dGrid[i, j].Tile.GetComponent<MeshRenderer>().material;
+					mat.SetColor("Color_D10C4CBD", PickColor(new Vector2(i, j)));
+					mat.SetFloat("Vector1_237226DD", 0f);
 				}
-				else if (c>='0' && c<='9')
-				{
-					int indexPrefab = (int)c - '0';
-					m_2dGrid[i, j].Object = Instantiate(ObstacleList[indexPrefab]);
-				}
-				m_2dGrid[i, j].Reset();
-				Material mat = m_2dGrid[i, j].Tile.GetComponent<MeshRenderer>().material;
-				mat.SetColor("Color_D10C4CBD", PickColor(new Vector2(i, j)));
-				mat.SetFloat("Vector1_237226DD", 0f);
+			}
+			else
+			{
+				if (line == "--\r") continue;
+				// parse other data
+				cache.Desc = line;
 			}
 		}
 		int k = 0;
