@@ -38,6 +38,7 @@ public class DV_GameManager : MonoBehaviour
     public UnityEvent OnFailBeat;
 
     public string currentGamePhase;
+    private int scoreValue;
 
     public enum ProgressEffect
     {
@@ -92,6 +93,7 @@ public class DV_GameManager : MonoBehaviour
                 }
             }
             OnSucceedBeat.Invoke();
+            scoreValue += 10;
         }
         
     }
@@ -151,6 +153,7 @@ public class DV_GameManager : MonoBehaviour
 
     public void SwitchPane()
     {
+        scoreValue += 100;
         world.StopAnimationWaveLeftToRight();
         successfulDanceOnThisPlate = 0;
         bPaneCleared = successfulDanceOnThisPlate >= world.GetEnnemyCount();
@@ -172,6 +175,7 @@ public class DV_GameManager : MonoBehaviour
         discoController.AddBoogie(3);
         successfulDanceOnThisPlate++;
         bPaneCleared = successfulDanceOnThisPlate >= world.GetEnnemyCount();
+        scoreValue += 50;
         if (bPaneCleared)
         {
             world.ActivateEndColumn();
