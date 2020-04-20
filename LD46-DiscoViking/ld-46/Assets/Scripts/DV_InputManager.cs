@@ -73,7 +73,7 @@ public class DV_InputManager : MonoBehaviour
 
             if (gameManager.currentGamePhase == "move")
             {
-                if (valid)
+                if (valid && gameManager.bBeatInput == false)
                 {
                     ITileInfo tileInfo = m_player.DoMove(dir);
                     switch (tileInfo.GetState())
@@ -91,7 +91,6 @@ public class DV_InputManager : MonoBehaviour
                     }
                     if (!obstruction)
                     {
-                        gameManager.ValidateBeat();
                         successfulInput = true;
                         if (enemy)
                         {
@@ -121,20 +120,16 @@ public class DV_InputManager : MonoBehaviour
                         moveDirection = "Left";
                 }
 
-                if (gameManager.danceSequence.CheckStepValidityAgainstInput(moveDirection, danceStepIndex))
+                successfulInput = gameManager.danceSequence.CheckStepValidityAgainstInput(moveDirection, danceStepIndex);
+                if (successfulInput)
                 {
-                    gameManager.ValidateBeat();
                     gameManager.danceSequence.ValidateStep(danceStepIndex);
                     if (danceStepIndex < 3)
-                    {
                         danceStepIndex++;
-                        successfulInput = true;
-                    }
                     else
                     {
                         danceStepIndex = 0;
                         gameManager.SucceedDanceSequence();
-                        successfulInput = true;
                     }
                 }
                 else
@@ -145,9 +140,11 @@ public class DV_InputManager : MonoBehaviour
             }
 
             if (successfulInput)
-            {
                 anim.AnimationStep();
-            }
+            else
+                gameManager.MissBeatDamage();
+
+            gameManager.ValidateBeat(successfulInput);
         }
     }
 

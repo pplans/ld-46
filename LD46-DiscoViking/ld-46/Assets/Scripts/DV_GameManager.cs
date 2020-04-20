@@ -13,6 +13,7 @@ public class DV_GameManager : MonoBehaviour
     public Transform startGridPos;
     public Transform endGridPos;
     public bool bBeatValidated;
+    public bool bBeatInput;
     public DanceSequence danceSequence;
     public ITileInfo currentDanceTargetTile;
     private List<DV_EnemyAnimation> wokeEnemies;
@@ -40,6 +41,7 @@ public class DV_GameManager : MonoBehaviour
     void Awake()
     {
         bGameStarted = false;
+        bBeatInput = false;
         bBeatValidated = false;
         currentGamePhase = "move";
         wokeEnemies = new List<DV_EnemyAnimation>();
@@ -65,9 +67,10 @@ public class DV_GameManager : MonoBehaviour
 
     }
 
-    public void ValidateBeat()
+    public void ValidateBeat(bool succeed)
     {
-        bBeatValidated = true;
+        bBeatInput = true;
+        bBeatValidated = succeed;
     }
 
     public void StartDanceSequence()
@@ -77,14 +80,20 @@ public class DV_GameManager : MonoBehaviour
 
     public void EndOfBeatManager()
     {
-        if (!bBeatValidated)
-        {
-            //Debug.Log("BAD BEAT");
-            discoController.AddDisco(-failBeatBoogieCost);
-            discoController.AddBoogie(-failBeatBoogieCost);
-        }
+        if (!bBeatInput)
+            MissBeatDamage();
+    }
 
+    public void MissBeatDamage()
+    {
+        discoController.AddDisco(-failBeatBoogieCost);
+        discoController.AddBoogie(-failBeatBoogieCost);
+    }
+
+    public void ResetBeat()
+    {
         bBeatValidated = false;
+        bBeatInput = false;
     }
 
     public void BeginDanceSequence(ITileInfo tileInfo)
