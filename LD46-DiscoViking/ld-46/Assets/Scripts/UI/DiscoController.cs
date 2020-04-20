@@ -69,7 +69,6 @@ public class DiscoController : MonoBehaviour
     {
         if (amount < 0)
         {
-            discoBall.FailAnimation();
             if (currDisco == 0)
                 OnGameOver.Invoke();
         }
@@ -127,6 +126,7 @@ public class DiscoController : MonoBehaviour
 
     public void OnFailBeat()
     {
+        discoBall.FailAnimation();
         currSaturationTarget = -100.0f;
         AdjustSaturation();
     }
