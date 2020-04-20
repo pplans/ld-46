@@ -85,7 +85,6 @@ public class DV_GameManager : MonoBehaviour
                 if (firstInputCount == 4)
                 {
                     world.ActivateEndColumn();
-                    world.ActiveAllCells();
                     bFirstInputCleared = true;
                 }
             }
