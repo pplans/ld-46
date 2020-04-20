@@ -44,164 +44,28 @@ public class DV_InputManager : MonoBehaviour
 
     private void UpPressed(InputAction.CallbackContext callbackContext)
     {
-          
-        if (bInputDetectionActive)
-        {
-
-            bool valid = gameManager.musicHandler.ValidateBeat();
-            bool obstruction = false;
-            bool enemy = false;
-            bool successfulInput = false;
-
-            if (gameManager.currentGamePhase == "move")
-            {
-                
-                if (valid)
-                {
-                    ITileInfo tileInfo = m_player.DoMove(new Vector2(0, 1));
-                    switch (tileInfo.GetState())
-                    {
-                        case TileState.Occupied:
-                            obstruction = true;
-                            break;
-                        case TileState.Ennemy:
-                            enemy = true;
-                            break;
-                        case TileState.BorderRight:
-                            gameManager.IncrementProgress();
-                            break;
-                    }
-                    if (!obstruction)
-                    {
-                        gameManager.ValidateBeat();
-                        successfulInput = true;
-                        if (enemy)
-                        {
-                            if (!tileInfo.GetWorldObject().GetComponent<DV_EnemyAnimation>().bWokenUp)
-                            {
-                                gameManager.BeginDanceSequence(tileInfo);
-                            }
-                            
-                        }
-                    }
-                    
-                }
-            } else
-            {
-                if (gameManager.danceSequence.CheckStepValidityAgainstInput("Up", danceStepIndex))
-                {
-                    gameManager.ValidateBeat();
-                    gameManager.danceSequence.ValidateStep(danceStepIndex);
-                    if (danceStepIndex < 3)
-                    {
-                        danceStepIndex++;
-                        successfulInput = true;
-                    }
-                    else
-                    {
-                        danceStepIndex = 0;
-                        gameManager.SucceedDanceSequence();
-                        successfulInput = true;
-                    }
-                }
-                else
-                {
-                    gameManager.danceSequence.ResetDanceSequence();
-                    danceStepIndex = 0;
-                }
-            }
-
-            if (successfulInput)
-            {
-                anim.AnimationStep();
-            }
-            
-            
-        }        
-
+        Move(new Vector2(0, 1));
     }
 
     private void DownPressed(InputAction.CallbackContext callbackContext)
     {
-
-        if (bInputDetectionActive)
-        {
-
-            bool valid = gameManager.musicHandler.ValidateBeat();
-            bool obstruction = false;
-            bool enemy = false;
-            bool successfulInput = false;
-
-            if (gameManager.currentGamePhase == "move")
-            {
-                if (valid)
-                {
-                    ITileInfo tileInfo = m_player.DoMove(new Vector2(0, -1));
-                    switch (tileInfo.GetState())
-                    {
-                        case TileState.Occupied:
-                            obstruction = true;
-                            break;
-                        case TileState.Ennemy:
-                            enemy = true;
-                            break;
-                        case TileState.BorderRight:
-                            gameManager.IncrementProgress();
-                            break;
-                    }
-                    if (!obstruction)
-                    {
-                        gameManager.ValidateBeat();
-                        successfulInput = true;
-                        if (enemy)
-                        {
-                            if (!tileInfo.GetWorldObject().GetComponent<DV_EnemyAnimation>().bWokenUp)
-                            {
-                                gameManager.BeginDanceSequence(tileInfo);
-                            }
-                        }
-                    }
-                }
-            } else
-            {
-                if (gameManager.danceSequence.CheckStepValidityAgainstInput("Down", danceStepIndex))
-                {
-                    gameManager.ValidateBeat();
-                    gameManager.danceSequence.ValidateStep(danceStepIndex);
-                    if (danceStepIndex < 3)
-                    {
-                        danceStepIndex++;
-                        successfulInput = true;
-                    }
-                    else
-                    {
-                        danceStepIndex = 0;
-                        gameManager.SucceedDanceSequence();
-                        successfulInput = true;
-                    }
-                }
-                else
-                {
-                    gameManager.danceSequence.ResetDanceSequence();
-                    danceStepIndex = 0;
-                }
-            }
-
-            if (successfulInput)
-            {
-                anim.AnimationStep();
-            }
-
-        }
-
+        Move(new Vector2(0, -1));
     }
 
     private void LeftPressed(InputAction.CallbackContext callbackContext)
     {
+        Move(new Vector2(-1, 0));
+    }
 
+    private void RightPressed(InputAction.CallbackContext callbackContext)
+    {
+        Move(new Vector2(1, 0));
+    }
+
+    private void Move(Vector2 dir)
+    {
         if (bInputDetectionActive)
         {
-
             bool valid = gameManager.musicHandler.ValidateBeat();
             bool obstruction = false;
             bool enemy = false;
@@ -211,7 +75,7 @@ public class DV_InputManager : MonoBehaviour
             {
                 if (valid)
                 {
-                    ITileInfo tileInfo = m_player.DoMove(new Vector2(-1, 0));
+                    ITileInfo tileInfo = m_player.DoMove(dir);
                     switch (tileInfo.GetState())
                     {
                         case TileState.Occupied:
@@ -221,7 +85,8 @@ public class DV_InputManager : MonoBehaviour
                             enemy = true;
                             break;
                         case TileState.BorderRight:
-                            gameManager.IncrementProgress();
+                            if (gameManager.bPaneCleared)
+                                gameManager.IncrementProgress();
                             break;
                     }
                     if (!obstruction)
@@ -237,9 +102,26 @@ public class DV_InputManager : MonoBehaviour
                         }
                     }
                 }
-            } else
+            }
+            else
             {
-                if (gameManager.danceSequence.CheckStepValidityAgainstInput("Left", danceStepIndex))
+                string moveDirection;
+                if (dir.x == 0f)
+                {
+                    if (dir.y > 0f)
+                        moveDirection = "Up";
+                    else
+                        moveDirection = "Down";
+                }
+                else
+                {
+                    if (dir.x > 0f)
+                        moveDirection = "Right";
+                    else
+                        moveDirection = "Left";
+                }
+
+                if (gameManager.danceSequence.CheckStepValidityAgainstInput(moveDirection, danceStepIndex))
                 {
                     gameManager.ValidateBeat();
                     gameManager.danceSequence.ValidateStep(danceStepIndex);
@@ -266,85 +148,7 @@ public class DV_InputManager : MonoBehaviour
             {
                 anim.AnimationStep();
             }
-
-
         }
-
-    }
-
-    private void RightPressed(InputAction.CallbackContext callbackContext)
-    {
-
-        if (bInputDetectionActive)
-        {
-
-            bool valid = gameManager.musicHandler.ValidateBeat();
-            bool obstruction = false;
-            bool enemy = false;
-            bool successfulInput = false;
-
-            if (gameManager.currentGamePhase == "move")
-            {
-                if (valid)
-                {
-                    ITileInfo tileInfo = m_player.DoMove(new Vector2(1, 0));
-                    switch (tileInfo.GetState())
-                    {
-                        case TileState.Occupied:
-                            obstruction = true;
-                            break;
-                        case TileState.Ennemy:
-                            enemy = true;
-                            break;
-                        case TileState.BorderRight:
-                            gameManager.IncrementProgress();
-                            break;
-                    }
-                    if (!obstruction)
-                    {
-                        gameManager.ValidateBeat();
-                        successfulInput = true;
-                        if (enemy)
-                        {
-                            if (!tileInfo.GetWorldObject().GetComponent<DV_EnemyAnimation>().bWokenUp)
-                            {
-                                gameManager.BeginDanceSequence(tileInfo);
-                            }
-                        }
-                    }
-                }
-            } else
-            {
-                if (gameManager.danceSequence.CheckStepValidityAgainstInput("Right", danceStepIndex))
-                {
-                    gameManager.ValidateBeat();
-                    gameManager.danceSequence.ValidateStep(danceStepIndex);
-                    if (danceStepIndex < 3)
-                    {
-                        danceStepIndex++;
-                        successfulInput = true;
-                    } else
-                    {
-                        danceStepIndex = 0;
-                        gameManager.SucceedDanceSequence();
-                        successfulInput = true;
-                    }
-                    
-                }
-                else
-                {
-                    gameManager.danceSequence.ResetDanceSequence();
-                    danceStepIndex = 0;
-                }
-            }
-
-            if (successfulInput)
-            {
-                anim.AnimationStep();
-            }
-
-        }
-
     }
 
     public void testbeat()
