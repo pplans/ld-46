@@ -7,6 +7,16 @@ public class InstantiateRendererMat : MonoBehaviour
 {
     void Awake()
     {
-        GetComponent<Image>().material = Instantiate<Material>(GetComponent<Image>().material);
+        Material mat;
+        if (GetComponent<RectTransform>() != null)
+        {
+            mat = GetComponent<Image>().material;
+            GetComponent<Image>().material = Instantiate(mat);
+        }
+        else
+        {
+            mat = GetComponent<Renderer>().material;
+            GetComponent<Renderer>().material = Instantiate(mat);
+        }
     }
 }
