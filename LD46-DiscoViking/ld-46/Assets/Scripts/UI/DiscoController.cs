@@ -57,7 +57,8 @@ public class DiscoController : MonoBehaviour
         if (postprocess.profile.TryGet<ColorAdjustments>(out colorAdjustments))
         {
             float beat = Mathf.Clamp(musicHandler.GetBeatOffset() * 2.0f, 0.0f, 1.0f);
-            beat = Mathf.Pow(beat, 1.0f / 16.0f);
+            //beat = Mathf.Pow(beat, 1.0f / 2.0f);
+            beat *= beat;
             colorAdjustments.saturation.value = Mathf.Lerp(currSaturationTarget, 0.0f, beat);
             //colorAdjustments.contrast.value -= 0.5f;
             //colorAdjustments.contrast.value = Mathf.Max(colorAdjustments.contrast.value, 0);
@@ -110,6 +111,10 @@ public class DiscoController : MonoBehaviour
     public void OnBeat()
     {
         ChangeColor();
+    }
+
+    public void OnBeatReset()
+    {
         currSaturationTarget = 0.0f;
     }
 
