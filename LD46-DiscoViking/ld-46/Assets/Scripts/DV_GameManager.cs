@@ -25,8 +25,10 @@ public class DV_GameManager : MonoBehaviour
 
     private int successfulDanceOnThisPlate;
     private bool bTutoCleared;
-
     public bool bPaneCleared;
+
+    private bool bFirstInputCleared;
+    private int firstInputCount;
 
 
     public string currentGamePhase;
@@ -51,6 +53,8 @@ public class DV_GameManager : MonoBehaviour
         successfulDanceOnThisPlate = 0;
         bPaneCleared = false;
         bTutoCleared = false;
+        bFirstInputCleared = false;
+        firstInputCount = 0;
     }
 
     public void StartGame()
@@ -60,6 +64,7 @@ public class DV_GameManager : MonoBehaviour
 
         world.Init(new Vector2 (startGridPos.position.x,startGridPos.position.z), new Vector2(endGridPos.position.x, endGridPos.position.z), new Vector2(1, 1));
         player.Init(new Vector2(0, 0), world);
+        
 
     }
 
@@ -67,6 +72,15 @@ public class DV_GameManager : MonoBehaviour
     {
         bBeatInput = true;
         bBeatValidated = succeed;
+        if (!bFirstInputCleared)
+        {
+            firstInputCount++;
+            if (firstInputCount == 4)
+            {
+                world.ActivateEndColumn();
+                bFirstInputCleared = true;
+            }
+        }
     }
 
     public void EndOfBeatManager()
@@ -83,8 +97,12 @@ public class DV_GameManager : MonoBehaviour
         if (!musicHandler.started)
             return;
 
-        discoController.AddDisco(-failBeatBoogieCost);
-        discoController.AddBoogie(-failBeatBoogieCost);
+        if (bTutoCleared)
+        {
+            discoController.AddDisco(-failBeatBoogieCost);
+            discoController.AddBoogie(-failBeatBoogieCost);
+        }
+        
     }
 
     public void ResetBeat()
