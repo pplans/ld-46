@@ -1718,6 +1718,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3769846485720141264, guid: 0c83a750159a7c146b63fb872da7c527, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8575377396389120425, guid: 0c83a750159a7c146b63fb872da7c527, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
