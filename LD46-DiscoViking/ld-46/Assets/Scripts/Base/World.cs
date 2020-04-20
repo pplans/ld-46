@@ -437,7 +437,7 @@ public class World : MonoBehaviour
 
 	private float sampleBeat(MusicHandler mh)
 	{
-		return mh?1f-Mathf.Abs(Mathf.Sin(mh.GetBeatOffset() * Mathf.PI)):1f;
+		return mh?1f-Mathf.Abs(Mathf.Sin(Mathf.Clamp(2f*mh.GetBeatOffset(), -0.5f, 0.5f) * Mathf.PI)):1f;
 	}
 
 	public TileState MoveObject(Vector2 _pos, Vector2 _d)
