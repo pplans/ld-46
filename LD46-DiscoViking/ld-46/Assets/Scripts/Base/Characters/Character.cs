@@ -84,7 +84,7 @@ public abstract class Character : WorldObject
 		ITileInfo tileInfo = m_World.GetTileInfo(m_Position + direction);
 		if (tileInfo.GetState() == TileState.BorderRight)
 		{
-			if (m_World.gameManager.bPaneCleared)
+			if (m_World.gameManager.bPaneCleared || m_World.IsInTuto())
             {
 				Debug.Log("Loading Next Pane");
 				m_World.NextCache();
