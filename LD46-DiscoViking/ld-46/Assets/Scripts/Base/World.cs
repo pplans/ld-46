@@ -298,7 +298,10 @@ public class World : MonoBehaviour
 		
 		if(m_bTutosPassed)
 		{
-			m_currentCacheIndex = Random.Range(0, cache.cache.Count);
+			int nextIndex = Random.Range(0, cache.cache.Count);
+			if (m_currentCacheIndex == nextIndex)
+				nextIndex = (nextIndex + 1) % cache.cache.Count;
+			m_currentCacheIndex = nextIndex;
 			UseCache(cache.cache[m_currentCacheIndex]);
 		}
 		else
