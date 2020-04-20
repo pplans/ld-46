@@ -70,7 +70,10 @@ public class DV_GameManager : MonoBehaviour
     public void EndOfBeatManager()
     {
         if (!bBeatInput)
+        {
             MissBeatDamage();
+            bBeatInput = true;
+        }
     }
 
     public void MissBeatDamage()
