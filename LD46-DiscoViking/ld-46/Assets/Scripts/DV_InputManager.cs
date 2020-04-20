@@ -33,7 +33,7 @@ public class DV_InputManager : MonoBehaviour
         right.Enable();
 
         bInputDetectionActive = false;
-
+        danceStepIndex = 0;
     }
 
     // Update is called once per frame
@@ -66,14 +66,14 @@ public class DV_InputManager : MonoBehaviour
     {
         if (bInputDetectionActive)
         {
-            bool valid = gameManager.musicHandler.ValidateBeat();
+            bool valid = (gameManager.musicHandler.ValidateBeat() && gameManager.bBeatInput == false);
             bool obstruction = false;
             bool enemy = false;
             bool successfulInput = false;
 
             if (gameManager.currentGamePhase == "move")
             {
-                if (valid && gameManager.bBeatInput == false)
+                if (valid)
                 {
                     ITileInfo tileInfo = m_player.DoMove(dir);
                     switch (tileInfo.GetState())
@@ -116,7 +116,7 @@ public class DV_InputManager : MonoBehaviour
                         moveDirection = "Left";
                 }
 
-                successfulInput = gameManager.danceSequence.CheckStepValidityAgainstInput(moveDirection, danceStepIndex);
+                successfulInput = valid && gameManager.danceSequence.CheckStepValidityAgainstInput(moveDirection, danceStepIndex);
                 if (successfulInput)
                 {
                     gameManager.danceSequence.ValidateStep(danceStepIndex);

@@ -24,12 +24,15 @@ public class DanceSequence : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitializeDanceSequence();
+        //InitializeDanceSequence();
         HideSequence();
     }
 
     public void HideSequence()
     {
+        Debug.Log("HideSequence");
+        if (stepDisplays == null)
+            return;
         foreach (SpriteRenderer rend in stepDisplays)
         {
             rend.enabled = false;
@@ -38,10 +41,13 @@ public class DanceSequence : MonoBehaviour
 
     public void ShowSequence()
     {
-        foreach (SpriteRenderer rend in stepDisplays)
-        {
-            rend.enabled = true;
-        }
+        Debug.Log("ShowSequence");
+        InitializeDanceSequence();
+        ResetDanceSequence();
+        //foreach (SpriteRenderer rend in stepDisplays)
+        //{
+        //    rend.enabled = true;
+        //}
     }
 
     public bool CheckStepValidityAgainstInput(string inputString, int stepIndex)
@@ -70,6 +76,7 @@ public class DanceSequence : MonoBehaviour
 
     public void ValidateStep(int danceStepIndex)
     {
+        danceStepIndex = Mathf.Min(3, danceStepIndex);
         SpriteRenderer renderer = stepDisplays[danceStepIndex];
 
         print("Validate step " + renderer.material.GetFloat("_Intensity"));

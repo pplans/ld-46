@@ -51,12 +51,6 @@ public class DV_GameManager : MonoBehaviour
         bPaneCleared = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void StartGame()
     {
         bGameStarted = true;
@@ -71,11 +65,6 @@ public class DV_GameManager : MonoBehaviour
     {
         bBeatInput = true;
         bBeatValidated = succeed;
-    }
-
-    public void StartDanceSequence()
-    {
-
     }
 
     public void EndOfBeatManager()
@@ -107,7 +96,8 @@ public class DV_GameManager : MonoBehaviour
 
     public void BeginDanceSequence(ITileInfo tileInfo)
     {
-        danceSequence.InitializeDanceSequence();
+        //danceSequence.InitializeDanceSequence();
+        danceSequence.ShowSequence();
         currentDanceTargetTile = tileInfo;
         currentGamePhase = "dance";
     }
