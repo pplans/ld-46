@@ -42,6 +42,10 @@ public class DV_GameManager : MonoBehaviour
 
     public MusicEffect musicEffect;
 
+    public bool bIgnoreTuto;
+
+    public Text scoreDisplay;
+
     public enum ProgressEffect
     {
         Nothing,
@@ -49,9 +53,24 @@ public class DV_GameManager : MonoBehaviour
         ValidationWindow
     }
 
+    void AddScore(int score)
+    {
+        scoreValue += score;
+        scoreDisplay.text = "Score: " + scoreValue.ToString();
+    }
+
+    void SetScore(int score)
+    {
+        scoreValue = score;
+        scoreDisplay.text = "Score: " + scoreValue.ToString();
+    }
+
     // Start is called before the first frame update
     void Awake()
     {
+        //TEMP set to true if ignore tuto from menu
+        bIgnoreTuto = false;
+        //
         bGameStarted = false;
         bBeatInput = false;
         bBeatValidated = false;
@@ -62,9 +81,19 @@ public class DV_GameManager : MonoBehaviour
         successfulDanceOnThisPlate = 0;
         bPaneCleared = false;
         bTutoCleared = false;
-        bFirstInputCleared = false;
-        firstInputCount = 0;
-        musicEffect.tutoMode = true;
+        SetScore(0);
+        if (!bIgnoreTuto)
+        {
+            bFirstInputCleared = false;
+            firstInputCount = 0;
+            musicEffect.tutoMode = true;
+            musicHandler.bpmOffset = 0;
+        } else
+        {
+            bFirstInputCleared = true;
+            bTutoCleared = true;
+        }
+        
     }
 
     public void StartGame()
@@ -96,7 +125,7 @@ public class DV_GameManager : MonoBehaviour
                 }
             }
             OnSucceedBeat.Invoke();
-            scoreValue += 10;
+            AddScore(10);
         }
         
     }
@@ -156,7 +185,7 @@ public class DV_GameManager : MonoBehaviour
 
     public void SwitchPane()
     {
-        scoreValue += 100;
+        AddScore(100);
         world.StopAnimationWaveLeftToRight();
         successfulDanceOnThisPlate = 0;
         bPaneCleared = successfulDanceOnThisPlate >= world.GetEnnemyCount();
@@ -178,7 +207,7 @@ public class DV_GameManager : MonoBehaviour
         discoController.AddBoogie(3);
         successfulDanceOnThisPlate++;
         bPaneCleared = successfulDanceOnThisPlate >= world.GetEnnemyCount();
-        scoreValue += 50;
+        AddScore(50);
         if (bPaneCleared)
         {
             world.ActivateEndColumn();
