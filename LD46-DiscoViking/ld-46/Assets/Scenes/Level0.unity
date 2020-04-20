@@ -1962,7 +1962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - MainMenu
-  - SampleScene
+  - Level0
 --- !u!4 &671821952
 Transform:
   m_ObjectHideFlags: 0
