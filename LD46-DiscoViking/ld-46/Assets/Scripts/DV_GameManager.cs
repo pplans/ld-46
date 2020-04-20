@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class DV_GameManager : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class DV_GameManager : MonoBehaviour
     private bool bFirstInputCleared;
     private int firstInputCount;
 
+    public UnityEvent OnSucceedBeat;
+    public UnityEvent OnFailBeat;
 
     public string currentGamePhase;
 
@@ -88,6 +91,7 @@ public class DV_GameManager : MonoBehaviour
                     bFirstInputCleared = true;
                 }
             }
+            OnSucceedBeat.Invoke();
         }
         
     }
@@ -105,6 +109,8 @@ public class DV_GameManager : MonoBehaviour
     {
         if (!musicHandler.started)
             return;
+
+        OnFailBeat.Invoke();
 
         if (bTutoCleared)
         {
