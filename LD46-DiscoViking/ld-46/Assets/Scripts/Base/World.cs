@@ -283,7 +283,7 @@ public class World : MonoBehaviour
 			m_2dGridEndColumn[j].Tile.transform.position = new Vector3(pos.x, 0, pos.y);
 			m_2dGridEndColumn[j].Tile.transform.parent = WorldObject.transform;
 			Material mat = m_2dGridEndColumn[j].Tile.GetComponent<MeshRenderer>().material;
-			mat.SetColor("Color_D10C4CBD", PickColor(it));
+			mat.SetColor("Color_D10C4CBD", PickColor(new Vector2(0, 0)));
 			mat.SetFloat("Vector1_237226DD", 0f);
 			mat.SetTexture("Texture2D_67BA07E5", m_tileNextLevelTex);
 		}
@@ -407,7 +407,7 @@ public class World : MonoBehaviour
 		{
 			tile.Reset();
 			Material mat = tile.Tile.GetComponent<MeshRenderer>().material;
-			mat.SetColor("Color_D10C4CBD", PickColor(new Vector2(GridSize.x, k)));
+			mat.SetColor("Color_D10C4CBD", PickColor(new Vector2(0, 0)));
 			mat.SetFloat("Vector1_237226DD", 0f);
 			k++;
 		}
