@@ -86,6 +86,9 @@ public class DV_GameManager : MonoBehaviour
 
     public void MissBeatDamage()
     {
+        if (!musicHandler.started)
+            return;
+
         discoController.AddDisco(-failBeatBoogieCost);
         discoController.AddBoogie(-failBeatBoogieCost);
     }
